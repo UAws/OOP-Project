@@ -2,6 +2,7 @@
 
 if [ ! -x ../lib/googletest/googletest ]; then
 cd ../lib/ || exit
+git config credential.helper store
 git clone https://github.com/googletest/googletest.git
 cd - || exit
 fi
