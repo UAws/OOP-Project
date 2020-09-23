@@ -6,3 +6,4 @@ tmp/
 build/
 .vscode
 vcpkg/
+doc/sqlpp11
