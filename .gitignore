@@ -2,6 +2,7 @@
 cmake-build-debug/
 
 .idea/
-/tmp/
+tmp/
 build/
 .vscode
+vcpkg/

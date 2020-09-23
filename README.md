@@ -50,3 +50,19 @@ Successfully logged: information of the teacher would be shown (information that
 \-    GitHub.
 
 \-    We may use a database to replace the Storage class.
+
+### Dependence credits :
+
+- [Google Test](https://github.com/google/googletest)
+  - unit test framework
+- [prettyprint.hpp](https://github.com/louisdx/cxx-prettyprint)
+  - c++ STL cout print 
+- [VariadicTable.h](https://github.com/friedmud/variadic_table)
+  - beautiful console table print
+- [Sqlpp11](https://github.com/rbock/sqlpp11)
+  - A type safe SQL template library for C++
+- [vcpkg](https://github.com/microsoft/vcpkg) (build sqlpp11-mysql-connector)
+  - C++ Library Manager for Windows, Linux, and MacOS
+- [Conan](https://github.com/conan-io/conan) (build other dependencies)
+  - Conan - The open-source C/C++ package manager
+

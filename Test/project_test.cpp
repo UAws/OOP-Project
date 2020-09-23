@@ -43,5 +43,9 @@ TEST(major,test01){
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
+
+    // ::testing::GTEST_FLAG(filter) = "database*";
+    // ::testing::GTEST_FLAG(filter) = "major*";
+
     return RUN_ALL_TESTS();
 }

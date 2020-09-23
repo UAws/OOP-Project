@@ -1,10 +1,11 @@
 #! /bin/bash
 
-if [ ! -x ../lib/googletest/googletest ]; then
-cd ../lib/ || exit
-git config credential.helper store
-git clone https://github.com/google/googletest.git
-cd - || exit
+if [ ! -f ../LICENSE ]; then
+
+  echo "YOUR MUSH execute this script at script directory"
+  echo "cd script/ ; ./mysql.sh "
+  exit
+
 fi
 
 
