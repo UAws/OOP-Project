@@ -13,7 +13,7 @@
 #include <vector>
 #include <algorithm>
 
-#include "../../utils/prettyprint.hpp"
+#include <prettyprint.hpp>
 #include "Subject.h"
 
 using namespace std;
@@ -30,28 +30,7 @@ public:
     People(const string &name, const string &title);
 
     virtual ~People();
-
-    /*
-     * static utils functions
-     */
-
-    static bool logout(int user_id);
-
-    static bool login(int user_id, string password);
-
-    static bool initPassword();
-
-    static bool changePassword(int user_id, const string &oldPassword , const string &new_password);
-
-    static void ListAllUsers();
-
-    static int checkUserLevelById(int user_id);
-
-    static void resetUserPasswordById(int user_id);
-
-    static void lockUser(int user_id);
-
-    static void unlockUser(int user_id);
+    
 
     /*
      * object getter and setter
@@ -83,30 +62,6 @@ public:
 
     friend ostream &operator<<(ostream &os, const People &people);
 
-    /*
-     * userAction functions
-     */
-
-    virtual void addNewTutor(People people);
-
-    virtual void modifyTutorById(int user_id);
-
-    virtual void addNewStudent(People *people);
-
-    virtual void modifyStudentById(int user_id);
-
-    virtual void addNewSubject(Subject subject);
-
-    virtual void modifySubjectById(int subject_id);
-
-    virtual void showStudents();
-
-    virtual void showTutors();
-
-    virtual void showSubjects();
-
-    virtual vector<int> getUserSubjectId();
-
 
 
 
@@ -121,7 +76,6 @@ protected:
     string password = "-1";
     string title;
     bool isActive;
-    vector<int> userSubjectId;
 
 };
 

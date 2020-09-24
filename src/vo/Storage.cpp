@@ -6,7 +6,9 @@
 
 //
 
-#include "include/PUBLIC.h"
+#include "include/VO_PUBLIC.h"
+
+//TODO: need to replace by database
 
 void Storage::setCurrentUserById(int i){
 

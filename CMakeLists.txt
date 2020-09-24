@@ -4,15 +4,41 @@ project(OOP-project)
 add_definitions(-Wall)
 set(CMAKE_CXX_STANDARD 11)
 
+#include project headers
+include_directories(
+        ${CMAKE_CURRENT_SOURCE_DIR}/utils
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
+set(source_vo
+        src/vo/People.cpp
+        src/vo/Storage.cpp
+        src/vo/Student.cpp
+        src/vo/Subject.cpp
+        src/vo/Teacher.cpp
+        src/vo/Tutor.cpp
+        )
+set(source_dao
+#        src/dao/
+        )
+set(source_service
+        src/service/TutorServices.cpp
+        src/service/StudentServices.cpp
+        src/service/PeopleServices.cpp
+        src/service/SubjectServices.cpp
+        src/service/TeacherServices.cpp
+        )
+
+set(source_test
+        test/project_test.cpp
+        test/database_test.cpp
+        )
+
 set(major_project
-        Test/project_test.cpp
-        Test/database_test.cpp
-        src/People.cpp
-        src/Storage.cpp
-        src/Student.cpp
-        src/Subject.cpp
-        src/Teacher.cpp
-        src/Tutor.cpp
+        ${source_test}
+        ${source_service}
+        ${source_dao}
+        ${source_vo}
         )
 add_executable(GTestSelf ${major_project})
 
@@ -37,6 +63,7 @@ conan_cmake_run(REQUIRES
         mysql-connector-c/6.1.11
         gtest/1.10.0
         sqlpp11/0.59
+#        tinyxml2/8.0.0
 
         BASIC_SETUP CMAKE_TARGETS
         BUILD missing)
@@ -46,6 +73,7 @@ target_link_libraries(GTestSelf
         CONAN_PKG::openssl
         CONAN_PKG::mysql-connector-c
         CONAN_PKG::sqlpp11
+#        CONAN_PKG::tinyxml2
         )
 
 #use different sqlpp11-mysql-connector library depending platform

@@ -26,7 +26,7 @@ CURRENT_DIR=`pwd`
 #install system build dependency
 sudo apt update
 
-sudo apt-get -y install build-essential curl unzip tar pkg-config cmake python-pip
+sudo apt-get -y install build-essential curl unzip tar pkg-config cmake python-pip gdb
 
 sudo pip install conan
 
@@ -48,6 +48,7 @@ if [ -f ./GTestSelf  ]; then
 
 else
     echo "build dependencies failed "
+    exit 1
 fi
 
 

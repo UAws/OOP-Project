@@ -24,9 +24,8 @@ public:
 
     friend ostream &operator<<(ostream &os, const Student &student);
 
-    void showSubjects() override;
 
-    vector<int> getUserSubjectId() override;
+
 
 };
 
