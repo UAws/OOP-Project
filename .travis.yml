@@ -1,0 +1,6 @@
+language: cpp
+compiler: gcc
+
+script:
+  - cd script/
+  - ./build_dependencies.sh
