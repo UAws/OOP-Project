@@ -15,10 +15,10 @@
 #include "Subject.h"
 #include "Teacher.h"
 #include "Tutor.h"
-#include "../../../utils/prettyprint.hpp"
+#include <prettyprint.hpp>
 
 //https://github.com/friedmud/variadic_table
-#include "../../../utils/VariadicTable.h"
+#include <VariadicTable.h>
 
 #include <vector>
 #include <iostream>

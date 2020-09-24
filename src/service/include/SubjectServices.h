@@ -10,11 +10,11 @@
 #define OOP_PROJECT_SUBJECTSERVICES_H
 
 
-
 class SubjectServices {
+public:
+
 
 };
-
 
 
 #endif //OOP_PROJECT_SUBJECTSERVICES_H

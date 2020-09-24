@@ -9,12 +9,14 @@
 #ifndef OOP_PROJECT_TEACHERSERVICES_H
 #define OOP_PROJECT_TEACHERSERVICES_H
 
+#include "PeopleServices.h"
 
+class TeacherServices : public PeopleServices {
 
-class TeacherServices {
+public:
+
 
 };
-
 
 
 #endif //OOP_PROJECT_TEACHERSERVICES_H

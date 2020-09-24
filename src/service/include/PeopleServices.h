@@ -16,7 +16,9 @@
 #include <prettyprint.hpp>
 #include <vo/include/People.h>
 
-class People {
+class PeopleServices {
+
+public:
     /*
      * static utils functions
      */
@@ -61,7 +63,21 @@ class People {
 
     virtual void showSubjects();
 
-    virtual vector<int> getUserSubjectId();
+
+private:
+
+    static int s_user_id;
+
+    static int s_subject_id;
+
+    static PeopleServices * currentUser;
+
+public:
+    static void setCurrentUser(PeopleServices *&currentUser);
+
+public:
+    static PeopleServices * getCurrentUser();
+
 };
 
 

@@ -6,19 +6,18 @@
 
 //
 
-#ifndef CPP_PUBLIC_H
-#define CPP_PUBLIC_H
+#ifndef CPP_SERVICE_PUBLIC_H
+#define CPP_SERVICE_PUBLIC_H
 
-#include "People.h"
-#include "Storage.h"
-#include "Student.h"
-#include "Subject.h"
-#include "Teacher.h"
-#include "Tutor.h"
-#include "../../../utils/prettyprint.hpp"
+#include "PeopleServices.h"
+#include "StudentServices.h"
+#include "SubjectServices.h"
+#include "TeacherServices.h"
+#include "TutorServices.h"
+#include <prettyprint.hpp>
 
 //https://github.com/friedmud/variadic_table
-#include "../../../utils/VariadicTable.h"
+#include <VariadicTable.h>
 
 #include <vector>
 #include <iostream>

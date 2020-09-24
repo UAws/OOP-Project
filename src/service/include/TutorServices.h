@@ -9,12 +9,17 @@
 #ifndef OOP_PROJECT_TUTORSERVICES_H
 #define OOP_PROJECT_TUTORSERVICES_H
 
+#include "PeopleServices.h"
 
+class TutorServices : public PeopleServices{
 
-class TutorServices {
+public:
+    void showStudents() override;
 
+    void addNewStudent(People *people) override;
+
+    void modifyStudentById(int user_id) override;
 };
-
 
 
 #endif //OOP_PROJECT_TUTORSERVICES_H

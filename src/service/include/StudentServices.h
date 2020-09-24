@@ -10,11 +10,15 @@
 #define OOP_PROJECT_STUDENTSERVICES_H
 
 
+#include "PeopleServices.h"
 
-class StudentServices {
+class StudentServices : public PeopleServices {
+
+public:
+
+    void showSubjects() override;
 
 };
-
 
 
 #endif //OOP_PROJECT_STUDENTSERVICES_H

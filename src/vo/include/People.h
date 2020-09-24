@@ -18,19 +18,19 @@
 
 using namespace std;
 
-class PeopleServices {
+class People {
 public:
     /*
      * constructor and destructor
      */
-    PeopleServices();
+    People();
 
-    PeopleServices(int userId, const string &name, const string &password, const string &title, bool isActive);
+    People(int userId, const string &name, const string &password, const string &title, bool isActive);
 
-    PeopleServices(const string &name, const string &title);
+    People(const string &name, const string &title);
 
-    virtual ~PeopleServices();
-
+    virtual ~People();
+    
 
     /*
      * object getter and setter
@@ -60,7 +60,7 @@ public:
 
     virtual void setUserLevel(int userLevel);
 
-    friend ostream &operator<<(ostream &os, const PeopleServices &people);
+    friend ostream &operator<<(ostream &os, const People &people);
 
 
 
