@@ -6,7 +6,7 @@
 
 //
 
-#include "include/PUBLIC.h"
+#include "include/VO_PUBLIC.h"
 
 int Teacher::getUserLevel() const {
     return this->userLevel;

@@ -10,8 +10,7 @@
 #include <iostream>
 #include <algorithm>
 
-// #include "../src/include/PUBLIC.h"
-#include "../src/include/databaseTables.h"
+#include <dao/include/databaseTables.h>
 #include <sqlpp11/sqlpp11.h>
 #include <sqlpp11/select.h>
 #include <sqlpp11/mysql/mysql.h>
@@ -32,6 +31,7 @@ mysql::connection getConnection() {
 
     return db;
 }
+
 
 TEST(database,test01){
 

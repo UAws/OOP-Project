@@ -4,15 +4,41 @@ project(OOP-project)
 add_definitions(-Wall)
 set(CMAKE_CXX_STANDARD 11)
 
+#include project headers
+include_directories(
+        ${CMAKE_CURRENT_SOURCE_DIR}/utils
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
+set(source_vo
+        src/vo/People.cpp
+        src/vo/Storage.cpp
+        src/vo/Student.cpp
+        src/vo/Subject.cpp
+        src/vo/Teacher.cpp
+        src/vo/Tutor.cpp
+        )
+set(source_dao
+#        src/dao/
+        )
+set(source_service
+        src/service/TutorServices.cpp
+        src/service/StudentServices.cpp
+        src/service/PeopleServices.cpp
+        src/service/SubjectServices.cpp
+        src/service/TeacherServices.cpp
+        )
+
+set(source_test
+        test/project_test.cpp
+        test/database_test.cpp
+        )
+
 set(major_project
-        Test/project_test.cpp
-        Test/database_test.cpp
-        src/People.cpp
-        src/Storage.cpp
-        src/Student.cpp
-        src/Subject.cpp
-        src/Teacher.cpp
-        src/Tutor.cpp
+        ${source_test}
+        ${source_service}
+        ${source_dao}
+        ${source_vo}
         )
 add_executable(GTestSelf ${major_project})
 

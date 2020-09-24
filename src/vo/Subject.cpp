@@ -6,7 +6,7 @@
 
 //
 
-#include "include/PUBLIC.h"
+#include "include/VO_PUBLIC.h"
 
 int Subject::getSubjectId() const {
     return subject_id;
@@ -34,6 +34,7 @@ void Subject::setUserIdEnrolled(const vector<int> &userIdEnrolled) {
 
 Subject::Subject(int subjectId, const string &subjectName) : subject_id(subjectId), subject_name(subjectName){
 
+    //TODO: need to replace by database
     Storage::setSSubjectId(Storage::getSSubjectId() + 1);
 
     /*
@@ -41,6 +42,7 @@ Subject::Subject(int subjectId, const string &subjectName) : subject_id(subjectI
      *
      */
 
+    //TODO: need to replace by database
     for (const auto& kv : Storage::storagePeople) {
         if (kv.second->getUserLevel() == 2 || kv.second->getUserLevel() == 3) {
             this->addUserIdEnrolledById(kv.first);
