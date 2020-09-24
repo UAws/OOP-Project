@@ -63,6 +63,7 @@ conan_cmake_run(REQUIRES
         mysql-connector-c/6.1.11
         gtest/1.10.0
         sqlpp11/0.59
+#        tinyxml2/8.0.0
 
         BASIC_SETUP CMAKE_TARGETS
         BUILD missing)
@@ -72,6 +73,7 @@ target_link_libraries(GTestSelf
         CONAN_PKG::openssl
         CONAN_PKG::mysql-connector-c
         CONAN_PKG::sqlpp11
+#        CONAN_PKG::tinyxml2
         )
 
 #use different sqlpp11-mysql-connector library depending platform
