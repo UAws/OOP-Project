@@ -32,6 +32,7 @@ set(source_service
 set(source_test
         test/project_test.cpp
         test/database_test.cpp
+        utils/database_connection.cpp
         )
 
 set(major_project
