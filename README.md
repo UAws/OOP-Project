@@ -3,7 +3,7 @@ Student management system
 
 ## Build status：
 
-| **master**      | [![Build Status](https://cdn.jsdelivr.net/gh/AkideLiu/image@master/uPic/image-20200925F9WeoM.svg)](https://travis-ci.com/UAws/OOP-Project) |
+| **master**      | [![Build Status](https://travis-ci.com/UAws/OOP-Project.svg?token=zP1c5kEjbj3paukTcp7U&branch=master)](https://travis-ci.com/UAws/OOP-Project) |
 | --------------- | ------------------------------------------------------------ |
 | **development** | ![Build Status](https://travis-ci.com/UAws/OOP-Project.svg?token=zP1c5kEjbj3paukTcp7U&branch=development) |
 
