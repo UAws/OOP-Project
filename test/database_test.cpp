@@ -25,7 +25,7 @@ mysql::connection getConnection() {
     config->password = "LJi8kLPc2KaGjEJF";
     config->user = "oop";
     config->database = "oop";
-    // config->debug = true;
+    config->debug = true;
 
     mysql::connection db(config);
 
