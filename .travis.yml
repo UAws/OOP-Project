@@ -4,15 +4,13 @@ compiler:
   - gcc
   - clang
 
-install: wget
 
 services:
   - mysql
 
 before_install:
   -  mysql -e 'create database oop;'
-  -  wget https://cdn.jsdelivr.net/gh/AkideLiu/image@master/uPic/image-20200925lTdXiB.sql
-  -  mysql oop < image-20200925lTdXiB.sql
+  -  mysql oop < utils/db.sql
   -  sed -i 's/172.16.0.78/127.0.0.1/g' utils/database_connection.cpp
   -  sed -i 's/LJi8kLPc2KaGjEJF//g' utils/database_connection.cpp
   -  sed -i 's/user = "oop"/user = "root"/g' utils/database_connection.cpp
