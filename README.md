@@ -5,7 +5,7 @@ Student management system
 
 | **master**      | [![Build Status](https://travis-ci.com/UAws/OOP-Project.svg?token=zP1c5kEjbj3paukTcp7U&branch=master)](https://travis-ci.com/UAws/OOP-Project) |
 | --------------- | ------------------------------------------------------------ |
-| **development** | ![Build Status](https://travis-ci.com/UAws/OOP-Project.svg?token=zP1c5kEjbj3paukTcp7U&branch=development) |
+| **development** | [![Build Status](https://travis-ci.com/UAws/OOP-Project.svg?token=zP1c5kEjbj3paukTcp7U&branch=development)](https://travis-ci.com/UAws/OOP-Project) |
 
 ## System design
 
