@@ -19,7 +19,8 @@ set(source_vo
         src/vo/Tutor.cpp
         )
 set(source_dao
-#        src/dao/
+        src/dao/PeopleDao.cpp
+        src/dao/SubjectDao.cpp
         )
 set(source_service
         src/service/TutorServices.cpp
