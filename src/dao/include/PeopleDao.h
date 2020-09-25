@@ -9,8 +9,47 @@
 #ifndef OOP_PROJECT_PEOPLEDAO_H
 #define OOP_PROJECT_PEOPLEDAO_H
 
+#include <vo/include/VO_PUBLIC.h>
 
 class PeopleDao {
+public:
+
+    // list
+    static vector<People *> listAllUsers();
+
+    static vector<People *> showAllStudents();
+
+    static vector<People *> showAllTutors();
+
+    static vector<People *> showAllTeachers();
+
+
+    // select
+
+    static People *selectOnePeople(int id);
+
+    static vector<People *> selectPeopleByName(string name);
+
+
+
+    //insert
+
+    static bool addNewStudent(Student *student);
+
+    static bool addNewTutor(Tutor *tutor);
+
+    static bool addNewTeacher(Teacher *teacher);
+
+
+    //update
+
+    static bool updatePeoplePassword(int id, string password);
+
+    static bool updatePeopleResetPassword(int id);
+
+    static bool updatePeopleActive(int id, bool flag);
+
+
 
 };
 

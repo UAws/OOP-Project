@@ -31,7 +31,7 @@ CREATE TABLE `people` (
   `userLevel` int(11) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `People_user_id_uindex` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `people` (
 
 LOCK TABLES `people` WRITE;
 /*!40000 ALTER TABLE `people` DISABLE KEYS */;
-INSERT INTO `people` VALUES (1,'student01','-1','student',1,1),(2,'tutor01','-1','tutor',1,2),(3,'teacher01','-1','teacher',1,3);
+INSERT INTO `people` VALUES (1,'student01','-1','student',1,1),(2,'tutor01','-1','tutor',1,2),(3,'teacher01','-1','teacher',1,3),(4,'student02','-1','student',1,1),(5,'tutor02','-1','tutor',1,2);
 /*!40000 ALTER TABLE `people` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,4 +105,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-25  5:52:46
+-- Dump completed on 2020-09-26  5:28:56
