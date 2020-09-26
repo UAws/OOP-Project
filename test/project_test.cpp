@@ -12,6 +12,7 @@
 
 #include <vo/include/VO_PUBLIC.h>
 #include <service/include/SERVICE_PUBLIC.h>
+#include<dao/include/PeopleDao.h>
 
 using namespace std;
 
@@ -58,10 +59,24 @@ int main(int argc, char **argv) {
 
 TEST(any_name,any_function){
     vector < int > expect {1,2,3,4,5};
-    vector < int > actual {1,4,6,4,5};
+    vector < int > actual {1,2,3,4,5};
     
     for (size_t i = 0; i < expect.size(); i++){
         EXPECT_EQ(expect[i],actual[i]);
     }
 
 }
+
+TEST(People_Services,logout){
+    for (int i = 1; i < 10; i++){
+        if(i<5){
+            bool actual = PeopleServices::logout(i);
+            EXPECT_EQ(actual,true);
+        }
+        if(i>5){
+            bool actual = PeopleServices::logout(i);
+            EXPECT_EQ(actual,false);
+        }
+    }
+}
+

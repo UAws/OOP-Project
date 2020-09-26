@@ -8,6 +8,8 @@
 
 #include <service/include/SERVICE_PUBLIC.h>
 #include <vo/include/VO_PUBLIC.h>
+#include<dao/include/PeopleDao.h>
+
 
 bool PeopleServices::login(int user_id , string password) {
 
@@ -64,8 +66,16 @@ bool PeopleServices::logout(int user_id) {
     // Storage::setCurrentUser(People());
 
     //TODO: need to replace by database
-    cout << Storage::getCurrentUser()->getName() << "Log out successfully !" << std::endl;
-    return true;
+    People* people = PeopleDao::selectOnePeople(user_id);
+    if(people != nullptr){
+        cout << people->getName() << "Log out successfully !" << std::endl;
+        return true;
+    }else{
+        cout <<"The user ID: "<< user_id << "is not esist. "<< endl;
+        return false;
+    }
+    delete people;
+
 }
 
 bool PeopleServices::initPassword() {
