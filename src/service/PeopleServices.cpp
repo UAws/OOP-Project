@@ -8,6 +8,7 @@
 
 #include <service/include/SERVICE_PUBLIC.h>
 #include <vo/include/VO_PUBLIC.h>
+#include <dao/include/PeopleDao.h>
 
 bool PeopleServices::login(int user_id , string password) {
 

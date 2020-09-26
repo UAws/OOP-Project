@@ -56,8 +56,6 @@ void People::setIsActive(bool isActive) {
 }
 
 People::People(int userId, const string &name, const string &password, const string &title, bool isActive) : user_id(userId), name(name) , password(password),title(title) ,isActive(isActive){
-    //TODO: need to replace by database
-    Storage::setSUserId(Storage::getSUserId() + 1);
 }
 
 ostream &operator<<(ostream &os, const People &people) {

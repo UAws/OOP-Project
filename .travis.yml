@@ -20,4 +20,4 @@ script:
   - cd script/
   - ./build_dependencies.sh
   - cd ../build_test/
-  - ./GTestSelf
+  - ./GTestSelf >/dev/null 2>&1
