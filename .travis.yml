@@ -19,3 +19,5 @@ before_install:
 script:
   - cd script/
   - ./build_dependencies.sh
+  - cd ../build_test/
+  - ./GTestSelf
