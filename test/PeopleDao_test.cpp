@@ -14,7 +14,7 @@
 
 TEST(PeopleDao_test,listAllUsers) {
 
-    vector<string> check {"student01","tutor01","teacher01","student02","tutor02"};
+    //vector<string> check {"student01","tutor01","teacher01","student02","tutor02"};
 
     vector<People*> result = PeopleDao::listAllUsers();
 
