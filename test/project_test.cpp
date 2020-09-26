@@ -12,6 +12,7 @@
 
 #include <vo/include/VO_PUBLIC.h>
 #include <service/include/SERVICE_PUBLIC.h>
+#include<dao/include/PeopleDao.h>
 
 using namespace std;
 
@@ -55,3 +56,19 @@ int main(int argc, char **argv) {
 
     return RUN_ALL_TESTS();
 }
+
+
+
+TEST(People_Services,logout){
+    for (int i = 1; i < 10; i++){
+        if(i < 5){
+            bool actual = PeopleServices::logout(i);
+            EXPECT_EQ(actual,true);
+        }
+        if(i > 5){
+            bool actual = PeopleServices::logout(i);
+            EXPECT_EQ(actual,false);
+        }
+    }
+}
+
