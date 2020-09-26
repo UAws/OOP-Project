@@ -58,7 +58,7 @@ int main(int argc, char **argv) {
 
 TEST(any_name,any_function){
     vector < int > expect {1,2,3,4,5};
-    vector < int > actual {1,4,3,4,5};
+    vector < int > actual {1,4,6,4,5};
     
     for (size_t i = 0; i < expect.size(); i++){
         EXPECT_EQ(expect[i],actual[i]);
