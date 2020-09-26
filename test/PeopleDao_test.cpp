@@ -16,7 +16,7 @@ TEST(PeopleDao_test,listAllUsers) {
 
     vector<string> check {"student01","tutor01","teacher01","student02","tutor02"};
 
-    vector<People*> result = PeopleDao::listAll"abc"Users();
+    vector<People*> result = PeopleDao::listAllUsers();
 
     for (size_t i = 0; i < check.size(); ++i) {
         ASSERT_EQ(result[i]->getName(),check[i]);
