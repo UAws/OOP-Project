@@ -54,7 +54,7 @@ Subject::Subject(int subjectId, const string &subjectName) : subject_id(subjectI
 void Subject::addUserIdEnrolledById(int id) {
 
     /*
-     * check does current subject contains id from parameter or not
+     * check does the current subject contains id from parameter or not
      */
 
         int count = 0;
