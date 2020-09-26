@@ -27,6 +27,7 @@ TEST(PeopleDao_test,listAllUsers) {
 }
 
 
+
 TEST(PeopleDao_test, showAllStudents) {
 
     vector<string> check {"student01", "student02"};
@@ -104,7 +105,7 @@ TEST(PeopleDao_test,addNewStudent){
 
     //user id automatically increased and managed by database
 
-    Student *check01 = new Student(0, "test");
+    Student *check01 = new Student(0, "test_student");
 
     bool result01 =  PeopleDao::addNewStudent(check01);
 
@@ -113,7 +114,7 @@ TEST(PeopleDao_test,addNewStudent){
     vector<People *> result02 = PeopleDao::selectPeopleByName(check01->getName());
 
     EXPECT_EQ(result02.size(),1);
-    EXPECT_EQ(result02[0]->getName(), "test");
+    EXPECT_EQ(result02[0]->getName(), "test_student");
     EXPECT_EQ(result02[0]->getUserLevel(), 1);
     EXPECT_EQ(result02[0]->getPassword(), "-1");
     EXPECT_EQ(result02[0]->getTitle(), "student");
@@ -122,11 +123,91 @@ TEST(PeopleDao_test,addNewStudent){
 
     mysql::connection db = database_connection::getConnection();
 
-    db.execute("delete people.* from people where people.name = 'test';");
+    db.execute("delete people.* from people where people.name = 'test_student';");
+
+    delete check01;
+
+}
+
+TEST(PeopleDao_test,addNewTutor){
+
+    //user id automatically increased and managed by database
+
+    Tutor *check01 = new Tutor(0, "test_tutor");
+
+    bool result01 =  PeopleDao::addNewTutor(check01);
+
+    EXPECT_EQ(result01, true);
+
+    vector<People *> result02 = PeopleDao::selectPeopleByName(check01->getName());
+
+    EXPECT_EQ(result02.size(),1);
+    EXPECT_EQ(result02[0]->getName(), "test_tutor");
+    EXPECT_EQ(result02[0]->getUserLevel(), 2);
+    EXPECT_EQ(result02[0]->getPassword(), "-1");
+    EXPECT_EQ(result02[0]->getTitle(), "tutor");
+    EXPECT_EQ(result02[0]->isActive1(), true);
+
+
+    mysql::connection db = database_connection::getConnection();
+
+    db.execute("delete peopleSubject.* from peopleSubject where peopleSubject.user_id in (select people.user_id from people where people.name = 'test_tutor');");
+
+    db.execute("delete people.* from people where people.name = 'test_tutor';");
 
     delete check01;
 
 }
 
 
+TEST(PeopleDao_test, updatePeoplePassword) {
+    map<int, string> check{
+            {1, "123456"},
+            {2, "niashdjk"},
+            {3,"kasldb"},
+    };
 
+
+    for (const auto &kv : check) {
+
+       EXPECT_TRUE(PeopleDao::updatePeoplePassword(kv.first, kv.second));
+
+    }
+
+    for (const auto &kv : check) {
+
+        People *p = PeopleDao::selectOnePeople(kv.first);
+
+        EXPECT_EQ(p->getPassword(), kv.second);
+
+        delete p;
+
+        EXPECT_TRUE(PeopleDao::updatePeopleResetPassword(kv.first));
+
+    }
+
+    vector<People *> pCheck = PeopleDao::listAllUsers();
+
+    for (auto & i : pCheck) {
+        EXPECT_EQ(i->getPassword(), "-1");
+    }
+
+
+}
+
+
+TEST(PeopleDao_test, updatePeopleActive){
+
+
+    for (int i = 0; i < 4; i++) {
+
+        EXPECT_TRUE(PeopleDao::updatePeopleActive(i + 1, false));
+
+        EXPECT_TRUE(PeopleDao::updatePeopleActive(i + 1, true));
+
+    }
+
+    EXPECT_FALSE(PeopleDao::updatePeopleActive(10,false));
+    EXPECT_FALSE(PeopleDao::updatePeopleActive(10,true));
+
+}
