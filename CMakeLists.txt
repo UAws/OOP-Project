@@ -76,6 +76,7 @@ target_link_libraries(GTestSelf
         CONAN_PKG::openssl
         CONAN_PKG::mysql-connector-c
         CONAN_PKG::sqlpp11
+        
 #        CONAN_PKG::tinyxml2
         )
 
