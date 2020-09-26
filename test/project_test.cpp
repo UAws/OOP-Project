@@ -14,6 +14,8 @@
 #include <service/include/SERVICE_PUBLIC.h>
 #include <dao/include/PeopleDao.h>
 
+
+
 using namespace std;
 
 TEST(major,test01){
@@ -60,6 +62,7 @@ int main(int argc, char **argv) {
 
 
 
+
 TEST(major,login) {
 
    
@@ -79,3 +82,18 @@ TEST(major,login) {
     }
 
 }
+
+TEST(People_Services,logout){
+    for (int i = 1; i < 10; i++){
+        if(i < 5){
+            bool actual = PeopleServices::logout(i);
+            EXPECT_EQ(actual,true);
+        }
+        if(i > 5){
+            bool actual = PeopleServices::logout(i);
+            EXPECT_EQ(actual,false);
+        }
+    }
+}
+
+
