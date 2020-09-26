@@ -12,7 +12,9 @@
 
 #include <vo/include/VO_PUBLIC.h>
 #include <service/include/SERVICE_PUBLIC.h>
-#include<dao/include/PeopleDao.h>
+#include <dao/include/PeopleDao.h>
+
+
 
 using namespace std;
 
@@ -59,6 +61,28 @@ int main(int argc, char **argv) {
 
 
 
+
+
+TEST(major,login) {
+
+   
+
+    for(int i = 1; i < 5; i++){
+        vector<string> check{"1", "-1","1", "-1","1"}; 
+        bool result =  PeopleServices::login(i, check[i - 1]);
+
+       if(i < 6 && i%2 == 0){
+        // bool result =  PeopleServices::login(1,"-1");
+        EXPECT_EQ(result, true);   
+        } else {
+        EXPECT_EQ(result, false);   
+        }  
+
+
+    }
+
+}
+
 TEST(People_Services,logout){
     for (int i = 1; i < 10; i++){
         if(i < 5){
@@ -71,4 +95,5 @@ TEST(People_Services,logout){
         }
     }
 }
+
 

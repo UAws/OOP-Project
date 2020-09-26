@@ -12,48 +12,53 @@
 
 bool PeopleServices::login(int user_id , string password) {
 
-    /*
-     * try find user_id from storage people array
+/*
+     * try find user_id from database
      * if found , assign global static variable to current user by user id
+     * put current user info into storage
      */
 
-    //TODO: need to replace by database
-    if (Storage::storagePeople[user_id] != nullptr ) {
+    People* People = PeopleDao::selectOnePeople(user_id);
+    if (People != nullptr ) {
         Storage::setCurrentUserById(user_id);
     } else {
         cout << "user_id not found : " << user_id << endl;
+        delete People;
         return false;
     }
 
-    /*
+/*
      * check current user is active(not locked) or not.
      */
-    //TODO: need to replace by database
-    if (!Storage::getCurrentUser()->isActive1()){
-        cout << "Hi," << Storage::getCurrentUser()->getName() << "your acount is locked , please contact your tutor or teacher for unlock" << endl;
+
+     if (!People->isActive1()){
+        cout << "Hi," << People->getName() << "your acount is locked , please contact your tutor or teacher for unlock" << endl;
+        delete People;
         return false;
     }
 
-    /*
+/*
      * if password equals to default password '-1', then execute initialization of current user 's password
      */
-    //TODO: need to replace by database
-    if(password == "-1" && password == Storage::getCurrentUser()->getPassword()){
+    if(password == "-1" && password == People->getPassword()){
 
-        /*
-         * initpassword function will return the results of password initialization
-         */
-        return initPassword();
+        cout<< "hahah"<< endl;
+        delete People;
+        return true;
+        //TODO: need to implace the following function 
+        // return initPassword();
 
-        /*
+         /*
          * check input password as same as the password stored inside storage.
          */
         //TODO: need to replace by database
-    }else if ( password == Storage::getCurrentUser()->getPassword()){
 
+    }else if (password == People->getPassword()){
+        delete People;
         return true;
-
     }
+    
+    delete People;
 
     /* login failed
      * unknown conditions default return false.
@@ -102,11 +107,11 @@ bool PeopleServices::initPassword() {
             break;
         } else {
             if (count >= 1){
-                cout << "your entered passwords are not same, plz try again ; you have " << count << "chance left ." << endl;
+                cout << "password you entered is not the same, please try again ; you have " << count << "chance left ." << endl;
                 count--;
             } else {
                 //TODO: need to replace by database
-                cout << "Hi," << Storage::getCurrentUser()->getName() << "your acount is locked , please contact your tutor or teacher for unlock" << endl;
+                cout << "Hi," << Storage::getCurrentUser()->getName() << "your account is locked , please contact your tutor or teacher for unlock" << endl;
                 lockUser(Storage::getCurrentUser()->getUserId());
                 break;
             }
