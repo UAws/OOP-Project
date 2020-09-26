@@ -68,12 +68,15 @@ bool PeopleServices::logout(int user_id) {
     People* people = PeopleDao::selectOnePeople(user_id);
     if(people != nullptr){
         cout << people->getName() << "Log out successfully !" << std::endl;
+        Storage::setCurrentUserById(-1);// satic variable(currentUserId) from storage need to be reset to -1
+        delete people;
         return true;
     }else{
         cout <<"The user ID: "<< user_id << "is not esist. "<< endl;
+        delete people;
         return false;
     }
-    delete people;
+   
 
 }
 

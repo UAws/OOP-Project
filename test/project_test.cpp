@@ -69,11 +69,11 @@ TEST(any_name,any_function){
 
 TEST(People_Services,logout){
     for (int i = 1; i < 10; i++){
-        if(i<5){
+        if(i < 5){
             bool actual = PeopleServices::logout(i);
             EXPECT_EQ(actual,true);
         }
-        if(i>5){
+        if(i > 5){
             bool actual = PeopleServices::logout(i);
             EXPECT_EQ(actual,false);
         }
