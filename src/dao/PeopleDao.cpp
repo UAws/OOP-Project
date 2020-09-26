@@ -394,6 +394,11 @@ bool PeopleDao::updatePeopleActive(int id, bool flag) {
     {
         mysql::connection db = database_connection::getConnection();
 
+        People *p = PeopleDao::selectOnePeople(id);
+
+        if (p == nullptr) {
+            return false;
+        }
         // insert into people (name, password, title, isActive, userLevel)
         //      VALUES ('xiaoming', '-1', 'student', true, 1);
 
@@ -403,7 +408,6 @@ bool PeopleDao::updatePeopleActive(int id, bool flag) {
     catch (const sqlpp::exception& e)
     {
         std::cerr << e.what() << std::endl;
-        return false;
     }
 
     return true;
