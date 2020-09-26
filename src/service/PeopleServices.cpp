@@ -12,34 +12,57 @@
 
 bool PeopleServices::login(int user_id , string password) {
 
+/*
+     * try find user_id from database
+     * if found , assign global static variable to current user by user id
+     * put current user info into storage
+     */
 
     People* People = PeopleDao::selectOnePeople(user_id);
     if (People != nullptr ) {
         Storage::setCurrentUserById(user_id);
     } else {
         cout << "user_id not found : " << user_id << endl;
+        delete People;
         return false;
     }
+
+/*
+     * check current user is active(not locked) or not.
+     */
 
      if (!People->isActive1()){
         cout << "Hi," << People->getName() << "your acount is locked , please contact your tutor or teacher for unlock" << endl;
+        delete People;
         return false;
     }
 
+/*
+     * if password equals to default password '-1', then execute initialization of current user 's password
+     */
     if(password == "-1" && password == People->getPassword()){
 
         cout<< "hahah"<< endl;
+        delete People;
         return true;
         //TODO: need to implace the following function 
         // return initPassword();
 
-    }else if (password == People->getPassword()){
+         /*
+         * check input password as same as the password stored inside storage.
+         */
+        //TODO: need to replace by database
 
+    }else if (password == People->getPassword()){
+        delete People;
         return true;
     }
-
+    
     delete People;
 
+    /* login failed
+     * unknown conditions default return false.
+     */
     return false;
 }
 
