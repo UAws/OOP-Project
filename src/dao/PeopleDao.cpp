@@ -278,11 +278,18 @@ bool PeopleDao::addNewTutor(Tutor *tutor) {
 
 
         // auto enroll to all subject
-        int subject_count = db(select(
-                count(t_subject.subjectId)).from(t_subject).
-                unconditionally()).front().count;
+        // int subject_count = db(select(
+        //         count(t_subject.subjectId)).from(t_subject).
+                // unconditionally()).front().count;
 
         int currentUserId = 0;
+
+        vector <int> subjectIds;
+
+        for (const auto &row : db(select(all_of(t_subject)).from(t_subject).unconditionally())) {
+            subjectIds.push_back(row.subjectId);
+        }
+
 
         for (const auto &row : db(select(t_people.userId).
             from(t_people).
@@ -298,10 +305,10 @@ bool PeopleDao::addNewTutor(Tutor *tutor) {
             return false;
         }
 
-        for (int i = 0; i < subject_count; ++i) {
+        for (int i = 0; i < subjectIds.size(); ++i) {
             db(insert_into(t_peopleSubject).set(
                     t_peopleSubject.userId = currentUserId,
-                    t_peopleSubject.subjectId = (i + 1)));
+                    t_peopleSubject.subjectId = subjectIds[i]));
         }
 
     }
