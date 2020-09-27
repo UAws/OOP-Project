@@ -57,15 +57,17 @@ void Subject::addUserIdEnrolledById(int id) {
      * check does the current subject contains id from parameter or not
      */
 
-        int count = 0;
-        for (size_t i = 0; i < userIdEnrolled.size(); ++i) {
-            if (id != i){
-                count++;
-            }
-        }
-        if (count == userIdEnrolled.size()) {
-            this->userIdEnrolled.push_back(id);
-        }
+    // TODO: need to replace by database
+
+        // int count = 0;
+        // for (size_t i = 0; i < userIdEnrolled.size(); ++i) {
+        //     if (id != i){
+        //         count++;
+        //     }
+        // }
+        // if (count == userIdEnrolled.size()) {
+        //     this->userIdEnrolled.push_back(id);
+        // }
 }
 
 ostream &operator<<(ostream &os, const Subject &subject) {
