@@ -43,11 +43,11 @@ Subject::Subject(int subjectId, const string &subjectName) : subject_id(subjectI
      */
 
     //TODO: need to replace by database
-    for (const auto& kv : Storage::storagePeople) {
-        if (kv.second->getUserLevel() == 2 || kv.second->getUserLevel() == 3) {
-            this->addUserIdEnrolledById(kv.first);
-        }
-    }
+    // for (const auto& kv : Storage::storagePeople) {
+    //     if (kv.second->getUserLevel() == 2 || kv.second->getUserLevel() == 3) {
+    //         this->addUserIdEnrolledById(kv.first);
+    //     }
+    // }
 
 }
 
