@@ -20,7 +20,7 @@ bool PeopleServices::login(int user_id , string password) {
 
     People* People = PeopleDao::selectOnePeople(user_id);
     if (People != nullptr ) {
-        Storage::setCurrentUserById(user_id);
+        Storage::setSUserId(user_id);
     } else {
         cout << "user_id not found : " << user_id << endl;
         delete People;
@@ -42,15 +42,13 @@ bool PeopleServices::login(int user_id , string password) {
      */
     if(password == "-1" && password == People->getPassword()){
 
-        // delete People;
-        // return true;
-        //TODO: need to implace the following function 
-        return initPassword();
+        delete People;
+        return true;
+        //TODO: need to take consider on testing
+        // return initPassword();
          /*
          * check input password as same as the password stored inside storage.
          */
-        //TODO: need to replace by database
-
     }else if (password == People->getPassword()){
         delete People;
         return true;
@@ -67,11 +65,10 @@ bool PeopleServices::login(int user_id , string password) {
 bool PeopleServices::logout(int user_id) {
     // Storage::setCurrentUser(People());
 
-    //TODO: need to replace by database
     People* people = PeopleDao::selectOnePeople(user_id);
     if(people != nullptr){
         cout << people->getName() << "Log out successfully !" << std::endl;
-        Storage::setCurrentUserById(-1);// satic variable(currentUserId) from storage need to be reset to -1
+        Storage::setSUserId(-1);// satic variable(currentUserId) from storage need to be reset to -1
         delete people;
         return true;
     }else{
@@ -92,12 +89,11 @@ bool PeopleServices::initPassword() {
      * after pass all required check, password will be modified and updated to storage
      */
     
-    People* People = Storage::getCurrentUser();
+    People* People = PeopleDao::selectOnePeople(Storage::getSUserId());
 
     string password,secondPasswd;
     int count = 3;
     while (true) {
-        //replaced by database
         cout << "Please enter your password for user " << People->getName() << ":" << std::endl;
         cin >> password;
         cout << "Please re-enter your password : ";
@@ -110,7 +106,6 @@ bool PeopleServices::initPassword() {
                 cout << "password you entered is not the same, please try again ; you have " << count << "chance left ." << endl;
                 count--;
             } else {
-                //replaced by database
                 cout << "Hi," << People->getName() << "your account is locked , please contact your tutor or teacher for unlock" << endl;
                 lockUser(People->getUserId());
                 break;
@@ -118,7 +113,6 @@ bool PeopleServices::initPassword() {
         }
     }
 
-    //TODO: need to replace by database
     People->setPassword(password);
     delete People;
     return true;
@@ -126,19 +120,32 @@ bool PeopleServices::initPassword() {
 
 bool PeopleServices::changePassword(int user_id, const string &oldPassword, const string &new_password) {
 
+    People* People = PeopleDao::selectOnePeople(user_id);
+
     if (oldPassword != new_password) {
-        //TODO: need to replace by database
-        Storage::getCurrentUser()->setPassword(new_password);
+        People->setPassword(new_password);
+        delete People;
         return true;
     }
+    delete People;
     return false;
 }
 
 void PeopleServices::ListAllUsers() {
-    //TODO: need to replace by database
-    for (const auto& kv : Storage::storagePeople) {
-        std::cout << kv.first << " has value " << *kv.second <<" userLevel : "<<kv.second->getUserLevel()<<std::endl;
+
+    vector<People *> People = PeopleDao::listAllUsers();
+
+    // for (size_t i = 0; i < People.size(); ++i) {
+    //    cout << People[i] << " ";
+    // }
+
+    VariadicTable<int, string, string, bool> vt({"People ID", "People name", "Title", "IsActive"});
+    for (size_t i = 0; i < People.size(); ++i) {
+
+        vt.addRow(People[i]->getUserId(), People[i]->getName(), People[i]->getTitle(),People[i]->isActive1());
     }
+    vt.print(cout);
+
 }
 
 

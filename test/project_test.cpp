@@ -65,13 +65,12 @@ int main(int argc, char **argv) {
 
 TEST(major,login) {
 
-   
+    vector<string> check{"1", "-1","1", "-1","1"}; 
 
     for(int i = 1; i < 5; i++){
-        vector<string> check{"1", "-1","1", "-1","1"}; 
         bool result =  PeopleServices::login(i, check[i - 1]);
 
-       if(i < 6 && i%2 == 0){
+       if(i < 5 && i%2 == 0){
         // bool result =  PeopleServices::login(1,"-1");
         EXPECT_EQ(result, true);   
         } else {
@@ -96,6 +95,23 @@ TEST(People_Services,logout){
     }
 }
 
-TEST(People_Services,initPassword){
-    
+TEST(major, ListAllUsers) {
+
+    PeopleServices check;
+
+    testing::internal::CaptureStdout();
+    check.ListAllUsers();
+    string output = testing::internal::GetCapturedStdout();
+
+    vector<string> arr;
+    stringstream ss(output);
+    string final_output;
+
+    while (std::getline(ss, final_output, '\n')){
+        arr.push_back(final_output);
+    }
+
+    EXPECT_EQ(arr[1],"| People ID | People name |  Title  | IsActive |");
+    EXPECT_EQ(arr[3],"|         1 | student01   | student |        1 |");
+    EXPECT_EQ(arr[4],"|         2 | tutor01     | tutor   |        1 |");
 }
