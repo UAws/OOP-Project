@@ -13,7 +13,7 @@
 #include <vo/include/VO_PUBLIC.h>
 #include <service/include/SERVICE_PUBLIC.h>
 #include <dao/include/PeopleDao.h>
-
+#include <database_connection.h>
 
 
 using namespace std;
@@ -96,4 +96,129 @@ TEST(People_Services,logout){
     }
 }
 
+// TEST(People_Services1,addNewTutor){
+//     //user id automatically increased and managed by database
+
+//     Tutor *check01 = new Tutor(0, "test_tutor");
+
+//     PeopleServices * ps = new PeopleServices();
+
+//     //PeopleServices::addNewTut5or(check01);
+
+//     ps->addNewTutor(check01);
+
+//     vector<People *> result02 = PeopleDao::selectPeopleByName(check01->getName());
+
+//     EXPECT_EQ(result02.size(),1);
+//     EXPECT_EQ(result02[0]->getName(), "test_tutor");
+//     EXPECT_EQ(result02[0]->getUserLevel(), 2);
+//     EXPECT_EQ(result02[0]->getPassword(), "-1");
+//     EXPECT_EQ(result02[0]->getTitle(), "tutor");
+//     EXPECT_EQ(result02[0]->isActive1(), true);
+
+
+//     mysql::connection db = database_connection::getConnection();
+
+//     db.execute("delete peopleSubject.* from peopleSubject where peopleSubject.user_id in (select people.user_id from people where people.name = 'test_tutor');");
+
+//     db.execute("delete people.* from people where people.name = 'test_tutor';");
+//     delete ps;
+//     delete check01;
+
+    
+
+// }
+
+// TEST(People_Services1,addNewStudent){
+//     //user id automatically increased and managed by database
+
+//     Student *check01 = new Student(0, "test_student");
+//     PeopleServices * ps = new PeopleServices();
+//     ps->addNewStudent(check01);
+
+
+    
+
+//     vector<People *> result02 = PeopleDao::selectPeopleByName(check01->getName());
+
+//     EXPECT_EQ(result02.size(),1);
+//     EXPECT_EQ(result02[0]->getName(), "test_student");
+//     EXPECT_EQ(result02[0]->getUserLevel(), 1);
+//     EXPECT_EQ(result02[0]->getPassword(), "-1");
+//     EXPECT_EQ(result02[0]->getTitle(), "student");
+//     EXPECT_EQ(result02[0]->isActive1(), true);
+
+
+//     mysql::connection db = database_connection::getConnection();
+
+//     db.execute("delete people.* from people where people.name = 'test_student';");
+
+//     delete ps;
+//     delete check01;
+// }
+
+TEST(People_Services,addNewTutor){
+
+    //user id automatically increased and managed by database
+
+    Tutor *check01 = new Tutor(0, "test_tutor");
+
+    PeopleServices * ps = new PeopleServices();
+
+    bool result01 =  ps->addNewTutor(check01);
+
+    EXPECT_EQ(result01, true);
+
+    vector<People *> result02 = PeopleDao::selectPeopleByName(check01->getName());
+
+    EXPECT_EQ(result02.size(),1);
+    EXPECT_EQ(result02[0]->getName(), "test_tutor");
+    EXPECT_EQ(result02[0]->getUserLevel(), 2);
+    EXPECT_EQ(result02[0]->getPassword(), "-1");
+    EXPECT_EQ(result02[0]->getTitle(), "tutor");
+    EXPECT_EQ(result02[0]->isActive1(), true);
+
+
+    mysql::connection db = database_connection::getConnection();
+
+    db.execute("delete peopleSubject.* from peopleSubject where peopleSubject.user_id in (select people.user_id from people where people.name = 'test_tutor');");
+
+    db.execute("delete people.* from people where people.name = 'test_tutor';");
+
+    delete ps;
+
+    delete check01;
+
+}
+
+TEST(People_Services,addNewStudent){
+
+    //user id automatically increased and managed by database
+
+    Student *check01 = new Student(0, "test_student");
+
+    PeopleServices * ps = new PeopleServices();
+
+    bool result01 =  ps->addNewStudent(check01);
+
+    EXPECT_EQ(result01, true);
+
+    vector<People *> result02 = PeopleDao::selectPeopleByName(check01->getName());
+
+    EXPECT_EQ(result02.size(),1);
+    EXPECT_EQ(result02[0]->getName(), "test_student");
+    EXPECT_EQ(result02[0]->getUserLevel(), 1);
+    EXPECT_EQ(result02[0]->getPassword(), "-1");
+    EXPECT_EQ(result02[0]->getTitle(), "student");
+    EXPECT_EQ(result02[0]->isActive1(), true);
+
+
+    mysql::connection db = database_connection::getConnection();
+
+    db.execute("delete people.* from people where people.name = 'test_student';");
+
+    delete ps;
+    delete check01;
+
+}
 
