@@ -42,12 +42,10 @@ bool PeopleServices::login(int user_id , string password) {
      */
     if(password == "-1" && password == People->getPassword()){
 
-        cout<< "hahah"<< endl;
-        delete People;
-        return true;
+        // delete People;
+        // return true;
         //TODO: need to implace the following function 
-        // return initPassword();
-
+        return initPassword();
          /*
          * check input password as same as the password stored inside storage.
          */
@@ -57,7 +55,7 @@ bool PeopleServices::login(int user_id , string password) {
         delete People;
         return true;
     }
-    
+
     delete People;
 
     /* login failed
@@ -77,7 +75,7 @@ bool PeopleServices::logout(int user_id) {
         delete people;
         return true;
     }else{
-        cout <<"The user ID: "<< user_id << "is not esist. "<< endl;
+        cout <<"The user ID: "<< user_id << "does not exist. "<< endl;
         delete people;
         return false;
     }
@@ -93,12 +91,14 @@ bool PeopleServices::initPassword() {
      * if failed to enter same password over maximum 3 times , the current user will be locked (can not login )
      * after pass all required check, password will be modified and updated to storage
      */
+    
+    People* People = Storage::getCurrentUser();
 
     string password,secondPasswd;
     int count = 3;
     while (true) {
-        //TODO: need to replace by database
-        cout << "Please enter your password for user " << Storage::getCurrentUser()->getName() << ":" << std::endl;
+        //replaced by database
+        cout << "Please enter your password for user " << People->getName() << ":" << std::endl;
         cin >> password;
         cout << "Please re-enter your password : ";
         cin >> secondPasswd;
@@ -110,16 +110,17 @@ bool PeopleServices::initPassword() {
                 cout << "password you entered is not the same, please try again ; you have " << count << "chance left ." << endl;
                 count--;
             } else {
-                //TODO: need to replace by database
-                cout << "Hi," << Storage::getCurrentUser()->getName() << "your account is locked , please contact your tutor or teacher for unlock" << endl;
-                lockUser(Storage::getCurrentUser()->getUserId());
+                //replaced by database
+                cout << "Hi," << People->getName() << "your account is locked , please contact your tutor or teacher for unlock" << endl;
+                lockUser(People->getUserId());
                 break;
             }
         }
     }
 
     //TODO: need to replace by database
-    Storage::getCurrentUser()->setPassword(password);
+    People->setPassword(password);
+    delete People;
     return true;
 }
 

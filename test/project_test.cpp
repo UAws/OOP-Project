@@ -96,4 +96,6 @@ TEST(People_Services,logout){
     }
 }
 
-
+TEST(People_Services,initPassword){
+    
+}
