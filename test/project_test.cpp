@@ -87,7 +87,7 @@ TEST(People_Services,logout){
     for (int i = 1; i < 10; i++){
         if(i < 5){
             bool actual = PeopleServices::logout(i);
-            EXPECT_EQ(actual,false);
+            EXPECT_EQ(actual,true);
         }
         if(i > 5){
             bool actual = PeopleServices::logout(i);
