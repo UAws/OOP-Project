@@ -113,17 +113,26 @@ bool PeopleServices::initPassword() {
         }
     }
 
-    People->setPassword(password);
+    // People->setPassword(password);
+    PeopleDao curUser;
+    curUser.updatePeoplePassword(People->getUserId(), People->getName());
+
     delete People;
     return true;
 }
 
-bool PeopleServices::changePassword(int user_id, const string &oldPassword, const string &new_password) {
+bool PeopleServices::changePassword(int user_id, const string password) {
 
     People* People = PeopleDao::selectOnePeople(user_id);
 
-    if (oldPassword != new_password) {
-        People->setPassword(new_password);
+    // if (oldPassword != new_password) {
+        
+        if (password != People->getPassword()) {
+
+        // People->setPassword(new_password);
+        PeopleDao curUser;
+        curUser.updatePeoplePassword(user_id, People->getName());
+
         delete People;
         return true;
     }
