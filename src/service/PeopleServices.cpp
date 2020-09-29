@@ -11,6 +11,7 @@
 #include <dao/include/PeopleDao.h>
 #include <dao/include/SubjectDao.h>
 
+
 bool PeopleServices::login(int user_id , string password) {
 
 /*
@@ -188,14 +189,39 @@ void PeopleServices::modifySubjectById(int subject_id) {
 }
 
 void PeopleServices::showStudents() {
+    
+    vector<People *> Student = PeopleDao::showAllStudents();
 
+    VariadicTable<int, string, bool> vt({"Student ID", "Student name", "IsActive"});
+    for (size_t i = 0; i < Student.size(); ++i) {
+
+        vt.addRow(Student[i]->getUserId(), Student[i]->getName(), Student[i]->isActive1());
+    }
+    vt.print(cout);
 }
 
 void PeopleServices::showTutors() {
+    vector<People *> Tutor = PeopleDao::showAllTutors();
+
+    VariadicTable<int, string, bool> vt({"Tutor ID", "Tutor name", "IsActive"});
+    for (size_t i = 0; i < Tutor.size(); ++i) {
+
+        vt.addRow(Tutor[i]->getUserId(), Tutor[i]->getName(), Tutor[i]->isActive1());
+    }
+    vt.print(cout);
 
 }
 
 void PeopleServices::showSubjects() {
+    vector<Subject *> Subject = SubjectDao::listAllSubjects();
+
+    VariadicTable<int, string> vt({"Tutor ID", "Tutor name"});
+    for (size_t i = 0; i < Subject.size(); ++i) {
+
+        vt.addRow(Subject[i]->getSubjectId(), Subject[i]->getSubjectName());
+    }
+    vt.print(cout);
+
 
 }
 
