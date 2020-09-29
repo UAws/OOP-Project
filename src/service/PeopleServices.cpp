@@ -159,20 +159,18 @@ void PeopleServices::ListAllUsers() {
     vt.print(cout);
 }
 
-//Chi 
+//Chi completed
 bool PeopleServices::addNewTutor(Tutor *people) {
     return PeopleDao::addNewTutor(people);
-     // needs to test, remove when finished.
 
 }
 
 void PeopleServices::modifyTutorById(int user_id) {
 
 }
-//Chi
+//Chi completed
 bool PeopleServices::addNewStudent(Student *people) {
-     return PeopleDao::addNewStudent(people);
-    // needs to test, remove when finished.
+    return PeopleDao::addNewStudent(people);
 
 }
 
@@ -205,20 +203,25 @@ int PeopleServices::checkUserLevelById(int user_id) {
     // return Storage::getCurrentUser()->getUserLevel();
     return 0;
 }
-//Chi
-void PeopleServices::resetUserPasswordById(int user_id) {
-    PeopleDao::updatePeoplePassword(user_id, "-1");
-    // needs to test, remove when finished.
+//Chi completed
+bool PeopleServices::resetUserPasswordById(int user_id) {
+
+    return PeopleDao::updatePeopleResetPassword(user_id);
+   
 }
 
 
-//Chi 
-void PeopleServices::unlockUser(int user_id) {
-    PeopleDao::updatePeopleActive(user_id, true);
+//Chi completed
+bool PeopleServices::unlockUser(int user_id) {
+
+    return PeopleDao::updatePeopleActive(user_id, true);
+
 }
-//Chi
-void PeopleServices::lockUser(int user_id) {
-    PeopleDao::updatePeopleActive(user_id, false);
+//Chi completed
+bool PeopleServices::lockUser(int user_id) {
+
+    return PeopleDao::updatePeopleActive(user_id, false);
+
 }
 
 
