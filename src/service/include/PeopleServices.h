@@ -38,9 +38,9 @@ public:
 
     static bool resetUserPasswordById(int user_id);//void to bool
 
-    static void lockUser(int user_id);
+    static bool lockUser(int user_id);
 
-    static void unlockUser(int user_id);
+    static bool unlockUser(int user_id);
 
     /*
      * userAction functions

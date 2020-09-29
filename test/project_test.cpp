@@ -176,3 +176,18 @@ TEST(People_Services,resetUserPasswordById){
     }
 
 }
+
+TEST(People_Services,unlockUser_and_lockUser){
+
+    for (int i = 0; i < 4; i++) {
+
+        EXPECT_TRUE(PeopleServices::unlockUser(i + 1));
+
+        EXPECT_TRUE(PeopleServices::lockUser(i + 1));
+
+    }
+
+    EXPECT_FALSE(PeopleServices::unlockUser(10));
+    EXPECT_FALSE(PeopleServices::lockUser(10));
+
+}
