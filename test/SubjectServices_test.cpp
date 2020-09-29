@@ -82,7 +82,8 @@ TEST(SubjectServices, displayOneSubject) {
 
         string output = testing::internal::GetCapturedStderr();
 
-        EXPECT_EQ(output,"The subject ID : 3 not found\n");
+        EXPECT_TRUE(output.find("The subject ID : 3 not found") != string::npos);
+
     }
 
 }
@@ -110,7 +111,7 @@ TEST(SubjectServices, displaySubjectByName) {
 
         string output = testing::internal::GetCapturedStderr();
 
-        EXPECT_EQ(output,"The subject name : IcanNotBeFound not found\n");
+        EXPECT_TRUE(output.find("The subject name : IcanNotBeFound not found") != string::npos);
     }
 }
 
