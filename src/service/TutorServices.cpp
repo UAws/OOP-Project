@@ -14,19 +14,19 @@ void TutorServices::showStudents() {
     VariadicTable<int, string, string, bool> vt({"Student ID", "Student name", "Title", "IsActive"});
 
     //TODO: need to replace by database
-    for (const auto& kv : Storage::storagePeople) {
-        if (kv.second->getUserLevel() == 1) {
-            People stu = *kv.second;
-            vt.addRow(stu.getUserId(), stu.getName(), stu.getTitle(),stu.isActive1());
-        }
-    }
+    // for (const auto& kv : Storage::storagePeople) {
+    //     if (kv.second->getUserLevel() == 1) {
+    //         People stu = *kv.second;
+    //         vt.addRow(stu.getUserId(), stu.getName(), stu.getTitle(),stu.isActive1());
+    //     }
+    // }
 
-    vt.print(cout);
+    // vt.print(cout);
 }
-
-void TutorServices::addNewStudent(People *people) {
+//chi has changed the "void" to "bool" for not sure.
+bool TutorServices::addNewStudent(Student *people) {
     //TODO: need to replace by database
-    Storage::storagePeople.insert(std::make_pair(people->getUserId(), people));
+    // Storage::storagePeople.insert(std::make_pair(people->getUserId(), people));
 }
 
 void TutorServices::modifyStudentById(int user_id) {

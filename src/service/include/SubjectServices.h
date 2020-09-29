@@ -13,6 +13,22 @@
 class SubjectServices {
 public:
 
+    static void listAllSubjects();
+
+    static void displayOneSubject(int id);
+
+    static void displaySubjectByName(const string name);
+
+    static bool addNewSubject(string name);
+
+    static bool addStudentToSubject(int userId, int subjectId);
+
+
+
+private:
+
+
+
 
 };
 

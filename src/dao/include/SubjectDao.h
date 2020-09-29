@@ -9,8 +9,28 @@
 #ifndef OOP_PROJECT_SUBJECTDAO_H
 #define OOP_PROJECT_SUBJECTDAO_H
 
+#include <vo/include/VO_PUBLIC.h>
 
 class SubjectDao {
+public:
+    // list
+
+    static vector<Subject*> listAllSubjects();
+
+    // select
+
+    static Subject* selectOneSubject(int id);
+
+    static vector<Subject*> selectSubjectByName(string name);
+
+    //insert
+
+    static bool addNewSubject(Subject *subject);
+
+    //update
+
+    static bool updatePeopleToSubject(int userId, int subjectId);
+
 
 };
 

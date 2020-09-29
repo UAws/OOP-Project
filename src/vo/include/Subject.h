@@ -18,12 +18,14 @@ private:
     int subject_id;
     string subject_name;
 
-    //TODO: need to replace by database
-    vector<int> userIdEnrolled;
 
 public:
 
+    Subject();
+
     Subject(int subjectId, const string &subjectName);
+
+    //getter and setter
 
     int getSubjectId() const;
 
@@ -32,12 +34,6 @@ public:
     const string &getSubjectName() const;
 
     void setSubjectName(const string &subjectName);
-
-    vector<int> getUserIdEnrolled() const;
-
-    void setUserIdEnrolled(const vector<int> &userIdEnrolled);
-
-    void addUserIdEnrolledById(int id);
 
     friend ostream &operator<<(ostream &os, const Subject &subject);
 

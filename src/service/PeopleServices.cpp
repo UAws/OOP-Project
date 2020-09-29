@@ -106,80 +106,66 @@ bool PeopleServices::initPassword() {
                 cout << "password you entered is not the same, please try again ; you have " << count << "chance left ." << endl;
                 count--;
             } else {
-                cout << "Hi," << People->getName() << "your account is locked , please contact your tutor or teacher for unlock" << endl;
-                lockUser(People->getUserId());
+                //TODO: need to replace by database
+                // cout << "Hi," << Storage::getCurrentUser()->getName() << "your account is locked , please contact your tutor or teacher for unlock" << endl;
+                // lockUser(Storage::getCurrentUser()->getUserId());
                 break;
             }
         }
     }
 
-    // People->setPassword(password);
-    PeopleDao curUser;
-    curUser.updatePeoplePassword(People->getUserId(), People->getName());
-
-    delete People;
+    //TODO: need to replace by database
+    // Storage::getCurrentUser()->setPassword(password);
     return true;
 }
 
 bool PeopleServices::changePassword(int user_id, const string password) {
 
-    People* People = PeopleDao::selectOnePeople(user_id);
+    // People* People = PeopleDao::selectOnePeople(user_id);
 
     // if (oldPassword != new_password) {
-        
-        if (password != People->getPassword()) {
-
-        // People->setPassword(new_password);
-        PeopleDao curUser;
-        curUser.updatePeoplePassword(user_id, People->getName());
-
-        delete People;
-        return true;
-    }
-    delete People;
-    return false;
-}
-
-void PeopleServices::ListAllUsers() {
-
-    vector<People *> People = PeopleDao::listAllUsers();
-
-    // for (size_t i = 0; i < People.size(); ++i) {
-    //    cout << People[i] << " ";
+    //     //TODO: need to replace by database
+    //     // Storage::getCurrentUser()->setPassword(new_password);
+    //     return true;
     // }
-
-    VariadicTable<int, string, string, bool> vt({"People ID", "People name", "Title", "IsActive"});
-    for (size_t i = 0; i < People.size(); ++i) {
-
-        vt.addRow(People[i]->getUserId(), People[i]->getName(), People[i]->getTitle(),People[i]->isActive1());
-    }
-    vt.print(cout);
-
+    // delete People;
+    // return false;
+}
+// 
+void PeopleServices::ListAllUsers() {
+    //TODO: need to replace by database
+    // for (const auto& kv : Storage::storagePeople) {
+    //     std::cout << kv.first << " has value " << *kv.second <<" userLevel : "<<kv.second->getUserLevel()<<std::endl;
+    // }
 }
 
-
-void PeopleServices::addNewTutor(People people) {
+//Chi 
+bool PeopleServices::addNewTutor(Tutor *people) {
+    return PeopleDao::addNewTutor(people);
+     // needs to test, remove when finished.
 
 }
 
 void PeopleServices::modifyTutorById(int user_id) {
 
 }
-
-void PeopleServices::addNewStudent(People *people) {
+//Chi
+bool PeopleServices::addNewStudent(Student *people) {
+     return PeopleDao::addNewStudent(people);
+    // needs to test, remove when finished.
 
 }
 
 void PeopleServices::modifyStudentById(int user_id) {
-
+    // talk later
 }
 
 void PeopleServices::addNewSubject(Subject subject) {
-
+// not sure
 }
 
 void PeopleServices::modifySubjectById(int subject_id) {
-
+    // talk later
 }
 
 void PeopleServices::showStudents() {
@@ -196,25 +182,23 @@ void PeopleServices::showSubjects() {
 
 int PeopleServices::checkUserLevelById(int user_id) {
     //TODO: need to replace by database
-    return Storage::getCurrentUser()->getUserLevel();
+    // return Storage::getCurrentUser()->getUserLevel();
+    return 0;
 }
-
+//Chi
 void PeopleServices::resetUserPasswordById(int user_id) {
-    unlockUser(user_id);
-    //TODO: need to replace by database
-    Storage::getCurrentUser()->setPassword("-1");
+    PeopleDao::updatePeoplePassword(user_id, "-1");
+    // needs to test, remove when finished.
 }
 
 
-
+//Chi 
 void PeopleServices::unlockUser(int user_id) {
-    //TODO: need to replace by database
-    Storage::storagePeople[user_id]->setIsActive(true);
+    PeopleDao::updatePeopleActive(user_id, true);
 }
-
+//Chi
 void PeopleServices::lockUser(int user_id) {
-    //TODO: need to replace by database
-    Storage::storagePeople[user_id]->setIsActive(false);
+    PeopleDao::updatePeopleActive(user_id, false);
 }
 
 
