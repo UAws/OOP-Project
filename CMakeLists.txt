@@ -35,6 +35,7 @@ set(source_test
         test/database_test.cpp
         test/PeopleDao_test.cpp
         test/SubjectDao_test.cpp
+        test/SubjectServices_test.cpp
         utils/database_connection.cpp
         )
 

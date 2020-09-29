@@ -16,7 +16,7 @@ public:
     int getUserLevel() const override;
 
     //TODO: need to replace by database//TODO: need to replace by database
-    Teacher(int userId, const string &name, const string &password = "-1", const string &title = Storage::title_array[3], bool isActive = true, int userLevel = 3);
+    Teacher(int userId, const string &name, const string &password = "-1", const string &title = "teacher", bool isActive = true, int userLevel = 3);
 };
 
 
