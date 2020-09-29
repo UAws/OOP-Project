@@ -255,6 +255,32 @@ TEST(People_Services,changePassword) {
 
 }
 
+   
+TEST(People_Services,addNewSubject) {
+
+    Subject *check01 = new Subject(0, "test_subject");
+
+    PeopleServices * ps = new PeopleServices();
+
+    bool result01 =  ps->addNewSubject(check01);
+
+    EXPECT_EQ(result01, true);
+
+    vector<Subject *> result02 = SubjectDao::selectSubjectByName(check01-> getSubjectName());
+
+    EXPECT_EQ(result02.size(),1);
+    EXPECT_EQ(result02[0]->getSubjectName(), "test_subject");
+
+    mysql::connection db = database_connection::getConnection();
+
+    db.execute(
+            "delete peopleSubject.* from peopleSubject where peopleSubject.subject_id in (select subject.subject_id  from subject where subject.name = 'test_subject');");
+
+    db.execute("delete subject.* from subject where subject.name = 'test_subject';");
+
+    delete check01;
+}
+
 TEST(People_Services, showStudents) {
 
 
