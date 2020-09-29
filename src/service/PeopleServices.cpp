@@ -20,7 +20,7 @@ bool PeopleServices::login(int user_id , string password) {
 
     People* People = PeopleDao::selectOnePeople(user_id);
     if (People != nullptr ) {
-        Storage::setCurrentUserById(user_id);
+        Storage::setSUserId(user_id);
     } else {
         cout << "user_id not found : " << user_id << endl;
         delete People;
@@ -73,7 +73,7 @@ bool PeopleServices::logout(int user_id) {
     People* people = PeopleDao::selectOnePeople(user_id);
     if(people != nullptr){
         cout << people->getName() << "Log out successfully !" << std::endl;
-        Storage::setCurrentUserById(-1);// satic variable(currentUserId) from storage need to be reset to -1
+        Storage::setSUserId(-1);// satic variable(currentUserId) from storage need to be reset to -1
         delete people;
         return true;
     }else{
@@ -98,7 +98,7 @@ bool PeopleServices::initPassword() {
     int count = 3;
     while (true) {
         //TODO: need to replace by database
-        cout << "Please enter your password for user " << Storage::getCurrentUser()->getName() << ":" << std::endl;
+        // cout << "Please enter your password for user " << Storage::getCurrentUser()->getName() << ":" << std::endl;
         cin >> password;
         cout << "Please re-enter your password : ";
         cin >> secondPasswd;
@@ -111,15 +111,15 @@ bool PeopleServices::initPassword() {
                 count--;
             } else {
                 //TODO: need to replace by database
-                cout << "Hi," << Storage::getCurrentUser()->getName() << "your account is locked , please contact your tutor or teacher for unlock" << endl;
-                lockUser(Storage::getCurrentUser()->getUserId());
+                // cout << "Hi," << Storage::getCurrentUser()->getName() << "your account is locked , please contact your tutor or teacher for unlock" << endl;
+                // lockUser(Storage::getCurrentUser()->getUserId());
                 break;
             }
         }
     }
 
     //TODO: need to replace by database
-    Storage::getCurrentUser()->setPassword(password);
+    // Storage::getCurrentUser()->setPassword(password);
     return true;
 }
 
@@ -127,7 +127,7 @@ bool PeopleServices::changePassword(int user_id, const string &oldPassword, cons
 
     if (oldPassword != new_password) {
         //TODO: need to replace by database
-        Storage::getCurrentUser()->setPassword(new_password);
+        // Storage::getCurrentUser()->setPassword(new_password);
         return true;
     }
     return false;
@@ -135,9 +135,9 @@ bool PeopleServices::changePassword(int user_id, const string &oldPassword, cons
 
 void PeopleServices::ListAllUsers() {
     //TODO: need to replace by database
-    for (const auto& kv : Storage::storagePeople) {
-        std::cout << kv.first << " has value " << *kv.second <<" userLevel : "<<kv.second->getUserLevel()<<std::endl;
-    }
+    // for (const auto& kv : Storage::storagePeople) {
+    //     std::cout << kv.first << " has value " << *kv.second <<" userLevel : "<<kv.second->getUserLevel()<<std::endl;
+    // }
 }
 
 
@@ -179,25 +179,26 @@ void PeopleServices::showSubjects() {
 
 int PeopleServices::checkUserLevelById(int user_id) {
     //TODO: need to replace by database
-    return Storage::getCurrentUser()->getUserLevel();
+    // return Storage::getCurrentUser()->getUserLevel();
+    return 0;
 }
 
 void PeopleServices::resetUserPasswordById(int user_id) {
     unlockUser(user_id);
     //TODO: need to replace by database
-    Storage::getCurrentUser()->setPassword("-1");
+    // Storage::getCurrentUser()->setPassword("-1");
 }
 
 
 
 void PeopleServices::unlockUser(int user_id) {
     //TODO: need to replace by database
-    Storage::storagePeople[user_id]->setIsActive(true);
+    // Storage::storagePeople[user_id]->setIsActive(true);
 }
 
 void PeopleServices::lockUser(int user_id) {
     //TODO: need to replace by database
-    Storage::storagePeople[user_id]->setIsActive(false);
+    // Storage::storagePeople[user_id]->setIsActive(false);
 }
 
 

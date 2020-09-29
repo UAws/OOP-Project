@@ -20,17 +20,6 @@ using namespace std;
 
 TEST(major,test01){
 
-    //TODO: storage need to change to dao by database
-    for (const auto& kv : Storage::storagePeople) {
-        std::cout << kv.first << " has value " << *kv.second <<" userLevel : "<<kv.second->getUserLevel()<<std::endl;
-    }
-    //TODO: need to replace by database
-    for (const auto& kv : Storage::storageSubjects) {
-        std::cout << kv.first << " has value " << kv.second <<std::endl;
-    }
-
-    //TODO: need to replace by database
-    cout << Storage::title_array << std::endl;
 
     // Storage::setCurrentUserById(2);
     // Storage::storagePeople[2]->login(4, "-1");
@@ -45,8 +34,6 @@ TEST(major,test01){
 
 
 
-    //TODO: need to replace by database
-    Storage::clearHeap();
 
 }
 

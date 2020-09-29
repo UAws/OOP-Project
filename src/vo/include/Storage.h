@@ -20,17 +20,6 @@ using namespace std;
 class Storage {
 
 public:
-    static void clearHeap();
-
-    static map<int,People *> storagePeople;
-
-    static map<int,Subject> storageSubjects;
-
-    static int useUser_Id();
-
-    static int useSubject_Id();
-
-    static vector<string> title_array;
 
     static int getSUserId();
 
@@ -40,7 +29,6 @@ public:
 
     static void setSSubjectId(int sSubjectId);
 
-    static void setCurrentUserById(int i);
 
 private:
 
@@ -48,13 +36,6 @@ private:
 
     static int s_subject_id;
 
-    static People * currentUser;
-
-public:
-    static void setCurrentUser(People *&currentUser);
-
-public:
-    static People * getCurrentUser();
 };
 
 
