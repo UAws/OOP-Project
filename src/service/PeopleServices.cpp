@@ -189,7 +189,15 @@ void PeopleServices::modifySubjectById(int subject_id) {
 }
 
 void PeopleServices::showStudents() {
+    
+    vector<People *> Student = PeopleDao::showAllStudents();
 
+    VariadicTable<int, string, string, bool> vt({"Student ID", "Student name", "Title", "IsActive"});
+    for (size_t i = 0; i < Student.size(); ++i) {
+
+        vt.addRow(Student[i]->getUserId(), Student[i]->getName(), Student[i]->getTitle(),Student[i]->isActive1());
+    }
+    vt.print(cout);
 }
 
 void PeopleServices::showTutors() {
