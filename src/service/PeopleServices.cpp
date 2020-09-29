@@ -106,37 +106,57 @@ bool PeopleServices::initPassword() {
                 cout << "password you entered is not the same, please try again ; you have " << count << "chance left ." << endl;
                 count--;
             } else {
-                //TODO: need to replace by database
-                // cout << "Hi," << Storage::getCurrentUser()->getName() << "your account is locked , please contact your tutor or teacher for unlock" << endl;
-                // lockUser(Storage::getCurrentUser()->getUserId());
-                break;
+                cout << "Hi," << People->getName() << "your account is locked , please contact your tutor or teacher for unlock" << endl;
+                lockUser(People->getUserId());
+                delete People;
+                return false;
             }
         }
     }
 
-    //TODO: need to replace by database
-    // Storage::getCurrentUser()->setPassword(password);
+    // People->setPassword(password);
+    // PeopleDao curUser;
+    // curUser.updatePeoplePassword(People->getUserId(), People->getName());
+    PeopleDao::updatePeoplePassword(People->getUserId(), People->getName());
+    delete People;
     return true;
 }
 
 bool PeopleServices::changePassword(int user_id, const string password) {
 
-    // People* People = PeopleDao::selectOnePeople(user_id);
+    People* People = PeopleDao::selectOnePeople(user_id);
 
     // if (oldPassword != new_password) {
-    //     //TODO: need to replace by database
-    //     // Storage::getCurrentUser()->setPassword(new_password);
-    //     return true;
-    // }
-    // delete People;
-    // return false;
+        
+        if (password != People->getPassword()) {
+
+        // People->setPassword(new_password);
+
+        delete People;
+        return PeopleDao::updatePeoplePassword(user_id, password);
+    }
+    
+    delete People;
+    return false;
 }
-// 
+
 void PeopleServices::ListAllUsers() {
     //TODO: need to replace by database
     // for (const auto& kv : Storage::storagePeople) {
     //     std::cout << kv.first << " has value " << *kv.second <<" userLevel : "<<kv.second->getUserLevel()<<std::endl;
     // }
+    vector<People *> People = PeopleDao::listAllUsers();
+
+    // for (size_t i = 0; i < People.size(); ++i) {
+    //    cout << People[i] << " ";
+    // }
+
+    VariadicTable<int, string, string, bool> vt({"People ID", "People name", "Title", "IsActive"});
+    for (size_t i = 0; i < People.size(); ++i) {
+
+        vt.addRow(People[i]->getUserId(), People[i]->getName(), People[i]->getTitle(),People[i]->isActive1());
+    }
+    vt.print(cout);
 }
 
 //Chi 
