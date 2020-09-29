@@ -94,7 +94,8 @@ TEST(People_Services,logout){
         }
     }
 }
-ll
+
+// 
 TEST(major, ListAllUsers) {
 
     PeopleServices check;
@@ -115,3 +116,4 @@ TEST(major, ListAllUsers) {
     EXPECT_EQ(arr[3],"|         1 | student01   | student |        1 |");
     EXPECT_EQ(arr[4],"|         2 | tutor01     | tutor   |        1 |");
 }
+
