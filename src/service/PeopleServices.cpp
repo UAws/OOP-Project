@@ -9,6 +9,8 @@
 #include <service/include/SERVICE_PUBLIC.h>
 #include <vo/include/VO_PUBLIC.h>
 #include <dao/include/PeopleDao.h>
+#include <dao/include/SubjectDao.h>
+
 
 bool PeopleServices::login(int user_id , string password) {
 
@@ -211,6 +213,15 @@ void PeopleServices::showTutors() {
 }
 
 void PeopleServices::showSubjects() {
+    vector<Subject *> Subject = SubjectDao::listAllSubjects();
+
+    VariadicTable<int, string> vt({"Tutor ID", "Tutor name"});
+    for (size_t i = 0; i < Subject.size(); ++i) {
+
+        vt.addRow(Subject[i]->getSubjectId(), Subject[i]->getSubjectName());
+    }
+    vt.print(cout);
+
 
 }
 

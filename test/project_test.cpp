@@ -307,4 +307,31 @@ TEST(People_Services, showTutors) {
 
 
 }
+TEST(People_Services, showSubjects) {
+
+    PeopleServices check;
+
+    testing::internal::CaptureStdout();
+    check.showSubjects();
+    string output = testing::internal::GetCapturedStdout();
+
+    vector<string> arr;
+    stringstream ss(output);
+    string final_output;
+
+    while (std::getline(ss, final_output, '\n')){
+        arr.push_back(final_output);
+    }
+
+    // EXPECT_EQ(arr[1],"| Tutor ID | Tutor name | IsActive |");
+    // EXPECT_EQ(arr[3],"|          1 | student01    |        1 |");
+    // EXPECT_EQ(arr[4],"|          4 | student02    |        1 |");
+    EXPECT_TRUE(output.find("subject01") != string::npos);
+    EXPECT_TRUE(output.find("subject02") != string::npos);
+    EXPECT_FALSE(output.find("teacher") != string::npos);
+    EXPECT_FALSE(output.find("student") != string::npos);
+
+
+}
+
 
