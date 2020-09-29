@@ -190,15 +190,23 @@ void PeopleServices::showStudents() {
     
     vector<People *> Student = PeopleDao::showAllStudents();
 
-    VariadicTable<int, string, string, bool> vt({"Student ID", "Student name", "Title", "IsActive"});
+    VariadicTable<int, string, bool> vt({"Student ID", "Student name", "IsActive"});
     for (size_t i = 0; i < Student.size(); ++i) {
 
-        vt.addRow(Student[i]->getUserId(), Student[i]->getName(), Student[i]->getTitle(),Student[i]->isActive1());
+        vt.addRow(Student[i]->getUserId(), Student[i]->getName(), Student[i]->isActive1());
     }
     vt.print(cout);
 }
 
 void PeopleServices::showTutors() {
+    vector<People *> Tutor = PeopleDao::showAllTutors();
+
+    VariadicTable<int, string, bool> vt({"Tutor ID", "Tutor name", "IsActive"});
+    for (size_t i = 0; i < Tutor.size(); ++i) {
+
+        vt.addRow(Tutor[i]->getUserId(), Tutor[i]->getName(), Tutor[i]->isActive1());
+    }
+    vt.print(cout);
 
 }
 

@@ -254,4 +254,57 @@ TEST(People_Services,changePassword) {
 
 }
 
-   
+TEST(People_Services, showStudents) {
+
+    PeopleServices check;
+
+    testing::internal::CaptureStdout();
+    check.showStudents();
+    string output = testing::internal::GetCapturedStdout();
+
+    vector<string> arr;
+    stringstream ss(output);
+    string final_output;
+
+    while (std::getline(ss, final_output, '\n')){
+        arr.push_back(final_output);
+    }
+
+    // EXPECT_EQ(arr[1],"| Student ID | Student name | IsActive |");
+    // EXPECT_EQ(arr[3],"|          1 | student01    |        1 |");
+    // EXPECT_EQ(arr[4],"|          4 | student02    |        1 |");
+    EXPECT_TRUE(output.find("student02") != string::npos);
+    EXPECT_TRUE(output.find("student") != string::npos);
+    EXPECT_FALSE(output.find("tutor") != string::npos);
+    EXPECT_FALSE(output.find("teacher01") != string::npos);
+
+
+}
+
+TEST(People_Services, showTutors) {
+
+    PeopleServices check;
+
+    testing::internal::CaptureStdout();
+    check.showTutors();
+    string output = testing::internal::GetCapturedStdout();
+
+    vector<string> arr;
+    stringstream ss(output);
+    string final_output;
+
+    while (std::getline(ss, final_output, '\n')){
+        arr.push_back(final_output);
+    }
+
+    // EXPECT_EQ(arr[1],"| Tutor ID | Tutor name | IsActive |");
+    // EXPECT_EQ(arr[3],"|          1 | student01    |        1 |");
+    // EXPECT_EQ(arr[4],"|          4 | student02    |        1 |");
+    EXPECT_TRUE(output.find("tutor") != string::npos);
+    EXPECT_TRUE(output.find("tutor01") != string::npos);
+    EXPECT_FALSE(output.find("teacher") != string::npos);
+    EXPECT_FALSE(output.find("student") != string::npos);
+
+
+}
+
