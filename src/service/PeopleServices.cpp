@@ -179,9 +179,9 @@ bool PeopleServices::addNewStudent(Student *people) {
 void PeopleServices::modifyStudentById(int user_id) {
     // talk later
 }
-
-void PeopleServices::addNewSubject(Subject subject) {
-// not sure
+//Chi
+bool PeopleServices::addNewSubject(Subject *subject) {
+    return SubjectDao::addNewSubject(subject);
 }
 
 void PeopleServices::modifySubjectById(int subject_id) {
