@@ -67,7 +67,7 @@ conan_cmake_run(REQUIRES
         openssl/1.0.2u
         mysql-connector-c/6.1.11
         gtest/1.10.0
-        sqlpp11/0.59
+        sqlpp11/0.60
 #        tinyxml2/8.0.0
 
         BASIC_SETUP CMAKE_TARGETS
