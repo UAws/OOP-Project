@@ -13,6 +13,19 @@
 class SubjectServices {
 public:
 
+    vector<int> getUserIdEnrolled() const;
+
+    void setUserIdEnrolled(const vector<int> &userIdEnrolled);
+
+    void addUserIdEnrolledById(int id);
+
+private:
+    //TODO: need to replace by database
+    vector<int> userIdEnrolled;
+
+
+
+
 
 };
 
