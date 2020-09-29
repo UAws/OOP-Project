@@ -50,15 +50,14 @@ int main(int argc, char **argv) {
 
 
 
-TEST(major,login) {
+TEST(People_Services,login) {
 
-   
+    vector<string> check{"1", "-1","1", "-1","1"}; 
 
     for(int i = 1; i < 5; i++){
-        vector<string> check{"1", "-1","1", "-1","1"}; 
         bool result =  PeopleServices::login(i, check[i - 1]);
 
-       if(i < 6 && i%2 == 0){
+       if(i < 5 && i%2 == 0){
         // bool result =  PeopleServices::login(1,"-1");
         EXPECT_EQ(result, true);   
         } else {
@@ -83,6 +82,27 @@ TEST(People_Services,logout){
     }
 }
 
+// 
+TEST(People_Services, ListAllUsers) {
+
+    PeopleServices check;
+
+    testing::internal::CaptureStdout();
+    check.ListAllUsers();
+    string output = testing::internal::GetCapturedStdout();
+
+    vector<string> arr;
+    stringstream ss(output);
+    string final_output;
+
+    while (std::getline(ss, final_output, '\n')){
+        arr.push_back(final_output);
+    }
+
+    EXPECT_EQ(arr[1],"| People ID | People name |  Title  | IsActive |");
+    EXPECT_EQ(arr[3],"|         1 | student01   | student |        1 |");
+    EXPECT_EQ(arr[4],"|         2 | tutor01     | tutor   |        1 |");
+}
 
 TEST(People_Services,addNewTutor){
 
@@ -191,3 +211,47 @@ TEST(People_Services,unlockUser_and_lockUser){
     EXPECT_FALSE(PeopleServices::lockUser(10));
 
 }
+
+TEST(People_Services,changePassword) {
+
+    map<int, string> check{
+            {1, "54dsb"},
+            {2, "-1"},
+            {3,"14dsb"},
+    };
+
+    int i = 0;
+
+    for (const auto &kv : check) {
+
+        i++;
+
+        if(i != 2){
+        EXPECT_TRUE(PeopleServices::changePassword(kv.first, kv.second));
+        } else {
+        EXPECT_FALSE(PeopleServices::changePassword(kv.first, kv.second));
+        }
+
+    }
+    
+    for (const auto &kv : check) {
+
+        People *p = PeopleDao::selectOnePeople(kv.first);
+
+        EXPECT_EQ(p->getPassword(), kv.second);
+
+        delete p;
+
+        EXPECT_TRUE(PeopleDao::updatePeopleResetPassword(kv.first));
+
+    }
+
+    vector<People *> pCheck = PeopleDao::listAllUsers();
+
+    for (auto & i : pCheck) {
+        EXPECT_EQ(i->getPassword(), "-1");
+    }
+
+}
+
+   
