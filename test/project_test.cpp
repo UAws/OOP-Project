@@ -191,6 +191,25 @@ TEST(People_Services,changePassword) {
         }
 
     }
+    
+    for (const auto &kv : check) {
+
+        People *p = PeopleDao::selectOnePeople(kv.first);
+
+        EXPECT_EQ(p->getPassword(), kv.second);
+
+        delete p;
+
+        EXPECT_TRUE(PeopleDao::updatePeopleResetPassword(kv.first));
+
+    }
+
+    vector<People *> pCheck = PeopleDao::listAllUsers();
+
+    for (auto & i : pCheck) {
+        EXPECT_EQ(i->getPassword(), "-1");
+    }
+
 }
 
    
