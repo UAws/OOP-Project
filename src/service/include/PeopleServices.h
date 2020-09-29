@@ -54,7 +54,7 @@ public:
 
     virtual void modifyStudentById(int user_id);
 
-    virtual void addNewSubject(Subject subject);
+    virtual bool addNewSubject(Subject *subject);
 
     virtual void modifySubjectById(int subject_id);
 
