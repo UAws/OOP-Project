@@ -9,6 +9,7 @@
 #include <service/include/SERVICE_PUBLIC.h>
 #include <vo/include/VO_PUBLIC.h>
 #include <dao/include/PeopleDao.h>
+#include <dao/include/SubjectDao.h>
 
 bool PeopleServices::login(int user_id , string password) {
 
@@ -177,9 +178,9 @@ bool PeopleServices::addNewStudent(Student *people) {
 void PeopleServices::modifyStudentById(int user_id) {
     // talk later
 }
-
-void PeopleServices::addNewSubject(Subject subject) {
-// not sure
+//Chi
+bool PeopleServices::addNewSubject(Subject *subject) {
+    return SubjectDao::addNewSubject(subject);
 }
 
 void PeopleServices::modifySubjectById(int subject_id) {
