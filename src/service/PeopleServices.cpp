@@ -117,7 +117,7 @@ bool PeopleServices::initPassword() {
     // People->setPassword(password);
     // PeopleDao curUser;
     // curUser.updatePeoplePassword(People->getUserId(), People->getName());
-    PeopleDao::updatePeoplePassword(People->getUserId(), People->getName());
+    PeopleDao::updatePeoplePassword(People->getUserId(), password);
     delete People;
     return true;
 }
@@ -135,7 +135,7 @@ bool PeopleServices::changePassword(int user_id, const string password) {
         delete People;
         return PeopleDao::updatePeoplePassword(user_id, password);
     }
-    
+
     delete People;
     return false;
 }
