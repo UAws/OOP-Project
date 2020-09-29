@@ -23,8 +23,8 @@ void TutorServices::showStudents() {
 
     // vt.print(cout);
 }
-
-void TutorServices::addNewStudent(People *people) {
+//chi has changed the "void" to "bool" for not sure.
+bool TutorServices::addNewStudent(Student *people) {
     //TODO: need to replace by database
     // Storage::storagePeople.insert(std::make_pair(people->getUserId(), people));
 }

@@ -15,6 +15,7 @@
 
 #include <prettyprint.hpp>
 #include <vo/include/People.h>
+#include <vo/include/VO_PUBLIC.h>
 
 class PeopleServices {
 
@@ -45,11 +46,11 @@ public:
      * userAction functions
      */
 
-    virtual void addNewTutor(People people);
+    virtual bool addNewTutor(Tutor *people);// change the object to tutor according to the form in peopledao_test.cpp
 
     virtual void modifyTutorById(int user_id);
 
-    virtual void addNewStudent(People *people);
+    virtual bool addNewStudent(Student *people);// change the object to tutor according to the form in peopledao_test.cpp
 
     virtual void modifyStudentById(int user_id);
 

@@ -140,29 +140,33 @@ void PeopleServices::ListAllUsers() {
     // }
 }
 
-
-void PeopleServices::addNewTutor(People people) {
+//Chi 
+bool PeopleServices::addNewTutor(Tutor *people) {
+    return PeopleDao::addNewTutor(people);
+     // needs to test, remove when finished.
 
 }
 
 void PeopleServices::modifyTutorById(int user_id) {
 
 }
-
-void PeopleServices::addNewStudent(People *people) {
+//Chi
+bool PeopleServices::addNewStudent(Student *people) {
+     return PeopleDao::addNewStudent(people);
+    // needs to test, remove when finished.
 
 }
 
 void PeopleServices::modifyStudentById(int user_id) {
-
+    // talk later
 }
 
 void PeopleServices::addNewSubject(Subject subject) {
-
+// not sure
 }
 
 void PeopleServices::modifySubjectById(int subject_id) {
-
+    // talk later
 }
 
 void PeopleServices::showStudents() {
@@ -182,23 +186,20 @@ int PeopleServices::checkUserLevelById(int user_id) {
     // return Storage::getCurrentUser()->getUserLevel();
     return 0;
 }
-
+//Chi
 void PeopleServices::resetUserPasswordById(int user_id) {
-    unlockUser(user_id);
-    //TODO: need to replace by database
-    // Storage::getCurrentUser()->setPassword("-1");
+    PeopleDao::updatePeoplePassword(user_id, "-1");
+    // needs to test, remove when finished.
 }
 
 
-
+//Chi 
 void PeopleServices::unlockUser(int user_id) {
-    //TODO: need to replace by database
-    // Storage::storagePeople[user_id]->setIsActive(true);
+    PeopleDao::updatePeopleActive(user_id, true);
 }
-
+//Chi
 void PeopleServices::lockUser(int user_id) {
-    //TODO: need to replace by database
-    // Storage::storagePeople[user_id]->setIsActive(false);
+    PeopleDao::updatePeopleActive(user_id, false);
 }
 
 
