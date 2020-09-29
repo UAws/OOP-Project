@@ -169,6 +169,48 @@ TEST(People_Services,addNewStudent){
 
 }
 
+//test temporary passed, the sixth line from the bottom needs to replace the function show all users in Peopleservice.
+TEST(People_Services,resetUserPasswordById){
+    // copy from test PeopleDap_test just replace the "PeopleDao::updatePeopleResetPassword" to PeopleServices::r.esetUserPasswordById
+    map<int, string> check{
+            {1, "123456"},
+            {2, "niashdjk"},
+            {3,"kasldb"},
+    };
+
+    for (const auto &kv : check) {
+
+        //People *p = PeopleDao::selectOnePeople(kv.first);
+
+        //EXPECT_EQ(p->getPassword(), kv.second);
+
+        //delete p;
+
+        EXPECT_TRUE(PeopleServices::resetUserPasswordById(kv.first));
+
+    }
+    vector<People *> pCheck = PeopleDao::listAllUsers();
+
+    for (auto & i : pCheck) {
+        EXPECT_EQ(i->getPassword(), "-1");
+    }
+
+}
+
+TEST(People_Services,unlockUser_and_lockUser){
+
+    for (int i = 0; i < 4; i++) {
+
+        EXPECT_TRUE(PeopleServices::unlockUser(i + 1));
+
+        EXPECT_TRUE(PeopleServices::lockUser(i + 1));
+
+    }
+
+    EXPECT_FALSE(PeopleServices::unlockUser(10));
+    EXPECT_FALSE(PeopleServices::lockUser(10));
+
+}
 
 TEST(People_Services,changePassword) {
 
