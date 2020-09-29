@@ -13,16 +13,19 @@
 class SubjectServices {
 public:
 
-    vector<int> getUserIdEnrolled() const;
+    static void listAllSubjects();
 
-    void setUserIdEnrolled(const vector<int> &userIdEnrolled);
+    static void displayOneSubject(int id);
 
-    void addUserIdEnrolledById(int id);
+    static void displaySubjectByName(const string name);
+
+    static bool addNewSubject(string name);
+
+    static bool addStudentToSubject(int userId, int subjectId);
+
+
 
 private:
-    //TODO: need to replace by database
-    vector<int> userIdEnrolled;
-
 
 
 
