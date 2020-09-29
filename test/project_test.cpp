@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
 
 
 
-TEST(major,login) {
+TEST(People_Services,login) {
 
     vector<string> check{"1", "-1","1", "-1","1"}; 
 
@@ -83,7 +83,7 @@ TEST(People_Services,logout){
 }
 
 // 
-TEST(major, ListAllUsers) {
+TEST(People_Services, ListAllUsers) {
 
     PeopleServices check;
 
@@ -170,7 +170,7 @@ TEST(People_Services,addNewStudent){
 }
 
 
-TEST(major,changePassword) {
+TEST(People_Services,changePassword) {
 
     map<int, string> check{
             {1, "54dsb"},
