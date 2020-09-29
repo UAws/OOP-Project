@@ -30,7 +30,7 @@ public:
 
     static bool initPassword();
 
-    static bool changePassword(int user_id, const string &oldPassword , const string &new_password);
+    static bool changePassword(int user_id, const string password);
 
     static void ListAllUsers();
 

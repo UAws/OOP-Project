@@ -42,22 +42,18 @@ bool PeopleServices::login(int user_id , string password) {
      */
     if(password == "-1" && password == People->getPassword()){
 
-        cout<< "hahah"<< endl;
         delete People;
         return true;
-        //TODO: need to implace the following function 
+        //TODO: need to take consider on testing
         // return initPassword();
-
          /*
          * check input password as same as the password stored inside storage.
          */
-        //TODO: need to replace by database
-
     }else if (password == People->getPassword()){
         delete People;
         return true;
     }
-    
+
     delete People;
 
     /* login failed
@@ -69,7 +65,6 @@ bool PeopleServices::login(int user_id , string password) {
 bool PeopleServices::logout(int user_id) {
     // Storage::setCurrentUser(People());
 
-    //TODO: need to replace by database
     People* people = PeopleDao::selectOnePeople(user_id);
     if(people != nullptr){
         cout << people->getName() << "Log out successfully !" << std::endl;
@@ -77,7 +72,7 @@ bool PeopleServices::logout(int user_id) {
         delete people;
         return true;
     }else{
-        cout <<"The user ID: "<< user_id << "is not esist. "<< endl;
+        cout <<"The user ID: "<< user_id << "does not exist. "<< endl;
         delete people;
         return false;
     }
@@ -93,12 +88,13 @@ bool PeopleServices::initPassword() {
      * if failed to enter same password over maximum 3 times , the current user will be locked (can not login )
      * after pass all required check, password will be modified and updated to storage
      */
+    
+    People* People = PeopleDao::selectOnePeople(Storage::getSUserId());
 
     string password,secondPasswd;
     int count = 3;
     while (true) {
-        //TODO: need to replace by database
-        // cout << "Please enter your password for user " << Storage::getCurrentUser()->getName() << ":" << std::endl;
+        cout << "Please enter your password for user " << People->getName() << ":" << std::endl;
         cin >> password;
         cout << "Please re-enter your password : ";
         cin >> secondPasswd;
@@ -110,26 +106,37 @@ bool PeopleServices::initPassword() {
                 cout << "password you entered is not the same, please try again ; you have " << count << "chance left ." << endl;
                 count--;
             } else {
-                //TODO: need to replace by database
-                // cout << "Hi," << Storage::getCurrentUser()->getName() << "your account is locked , please contact your tutor or teacher for unlock" << endl;
-                // lockUser(Storage::getCurrentUser()->getUserId());
-                break;
+                cout << "Hi," << People->getName() << "your account is locked , please contact your tutor or teacher for unlock" << endl;
+                lockUser(People->getUserId());
+                delete People;
+                return false;
             }
         }
     }
 
-    //TODO: need to replace by database
-    // Storage::getCurrentUser()->setPassword(password);
+    // People->setPassword(password);
+    // PeopleDao curUser;
+    // curUser.updatePeoplePassword(People->getUserId(), People->getName());
+    PeopleDao::updatePeoplePassword(People->getUserId(), password);
+    delete People;
     return true;
 }
 
-bool PeopleServices::changePassword(int user_id, const string &oldPassword, const string &new_password) {
+bool PeopleServices::changePassword(int user_id, const string password) {
 
-    if (oldPassword != new_password) {
-        //TODO: need to replace by database
-        // Storage::getCurrentUser()->setPassword(new_password);
-        return true;
+    People* People = PeopleDao::selectOnePeople(user_id);
+
+    // if (oldPassword != new_password) {
+        
+        if (password != People->getPassword()) {
+
+        // People->setPassword(new_password);
+
+        delete People;
+        return PeopleDao::updatePeoplePassword(user_id, password);
     }
+
+    delete People;
     return false;
 }
 
@@ -138,6 +145,18 @@ void PeopleServices::ListAllUsers() {
     // for (const auto& kv : Storage::storagePeople) {
     //     std::cout << kv.first << " has value " << *kv.second <<" userLevel : "<<kv.second->getUserLevel()<<std::endl;
     // }
+    vector<People *> People = PeopleDao::listAllUsers();
+
+    // for (size_t i = 0; i < People.size(); ++i) {
+    //    cout << People[i] << " ";
+    // }
+
+    VariadicTable<int, string, string, bool> vt({"People ID", "People name", "Title", "IsActive"});
+    for (size_t i = 0; i < People.size(); ++i) {
+
+        vt.addRow(People[i]->getUserId(), People[i]->getName(), People[i]->getTitle(),People[i]->isActive1());
+    }
+    vt.print(cout);
 }
 
 //Chi 
