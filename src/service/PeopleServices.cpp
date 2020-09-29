@@ -77,7 +77,7 @@ bool PeopleServices::logout(int user_id) {
         delete people;
         return true;
     }else{
-        cout <<"The user ID: "<< user_id << "is not esist. "<< endl;
+        cout <<"The user ID: "<< user_id << " is not esist. "<< endl;
         delete people;
         return false;
     }
@@ -127,10 +127,10 @@ bool PeopleServices::changePassword(int user_id, const string &oldPassword, cons
 
     if (oldPassword != new_password) {
         //TODO: need to replace by database
-        Storage::getCurrentUser()->setPassword(new_password);
-        return true;
+        return PeopleDao::updatePeoplePassword(user_id, new_password);
+       
     }
-    return false;
+  
 }
 
 void PeopleServices::ListAllUsers() {
@@ -143,7 +143,6 @@ void PeopleServices::ListAllUsers() {
 //Chi 
 bool PeopleServices::addNewTutor(Tutor *people) {
     return PeopleDao::addNewTutor(people);
-     // needs to test, remove when finished.
 
 }
 
@@ -152,8 +151,7 @@ void PeopleServices::modifyTutorById(int user_id) {
 }
 //Chi
 bool PeopleServices::addNewStudent(Student *people) {
-     return PeopleDao::addNewStudent(people);
-    // needs to test, remove when finished.
+    return PeopleDao::addNewStudent(people);
 
 }
 
@@ -186,8 +184,8 @@ int PeopleServices::checkUserLevelById(int user_id) {
     return Storage::getCurrentUser()->getUserLevel();
 }
 //Chi
-void PeopleServices::resetUserPasswordById(int user_id) {
-    PeopleDao::updatePeoplePassword(user_id, "-1");
+bool PeopleServices::resetUserPasswordById(int user_id) {
+    return PeopleDao::updatePeopleResetPassword(user_id);
     // needs to test, remove when finished.
 }
 
@@ -196,11 +194,13 @@ void PeopleServices::resetUserPasswordById(int user_id) {
 void PeopleServices::unlockUser(int user_id) {
     //TODO: need to replace by database
     PeopleDao::updatePeopleActive(user_id, true);
+    //needs test
 }
 //Chi
 void PeopleServices::lockUser(int user_id) {
     //TODO: need to replace by database
     PeopleDao::updatePeopleActive(user_id, false);
+    //needs test
 }
 
 
