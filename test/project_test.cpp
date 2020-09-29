@@ -169,3 +169,28 @@ TEST(People_Services,addNewStudent){
 
 }
 
+
+TEST(major,changePassword) {
+
+    map<int, string> check{
+            {1, "54dsb"},
+            {2, "-1"},
+            {3,"14dsb"},
+    };
+
+    int i = 0;
+
+    for (const auto &kv : check) {
+
+        i++;
+
+        if(i != 2){
+        EXPECT_TRUE(PeopleServices::changePassword(kv.first, kv.second));
+        } else {
+        EXPECT_FALSE(PeopleServices::changePassword(kv.first, kv.second));
+        }
+
+    }
+}
+
+   
