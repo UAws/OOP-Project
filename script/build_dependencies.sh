@@ -39,6 +39,11 @@ cmake -DCMAKE_BUILD_TYPE=debug .. && make -j 12
 
 if [ -f ./GTestSelf  ]; then
     ./GTestSelf
+
+    if [ $? != "0" ]; then
+    exit 1
+    fi
+
     cd $CURRENT_DIR
 #    if [ -d build_test ]; then
 #        rm -rf build_test/
