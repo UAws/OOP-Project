@@ -30,6 +30,8 @@ public:
 
     static vector<People *> selectPeopleByName(string name);
 
+    static pair<People *, vector<Subject *>> selectSubjectPeopleEnrolledByUserId(int id);
+
 
 
     //insert
@@ -42,6 +44,8 @@ public:
 
 
     //update
+
+    static bool updatePeopleName(int id, string name);
 
     static bool updatePeoplePassword(int id, string password);
 

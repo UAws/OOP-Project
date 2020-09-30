@@ -10,6 +10,7 @@
 #include <vo/include/VO_PUBLIC.h>
 #include <dao/include/PeopleDao.h>
 #include <dao/include/SubjectDao.h>
+#include <service/include/PeopleServices.h>
 
 
 bool PeopleServices::login(int user_id , string password) {
@@ -160,25 +161,47 @@ bool PeopleServices::addNewTutor(Tutor *people) {
 
 }
 
-void PeopleServices::modifyTutorById(int user_id) {
+bool PeopleServices::changeUserName(int user_id, string user_name) {
+
+    auto p = PeopleDao::selectOnePeople(user_id);
+    if (p == nullptr) {
+        cout << "user_id not found : " << user_id << endl;
+        delete p;
+        return false;
+    }
+
+    if (PeopleDao::updatePeopleName(user_id, user_name)) {
+
+        cout << "user information updated : " << user_name << endl;
+    }
+
+    return true;
 
 }
 //Chi completed
 bool PeopleServices::addNewStudent(Student *people) {
     return PeopleDao::addNewStudent(people);
-
 }
 
-void PeopleServices::modifyStudentById(int user_id) {
-    // talk later
-}
 //Chi
 bool PeopleServices::addNewSubject(Subject *subject) {
     return SubjectDao::addNewSubject(subject);
 }
 
-void PeopleServices::modifySubjectById(int subject_id) {
-    // talk later
+bool PeopleServices::changeSubjectName(int subject_id, string subject_name) {
+    auto p = SubjectDao::selectOneSubject(subject_id);
+    if (p == nullptr) {
+        cout << "subject_id not found : " << subject_id << endl;
+        delete p;
+        return false;
+    }
+    if (SubjectDao::updateSubjectName(subject_id, subject_name)) {
+
+        cout << "subject information updated : " << subject_name << endl;
+    }
+
+    return true;
+
 }
 
 void PeopleServices::showStudents() {
@@ -186,9 +209,9 @@ void PeopleServices::showStudents() {
     vector<People *> Student = PeopleDao::showAllStudents();
 
     VariadicTable<int, string, bool> vt({"Student ID", "Student name", "IsActive"});
-    for (size_t i = 0; i < Student.size(); ++i) {
+    for (auto & i : Student) {
 
-        vt.addRow(Student[i]->getUserId(), Student[i]->getName(), Student[i]->isActive1());
+        vt.addRow(i->getUserId(), i->getName(), i->isActive1());
     }
     vt.print(cout);
 }
@@ -197,9 +220,9 @@ void PeopleServices::showTutors() {
     vector<People *> Tutor = PeopleDao::showAllTutors();
 
     VariadicTable<int, string, bool> vt({"Tutor ID", "Tutor name", "IsActive"});
-    for (size_t i = 0; i < Tutor.size(); ++i) {
+    for (auto & i : Tutor) {
 
-        vt.addRow(Tutor[i]->getUserId(), Tutor[i]->getName(), Tutor[i]->isActive1());
+        vt.addRow(i->getUserId(), i->getName(), i->isActive1());
     }
     vt.print(cout);
 
@@ -209,9 +232,9 @@ void PeopleServices::showSubjects() {
     vector<Subject *> Subject = SubjectDao::listAllSubjects();
 
     VariadicTable<int, string> vt({"Tutor ID", "Tutor name"});
-    for (size_t i = 0; i < Subject.size(); ++i) {
+    for (auto & i : Subject) {
 
-        vt.addRow(Subject[i]->getSubjectId(), Subject[i]->getSubjectName());
+        vt.addRow(i->getSubjectId(), i->getSubjectName());
     }
     vt.print(cout);
 
@@ -244,9 +267,31 @@ bool PeopleServices::lockUser(int user_id) {
 
 }
 
+PeopleServices::~PeopleServices() = default;
 
-PeopleServices * PeopleServices::getCurrentUser() {
-    return currentUser;
+bool PeopleServices::showSubjectsEnrolledById(int user_id){
+    auto result = PeopleDao::selectSubjectPeopleEnrolledByUserId(user_id);
+
+    if (result.first == nullptr) {
+        cerr << "PeopleServices error : user_id : " << user_id << " not found" << endl;
+        return false;
+    }
+
+    VariadicTable<int, string> vc({"Student ID", "Student Name"});
+
+    vc.addRow(result.first->getUserId(), result.first->getName());
+
+    vc.print(cout);
+
+    VariadicTable<int, string> vt({"Subject ID", "Subject name"});
+    for (auto & i : result.second) {
+
+        vt.addRow(i->getSubjectId(), i->getSubjectName());
+    }
+    vt.print(cout);
+
+    return true;
+
+
 }
 
-PeopleServices * PeopleServices::currentUser = nullptr;

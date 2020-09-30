@@ -419,3 +419,78 @@ bool PeopleDao::updatePeopleActive(int id, bool flag) {
 
     return true;
 }
+
+bool PeopleDao::updatePeopleName(int id, string name) {
+    const auto t_people = oop::People{};
+
+    try
+    {
+        mysql::connection db = database_connection::getConnection();
+
+        People *p = PeopleDao::selectOnePeople(id);
+
+        if (p == nullptr) {
+            return false;
+        }
+        // insert into people (name, password, title, isActive, userLevel)
+        //      VALUES ('xiaoming', '-1', 'student', true, 1);
+
+        db(update(t_people).set(t_people.name = std::move(name)).where(t_people.userId.in(id)));
+
+    }
+    catch (const sqlpp::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+
+    return true;
+}
+
+pair<People *, vector<Subject *>> PeopleDao::selectSubjectPeopleEnrolledByUserId(int id) {
+
+    pair<People *, vector<Subject *>> result;
+
+    const auto t_people = oop::People{};
+    const auto t_peopleSubject = oop::PeopleSubject{};
+    const auto t_subject = oop::Subject{};
+    try {
+
+        result.first = PeopleDao::selectOnePeople(id);
+
+        if (result.first == nullptr) {
+            return result;
+        }
+
+        mysql::connection db = database_connection::getConnection();
+
+        // select p.user_id,p.name, s.*
+        //                          from subject s
+        // left join peopleSubject pS on s.subject_id = pS.subject_id
+        // left join people p on pS.user_id = p.user_id
+        // where p.user_id = 2;
+
+        for (const auto &row :
+                db(
+                select(all_of(t_subject))
+                    .from(t_subject
+                    .join(t_peopleSubject).on(t_subject.subjectId == t_peopleSubject.subjectId)
+                    .join(t_people).on(t_peopleSubject.userId == t_people.userId)
+                    )
+                .where(t_people.userId == id)
+                )
+            )
+        {
+            result.second.push_back(new Subject(row.subjectId, row.name));
+
+        }
+
+
+
+    }
+    catch (const sqlpp::exception &e) {
+        std::cerr << e.what() << std::endl;
+    }
+
+    return result;
+
+}

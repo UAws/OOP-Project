@@ -48,21 +48,23 @@ public:
 
     virtual bool addNewTutor(Tutor *people);// change the object to tutor according to the form in peopledao_test.cpp
 
-    virtual void modifyTutorById(int user_id);
+    virtual bool changeUserName(int user_id, string user_name);
 
     virtual bool addNewStudent(Student *people);// change the object to tutor according to the form in peopledao_test.cpp
 
-    virtual void modifyStudentById(int user_id);
-
     virtual bool addNewSubject(Subject *subject);
 
-    virtual void modifySubjectById(int subject_id);
+    virtual bool changeSubjectName(int subject_id, string subject_name);
 
     virtual void showStudents();
 
     virtual void showTutors();
 
     virtual void showSubjects();
+
+    virtual bool showSubjectsEnrolledById(int user_id);
+
+    virtual ~PeopleServices();
 
 
 private:
@@ -73,11 +75,6 @@ private:
 
     static PeopleServices * currentUser;
 
-public:
-    static void setCurrentUser(PeopleServices *&currentUser);
-
-public:
-    static PeopleServices * getCurrentUser();
 
 };
 

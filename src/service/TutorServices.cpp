@@ -27,8 +27,6 @@ void TutorServices::showStudents() {
 bool TutorServices::addNewStudent(Student *people) {
     //TODO: need to replace by database
     // Storage::storagePeople.insert(std::make_pair(people->getUserId(), people));
+    return true;
 }
 
-void TutorServices::modifyStudentById(int user_id) {
-    PeopleServices::modifyStudentById(user_id);
-}
