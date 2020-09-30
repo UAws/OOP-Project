@@ -39,15 +39,14 @@ bool PeopleServices::login(int user_id , string password) {
         return false;
     }
 
-/*
+    /*
      * if password equals to default password '-1', then execute initialization of current user 's password
      */
     if(password == "-1" && password == People->getPassword()){
 
         delete People;
-        return true;
-        //TODO: need to take consider on testing
-        // return initPassword();
+        return initPassword();
+
          /*
          * check input password as same as the password stored inside storage.
          */
@@ -105,7 +104,7 @@ bool PeopleServices::initPassword() {
             break;
         } else {
             if (count >= 1){
-                cout << "password you entered is not the same, please try again ; you have " << count << "chance left ." << endl;
+                cout << "password you entered is not the same, please try again ; you have " << count << " chance left ." << endl;
                 count--;
             } else {
                 cout << "Hi," << People->getName() << "your account is locked , please contact your tutor or teacher for unlock" << endl;
@@ -143,15 +142,9 @@ bool PeopleServices::changePassword(int user_id, const string password) {
 }
 
 void PeopleServices::ListAllUsers() {
-    //TODO: need to replace by database
-    // for (const auto& kv : Storage::storagePeople) {
-    //     std::cout << kv.first << " has value " << *kv.second <<" userLevel : "<<kv.second->getUserLevel()<<std::endl;
-    // }
+
     vector<People *> People = PeopleDao::listAllUsers();
 
-    // for (size_t i = 0; i < People.size(); ++i) {
-    //    cout << People[i] << " ";
-    // }
 
     VariadicTable<int, string, string, bool> vt({"People ID", "People name", "Title", "IsActive"});
     for (size_t i = 0; i < People.size(); ++i) {

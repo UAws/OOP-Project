@@ -17,15 +17,6 @@ using namespace std;
 class database_connection {
 public:
     static mysql::connection getConnection();
-
-private:
-    static string data_host;
-    static string data_password;
-    static string data_user;
-    static string data_database;
-    static string data_debug;
-
-    static bool readXML();
 };
 
 
