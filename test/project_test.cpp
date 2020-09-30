@@ -19,25 +19,6 @@
 
 using namespace std;
 
-TEST(major,test01){
-
-
-    // Storage::setCurrentUserById(2);
-    // Storage::storagePeople[2]->login(4, "-1");
-    // Storage::storagePeople[2]->showStudents();
-    // Storage::storagePeople[2]->addNewStudent(new Student(Storage::getSUserId(), "student02"));
-    // Storage::storagePeople[2]->showStudents();
-    //
-    PeopleServices::ListAllUsers();
-
-    PeopleServices *ps01 = new TutorServices();
-    ps01->showStudents();
-
-
-
-
-}
-
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
 
