@@ -131,9 +131,9 @@ bool SubjectDao::addNewSubject(Subject *subject) {
             return false;
         }
 
-        for (int i = 0; i < userIDs.size(); ++i) {
+        for (int userID : userIDs) {
             db(insert_into(t_peopleSubject).set(
-                    t_peopleSubject.userId = userIDs[i],
+                    t_peopleSubject.userId = userID,
                     t_peopleSubject.subjectId = currentSubjectID));
         }
 

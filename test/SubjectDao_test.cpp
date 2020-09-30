@@ -55,7 +55,7 @@ TEST(SubjectDao_test,selectSubjectByName){
 
     vector<Subject *> result01 = SubjectDao::selectSubjectByName("subject");
 
-    for (int i = 0; i < check01.size(); ++i) {
+    for (size_t i = 0; i < check01.size(); ++i) {
         EXPECT_EQ(check01[i], result01[i]->getSubjectName());
     }
 

@@ -305,10 +305,10 @@ bool PeopleDao::addNewTutor(Tutor *tutor) {
             return false;
         }
 
-        for (int i = 0; i < subjectIds.size(); ++i) {
+        for (int subjectId : subjectIds) {
             db(insert_into(t_peopleSubject).set(
                     t_peopleSubject.userId = currentUserId,
-                    t_peopleSubject.subjectId = subjectIds[i]));
+                    t_peopleSubject.subjectId = subjectId));
         }
 
     }
