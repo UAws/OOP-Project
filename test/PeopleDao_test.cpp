@@ -212,3 +212,38 @@ TEST(PeopleDao_test, updatePeopleActive){
     EXPECT_FALSE(PeopleDao::updatePeopleActive(10,true));
 
 }
+
+
+TEST(PeopleDao_test, selectSubjectPeopleEnrolledByUserId) {
+    {
+        auto result = PeopleDao::selectSubjectPeopleEnrolledByUserId(2);
+
+        EXPECT_EQ(result.first->getName(),"tutor01");
+
+        EXPECT_EQ(result.second.size(), 2);
+
+        for (auto & i : result.second) {
+            EXPECT_TRUE(i->getSubjectName().find("subject") != std::string::npos);
+        }
+    }
+
+    {
+        auto result = PeopleDao::selectSubjectPeopleEnrolledByUserId(1);
+
+        EXPECT_EQ(result.first->getName(),"student01");
+
+        EXPECT_EQ(result.second.size(), 1);
+
+        for (auto & i : result.second) {
+            EXPECT_TRUE(i->getSubjectName().find("subject") != std::string::npos);
+        }
+    }
+
+    {
+        auto result = PeopleDao::selectSubjectPeopleEnrolledByUserId(-1);
+
+        EXPECT_TRUE(result.first == nullptr);
+        EXPECT_TRUE(result.second.empty());
+    }
+
+}

@@ -311,4 +311,22 @@ TEST(People_Services, showSubjects) {
 }
 
 
+TEST(People_Services, showSubjectsEnrolledById) {
+    auto ps = PeopleServices();
+    for (int i = 1; i <= 6; ++i) {
+        if (i <= 5) {
 
+            testing::internal::CaptureStdout();
+            EXPECT_TRUE(ps.showSubjectsEnrolledById(i));
+            testing::internal::GetCapturedStdout();
+
+        } else {
+            testing::internal::CaptureStderr();
+            EXPECT_FALSE(ps.showSubjectsEnrolledById(i));
+            testing::internal::GetCapturedStderr();
+        }
+
+    }
+
+
+}

@@ -31,7 +31,7 @@ CREATE TABLE `people` (
   `userLevel` int(11) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `People_user_id_uindex` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=362 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `peopleSubject` (
 
 LOCK TABLES `peopleSubject` WRITE;
 /*!40000 ALTER TABLE `peopleSubject` DISABLE KEYS */;
-INSERT INTO `peopleSubject` VALUES (1,1),(2,1),(3,1),(2,2),(3,2);
+INSERT INTO `peopleSubject` VALUES (1,1),(2,1),(3,1),(5,1),(2,2),(3,2),(5,2);
 /*!40000 ALTER TABLE `peopleSubject` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,7 +83,7 @@ CREATE TABLE `subject` (
   `name` char(255) DEFAULT NULL,
   PRIMARY KEY (`subject_id`),
   UNIQUE KEY `subject_subject_id_uindex` (`subject_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=330 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,4 +105,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-26  5:28:56
+-- Dump completed on 2020-09-30 17:15:18

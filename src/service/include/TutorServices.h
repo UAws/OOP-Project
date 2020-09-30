@@ -17,8 +17,6 @@ public:
     void showStudents() override;
 
     bool addNewStudent(Student *people) override;
-
-    void modifyStudentById(int user_id) override;
 };
 
 

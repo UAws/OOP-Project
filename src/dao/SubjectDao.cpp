@@ -131,9 +131,9 @@ bool SubjectDao::addNewSubject(Subject *subject) {
             return false;
         }
 
-        for (int i = 0; i < userIDs.size(); ++i) {
+        for (int userID : userIDs) {
             db(insert_into(t_peopleSubject).set(
-                    t_peopleSubject.userId = userIDs[i],
+                    t_peopleSubject.userId = userID,
                     t_peopleSubject.subjectId = currentSubjectID));
         }
 
@@ -174,6 +174,34 @@ bool SubjectDao::updatePeopleToSubject(int userId, int subjectId) {
         return false;
     }
 
+
+    return true;
+}
+
+
+
+bool SubjectDao::updateSubjectName(int id, string name) {
+    const auto t_subject = oop::Subject{};
+
+    try
+    {
+        mysql::connection db = database_connection::getConnection();
+
+        auto s = SubjectDao::selectOneSubject(id);
+
+        if (s == nullptr) {
+            return false;
+        }
+        // insert into people (name, password, title, isActive, userLevel)
+        //      VALUES ('xiaoming', '-1', 'student', true, 1);
+
+        db(update(t_subject).set(t_subject.name = std::move(name)).where(t_subject.subjectId.in(id)));
+
+    }
+    catch (const sqlpp::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
 
     return true;
 }

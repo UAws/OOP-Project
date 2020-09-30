@@ -32,6 +32,7 @@ public:
     static bool updatePeopleToSubject(int userId, int subjectId);
 
 
+    static bool updateSubjectName(int id, string name);
 };
 
 
