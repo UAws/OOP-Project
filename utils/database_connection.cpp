@@ -10,14 +10,14 @@
 
 mysql::connection database_connection::getConnection() {
 
-    auto config = std::make_shared<mysql::connection_config>();
-    config->host = "172.16.0.78";
-    config->password = "LJi8kLPc2KaGjEJF";
-    config->user = "oop";
-    config->database = "oop";
-    config->debug = false;
+        auto config = std::make_shared<mysql::connection_config>();
+        config->host = "172.16.0.78";
+        config->password = "LJi8kLPc2KaGjEJF";
+        config->user = "oop";
+        config->database = "oop";
+        config->debug = false;
 
-    mysql::connection db(config);
+        mysql::connection db(config);
 
-    return db;
+        return db;
 }
