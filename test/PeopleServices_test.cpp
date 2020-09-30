@@ -22,34 +22,13 @@ using namespace std;
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
 
-    // ::testing::GTEST_FLAG(filter) = "database*";
-    // ::testing::GTEST_FLAG(filter) = "major*";
+    // ::testing::GTEST_FLAG(filter) = "database.*";
+    // ::testing::GTEST_FLAG(filter) = "People_Services.*";
 
     return RUN_ALL_TESTS();
 }
 
 
-
-
-
-TEST(People_Services,login) {
-
-    vector<string> check{"1", "-1","1", "-1","1"}; 
-
-    for(int i = 1; i < 5; i++){
-        bool result =  PeopleServices::login(i, check[i - 1]);
-
-       if(i < 5 && i%2 == 0){
-        // bool result =  PeopleServices::login(1,"-1");
-        EXPECT_EQ(result, true);   
-        } else {
-        EXPECT_EQ(result, false);   
-        }  
-
-
-    }
-
-}
 
 TEST(People_Services,logout){
     for (int i = 1; i < 10; i++){
@@ -324,23 +303,12 @@ TEST(People_Services, showSubjects) {
     check.showSubjects();
     string output = testing::internal::GetCapturedStdout();
 
-    vector<string> arr;
-    stringstream ss(output);
-    string final_output;
-
-    while (std::getline(ss, final_output, '\n')){
-        arr.push_back(final_output);
-    }
-
-    // EXPECT_EQ(arr[1],"| Tutor ID | Tutor name | IsActive |");
-    // EXPECT_EQ(arr[3],"|          1 | student01    |        1 |");
-    // EXPECT_EQ(arr[4],"|          4 | student02    |        1 |");
     EXPECT_TRUE(output.find("subject01") != string::npos);
     EXPECT_TRUE(output.find("subject02") != string::npos);
     EXPECT_FALSE(output.find("teacher") != string::npos);
     EXPECT_FALSE(output.find("student") != string::npos);
 
-
 }
+
 
 

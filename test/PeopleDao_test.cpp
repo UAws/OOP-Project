@@ -200,7 +200,7 @@ TEST(PeopleDao_test, updatePeoplePassword) {
 TEST(PeopleDao_test, updatePeopleActive){
 
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 5; i++) {
 
         EXPECT_TRUE(PeopleDao::updatePeopleActive(i + 1, false));
 
