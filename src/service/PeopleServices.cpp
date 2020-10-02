@@ -242,9 +242,19 @@ void PeopleServices::showSubjects() {
 }
 
 int PeopleServices::checkUserLevelById(int user_id) {
-    //TODO: need to replace by database
-    // return Storage::getCurrentUser()->getUserLevel();
-    return 0;
+
+    People *p = PeopleDao::selectOnePeople(user_id);
+
+    if (p == nullptr) {
+        delete p;
+        return 0;
+    }
+
+    int level = p->getUserLevel();
+    delete p;
+
+    return level;
+
 }
 //Chi completed
 bool PeopleServices::resetUserPasswordById(int user_id) {
