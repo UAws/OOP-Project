@@ -15,7 +15,6 @@
 class StudentServices : public PeopleServices {
 
 public:
-
     void showSubjects() override;
 
 };
