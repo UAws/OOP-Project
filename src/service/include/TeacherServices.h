@@ -32,8 +32,6 @@ public:
 
     bool showSubjectsEnrolledById(int user_id) override;
 
-    ~TeacherServices() override;
-
 };
 
 
