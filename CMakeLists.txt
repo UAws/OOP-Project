@@ -59,6 +59,15 @@ set(input_test
         )
 add_executable(GTestSelfInput ${input_test})
 
+set(main_cpp
+        ${source_service}
+        ${source_vo}
+        ${source_dao}
+        src/main.cpp
+        utils/database_connection.cpp
+        )
+add_executable(MainSelf ${main_cpp})
+
 #automatic dependency management
 
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
@@ -98,6 +107,13 @@ target_link_libraries(GTestSelfInput
         CONAN_PKG::sqlpp11
         )
 
+target_link_libraries(MainSelf
+        CONAN_PKG::gtest
+        CONAN_PKG::openssl
+        CONAN_PKG::mysql-connector-c
+        CONAN_PKG::sqlpp11
+        )
+
 #use different sqlpp11-mysql-connector library depending platform
 
 #https://stackoverflow.com/questions/9160335/os-specific-instructions-in-cmake-how-to
@@ -109,6 +125,9 @@ if(APPLE)
     target_link_libraries(GTestSelfInput
             ${CMAKE_CURRENT_SOURCE_DIR}/utils/sqlpp11-connector-mysql/installed/x64-osx/lib/libsqlpp-mysql.a
             )
+    target_link_libraries(MainSelf
+            ${CMAKE_CURRENT_SOURCE_DIR}/utils/sqlpp11-connector-mysql/installed/x64-osx/lib/libsqlpp-mysql.a
+            )
 endif(APPLE)
 
 if(UNIX AND NOT APPLE)
@@ -116,6 +135,9 @@ if(UNIX AND NOT APPLE)
             ${CMAKE_CURRENT_SOURCE_DIR}/utils/sqlpp11-connector-mysql/installed/x64-linux/lib/libsqlpp-mysql.a
             )
     target_link_libraries(GTestSelfInput
+            ${CMAKE_CURRENT_SOURCE_DIR}/utils/sqlpp11-connector-mysql/installed/x64-linux/lib/libsqlpp-mysql.a
+            )
+    target_link_libraries(MainSelf
             ${CMAKE_CURRENT_SOURCE_DIR}/utils/sqlpp11-connector-mysql/installed/x64-linux/lib/libsqlpp-mysql.a
             )
 endif(UNIX AND NOT APPLE)
