@@ -14,9 +14,15 @@
 class TutorServices : public PeopleServices{
 
 public:
-    void showStudents() override;
+    bool changeUserName(int user_id, string user_name) override;
 
     bool addNewStudent(Student *people) override;
+
+    void showStudents() override;
+
+    void showSubjects() override;
+
+    bool showSubjectsEnrolledById(int user_id) override;
 };
 
 

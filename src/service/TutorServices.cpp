@@ -10,23 +10,22 @@
 #include <vo/include/VO_PUBLIC.h>
 
 
-void TutorServices::showStudents() {
-    VariadicTable<int, string, string, bool> vt({"Student ID", "Student name", "Title", "IsActive"});
-
-    //TODO: need to replace by database
-    // for (const auto& kv : Storage::storagePeople) {
-    //     if (kv.second->getUserLevel() == 1) {
-    //         People stu = *kv.second;
-    //         vt.addRow(stu.getUserId(), stu.getName(), stu.getTitle(),stu.isActive1());
-    //     }
-    // }
-
-    // vt.print(cout);
+bool TutorServices::changeUserName(int user_id, string user_name) {
+    return PeopleServices::changeUserName(user_id, user_name);
 }
-//chi has changed the "void" to "bool" for not sure.
+
 bool TutorServices::addNewStudent(Student *people) {
-    //TODO: need to replace by database
-    // Storage::storagePeople.insert(std::make_pair(people->getUserId(), people));
-    return true;
+    return PeopleServices::addNewStudent(people);
 }
 
+void TutorServices::showStudents() {
+    PeopleServices::showStudents();
+}
+
+void TutorServices::showSubjects() {
+    PeopleServices::showSubjects();
+}
+
+bool TutorServices::showSubjectsEnrolledById(int user_id) {
+    return PeopleServices::showSubjectsEnrolledById(user_id);
+}
