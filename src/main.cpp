@@ -11,7 +11,6 @@
 #include <service/include/SERVICE_PUBLIC.h>
 #include <vo/include/VO_PUBLIC.h>
 #include <dao/include/PeopleDao.h>
-#include <sstream>
 
 using namespace std;
 
@@ -23,6 +22,8 @@ int teacherMenu(int ID);
 
 int tutorMenu(int ID);
 
+int studentMenu(int ID);
+
 int main(int argc, char **argv) {
 
     initFlag:
@@ -32,19 +33,40 @@ int main(int argc, char **argv) {
 // ----------------------------------------------------------------------------------------------------------------------------------
     if (PeopleServices::checkUserLevelById(ID) == 3) {
 
-        if (teacherMenu(ID) == -1) {
+        int goBackFlag = teacherMenu(ID);
+
+        while(goBackFlag == 0){
+            goBackFlag = teacherMenu(ID);
+        }
+        if (goBackFlag == -1) {
             goto initFlag;
         }
+
 
     } else if (PeopleServices::checkUserLevelById(ID) == 2) {
 
-        if (tutorMenu(ID) == -1) {
+        int goBackFlag = tutorMenu(ID);
+
+        while(goBackFlag == 0){
+            goBackFlag = tutorMenu(ID);
+        }
+
+        if (goBackFlag == -1) {
             goto initFlag;
         }
 
+
     } else if (PeopleServices::checkUserLevelById(ID) == 1) {
 
+        int goBackFlag = studentMenu(ID);
 
+        while(goBackFlag == 0){
+            goBackFlag = studentMenu(ID);
+        }
+
+        if (goBackFlag == -1) {
+            goto initFlag;
+        }
     }
 }
 
@@ -97,7 +119,7 @@ int init() {
 
     if (c == 1) {
         renterIdFlag:
-        cout << "Welcome! Please enter your student ID: ";
+        cout << "Welcome! Please enter your User ID: " << endl;
         int ID = input_Lim(1,1000);
 
         cout << endl;
@@ -108,16 +130,24 @@ int init() {
             goto renterIdFlag;
         }
 
-        cout << "Hi, " << p->getName() << ", Please enter your password: ";
+        cout << "Hi, " << p->getName() << " , Please enter your password: " << endl;
         // cin >> passWord;
 
-        getline(cin >> ws, passWord);
-        PeopleServices::login(ID, passWord);
+        delete p;
+
+        bool loginFlag = false;
+
+        while(!loginFlag){
+            getline(cin >> ws, passWord);
+            loginFlag = PeopleServices::login(ID, passWord);
+        }
+
+        return ID;
+
     } else {
         return 0;
     }
 
-    return -1;
 }
 
 int teacherMenu(int ID) {
@@ -131,22 +161,31 @@ int teacherMenu(int ID) {
 
     string student_name;
 
+    VariadicTable<int, string> vt({"Options", "Options"});
 
-    cout << "1 Show all students " << endl;
-    cout << "2 Show all tutors " << endl;
-    cout << "3 Show all subjects " << endl;
-    cout << "4 Show all subjects enrolled by ID. " << endl;
-    cout << "5 Change user's name. " << endl;
-    cout << "6 Add new student. " << endl;
-    cout << "7 Add new tutor. " << endl;
-    cout << "8 Add new subject. " << endl;
-    cout << "9 Logout " << endl;
+    vector<string> menu_names = {"Show all students",
+                                 "Show all tutors",
+                                 "Show all subjects",
+                                 "Show all subjects enrolled by ID",
+                                 "Add new student",
+                                 "Change user's name",
+                                 "Add new tutor",
+                                 "Add new subject",
+                                 "Logout"};
+
+    for (int i = 0; i < menu_names.size(); ++i) {
+        vt.addRow(i+1,menu_names[i]);
+    }
+
+
+    vt.print(cout);
+
 
     //accepts the command
 
     //assumed just only numbers
 
-    cout << "Please enter the commond of function" << endl;
+    cout << "Please enter the command of function" << endl;
 
     int command_1 = input_Lim(1, 9);
 
@@ -164,15 +203,31 @@ int teacherMenu(int ID) {
             break;
 
         case 4 ://Show all subjects enrolled by ID
-            TS.showSubjectsEnrolledById(ID);
+        {
+            PeopleServices::ListAllUsers();
+            cout << "Please enter a ID for the account. " << endl;
+
+            int id = input_Lim(1, 1000);
+
+            TS.showSubjectsEnrolledById(id);
             break;
+        }
         case 5 ://Change user's name.
+        {
+            PeopleServices::ListAllUsers();
+
+            cout << "Please enter a ID for the account. " << endl;
+
+            int id = input_Lim(1, 1000);
+
             cout << "Please enter a new name for your account. " << endl;
 
             getline(cin >> ws, new_name);
-            TS.changeUserName(ID, new_name);
+
+            TS.changeUserName(id, new_name);
 
             break;
+        }
         case 6 ://Add new student.
         {
 
@@ -234,6 +289,10 @@ int teacherMenu(int ID) {
             break;
     }
 
+    std::cout << "press any key to continue ...";
+
+    system("read");
+
     return 0;
 
 }
@@ -245,12 +304,17 @@ int tutorMenu(int ID) {
 
     string student_name;
 
-    cout << "1 Show all students " << endl;
-    cout << "2 Show all subjects " << endl;
-    cout << "3 Show all subjects enrolled by ID. " << endl;
-    cout << "4 Change user's name. " << endl;
-    cout << "5 Add new student. " << endl;
-    cout << "6 Logout " << endl;
+    VariadicTable<int, string> vt({"Options", "Options"});
+
+        vt.addRow(1,"Show all students");
+        vt.addRow(2,"Show all subjects");
+        vt.addRow(3,"Show all subjects enrolled by ID");
+        vt.addRow(4,"Change user's name");
+        vt.addRow(5,"Add new student");
+        vt.addRow(6,"Logout");
+
+    vt.print(cout);
+
     cout << "Please enter the command of function" << endl;
 
     int command_2 = input_Lim(1, 6);
@@ -259,7 +323,6 @@ int tutorMenu(int ID) {
         case 1 :// show all students
 
             TUS.showStudents();
-
             break;
 
         case 2 :// Show all subjects
@@ -268,13 +331,30 @@ int tutorMenu(int ID) {
             break;
 
         case 3 ://Show all subjects enrolled by ID
-            TUS.showSubjectsEnrolledById(ID);
+        {
+            PeopleServices::ListAllUsers();
+
+            cout << "Please enter a ID for the account. " << endl;
+
+            int id = input_Lim(1, 1000);
+
+            TUS.showSubjectsEnrolledById(id);
             break;
+        }
         case 4 ://Change user's name.
         {
+            PeopleServices::ListAllUsers();
+
+            cout << "Please enter a ID for the account. " << endl;
+
+            int id = input_Lim(1, 1000);
+
             cout << "Please enter a new name for your account. " << endl;
+
             getline(cin >> ws, new_name);
-            TUS.changeUserName(ID, new_name);
+
+            TUS.changeUserName(id, new_name);
+
             break;
         }
         case 5 ://Add new student.
@@ -295,12 +375,63 @@ int tutorMenu(int ID) {
             TutorServices::logout(ID);
             return -1;
         }
+
+        default:
+            break;
     }
+
+    std::cout << "press any key to continue ...";
+
+    system("read");
+
 
     return 0;
 }
 
+int studentMenu(int ID) {
 
+    StudentServices SS;
+    VariadicTable<int, string> vt({"Options", "Options"});
+
+    vector<string> menu_names = {"Show all subjects",
+                                 "Show all subjects currently enrolled",
+                                 "Logout"};
+
+    for (int i = 0; i < menu_names.size(); ++i) {
+        vt.addRow(i+1,menu_names[i]);
+    }
+
+    vt.print(cout);
+
+    cout << "Please enter the command of function" << endl;
+
+    int command_1 = input_Lim(1, 9);
+
+    switch (command_1) {
+        case 1:
+            SS.showSubjects();
+            break;
+
+        case 2:
+
+            SS.showSubjectsEnrolledById(ID);
+            break;
+
+        case 3:
+            StudentServices::logout(ID);
+            return -1;
+
+        default:
+            break;
+    }
+
+    std::cout << "press any key to continue ...";
+
+    system("read");
+
+    return 0;
+
+}
 
 
 

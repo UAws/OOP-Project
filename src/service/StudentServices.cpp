@@ -13,3 +13,7 @@
 void StudentServices::showSubjects() {
     PeopleServices::showSubjects();
 }
+
+bool StudentServices::showSubjectsEnrolledById(int user_id) {
+    return PeopleServices::showSubjectsEnrolledById(user_id);
+}
