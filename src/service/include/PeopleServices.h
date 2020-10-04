@@ -45,6 +45,11 @@ public:
     /*
      * userAction functions
      */
+    virtual ~PeopleServices();
+
+//todo: need to replace to protected and fix tests
+
+public:
 
     virtual bool addNewTutor(Tutor *people);// change the object to tutor according to the form in peopledao_test.cpp
 
@@ -63,8 +68,6 @@ public:
     virtual void showSubjects();
 
     virtual bool showSubjectsEnrolledById(int user_id);
-
-    virtual ~PeopleServices();
 
 
 private:

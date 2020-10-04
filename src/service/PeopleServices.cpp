@@ -56,11 +56,15 @@ bool PeopleServices::login(int user_id , string password) {
         return true;
     }
 
-    delete People;
 
     /* login failed
      * unknown conditions default return false.
      */
+
+    cerr << "password for " << People->getName() << " not correct " << endl;
+
+    delete People;
+
     return false;
 }
 
@@ -96,7 +100,7 @@ bool PeopleServices::initPassword() {
     string password,secondPasswd;
     int count = 3;
     while (true) {
-        cout << "Please enter your password for user " << People->getName() << ":" << std::endl;
+        cout << "Please reset your password for user " << People->getName() << ":" << std::endl;
         cin >> password;
         cout << "Please re-enter your password : ";
         cin >> secondPasswd;
@@ -287,18 +291,19 @@ bool PeopleServices::showSubjectsEnrolledById(int user_id){
         return false;
     }
 
-    VariadicTable<int, string> vc({"Student ID", "Student Name"});
+    VariadicTable<string, string, int, string> vc({"Student ID", "Student Name", "Subject ID", "Subject name"});
 
-    vc.addRow(result.first->getUserId(), result.first->getName());
+    bool flag = true;
+    for (auto & i : result.second) {
+        if (flag) {
+            vc.addRow(to_string(result.first->getUserId()), result.first->getName(),i->getSubjectId(), i->getSubjectName());
+            flag = false;
+        } else {
+            vc.addRow("","",i->getSubjectId(), i->getSubjectName());
+        }
+    }
 
     vc.print(cout);
-
-    VariadicTable<int, string> vt({"Subject ID", "Subject name"});
-    for (auto & i : result.second) {
-
-        vt.addRow(i->getSubjectId(), i->getSubjectName());
-    }
-    vt.print(cout);
 
     return true;
 

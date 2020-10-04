@@ -17,6 +17,8 @@ class StudentServices : public PeopleServices {
 public:
     void showSubjects() override;
 
+    bool showSubjectsEnrolledById(int user_id) override;
+
 };
 
 
