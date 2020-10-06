@@ -306,8 +306,8 @@ int teacherMenu(int ID) {
     }
 
     std::cout << "press any key to continue ...";
-
-    system("read");
+    cin.ignore().get();
+    system("clear");
 
     return 0;
 
@@ -397,8 +397,8 @@ int tutorMenu(int ID) {
     }
 
     std::cout << "press any key to continue ...";
-
-    system("read");
+    cin.ignore().get();
+    system("clear");
 
 
     return 0;
@@ -442,8 +442,8 @@ int studentMenu(int ID) {
     }
 
     std::cout << "press any key to continue ...";
-
-    system("read");
+    cin.ignore().get();
+    system("clear");
 
     return 0;
 
