@@ -20,9 +20,11 @@ before_install:
   -  sed -i 's/false/true/g' utils/database_connection.cpp
 
 script:
-  - cd script/; ./build_dependencies.sh
-  - cd ../build_test/; ./GTestSelf >/dev/null 2>&1
-  - cd ../test/input_tests/initPassword; ./intpassword_test.sh
+  - WORKDIR=`pwd`
+  - cd $WORKDIR/script/; ./build_dependencies.sh
+  - cd $WORKDIR/build_test/; ./GTestSelf >/dev/null 2>&1
+  - cd $WORKDIR/test/input_tests/initPassword; ./intpassword_test.sh
+  - cd $WORKDIR
 
 after_success:
   # Create lcov report
