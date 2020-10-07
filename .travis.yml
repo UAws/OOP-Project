@@ -4,6 +4,9 @@ compiler:
   - gcc
   - clang
 
+addons:
+  apt:
+    packages: lcov
 
 services:
   - mysql
@@ -20,3 +23,11 @@ script:
   - cd script/; ./build_dependencies.sh
   - cd ../build_test/; ./GTestSelf >/dev/null 2>&1
   - cd ../test/input_tests/initPassword; ./intpassword_test.sh
+
+after_success:
+  # Create lcov report
+  - lcov --capture --directory . --output-file coverage.info
+  - lcov --remove coverage.info '/usr/*' 'utils' --output-file coverage.info # filter system-files
+  - lcov --list coverage.info # debug info
+  # Uploading report to CodeCov
+  - bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
