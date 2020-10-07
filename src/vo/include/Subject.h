@@ -1,10 +1,27 @@
-// Author : Akide Liu 
-// Date : 13/9/20
-// License and copyright notice: GNU General Public License v3.0 
-// https://www.gnu.org/licenses/gpl-3.0.en.html
-// Description : 
+/*
 
-//
+Authors: Akide Liu ; Andrew Wang ; Chi Wang
+Date : 24/9/20
+
+OOP-Project
+Copyright (C) <2020>  Akide Liu ; Andrew Wang ; Chi Wang
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Description :
+
+*/
 
 #ifndef CPP_SUBJECT_H
 #define CPP_SUBJECT_H
@@ -18,12 +35,14 @@ private:
     int subject_id;
     string subject_name;
 
-    //TODO: need to replace by database
-    vector<int> userIdEnrolled;
 
 public:
 
+    Subject();
+
     Subject(int subjectId, const string &subjectName);
+
+    //getter and setter
 
     int getSubjectId() const;
 
@@ -32,12 +51,6 @@ public:
     const string &getSubjectName() const;
 
     void setSubjectName(const string &subjectName);
-
-    vector<int> getUserIdEnrolled() const;
-
-    void setUserIdEnrolled(const vector<int> &userIdEnrolled);
-
-    void addUserIdEnrolledById(int id);
 
     friend ostream &operator<<(ostream &os, const Subject &subject);
 

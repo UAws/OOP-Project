@@ -1,10 +1,27 @@
-// Author : Akide Liu 
-// Date : 24/9/20
-// License and copyright notice: GNU General Public License v3.0 
-// https://www.gnu.org/licenses/gpl-3.0.en.html
-// Description : 
+/*
 
-//
+Authors: Akide Liu ; Andrew Wang ; Chi Wang
+Date : 24/9/20
+
+OOP-Project
+Copyright (C) <2020>  Akide Liu ; Andrew Wang ; Chi Wang
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Description :
+
+*/
 
 #ifndef OOP_PROJECT_PEOPLESERVICESH_
 #define OOP_PROJECT_PEOPLESERVICESH_
@@ -15,6 +32,7 @@
 
 #include <prettyprint.hpp>
 #include <vo/include/People.h>
+#include <vo/include/VO_PUBLIC.h>
 
 class PeopleServices {
 
@@ -29,39 +47,44 @@ public:
 
     static bool initPassword();
 
-    static bool changePassword(int user_id, const string &oldPassword , const string &new_password);
+    static bool changePassword(int user_id, const string password);
 
     static void ListAllUsers();
 
     static int checkUserLevelById(int user_id);
 
-    static void resetUserPasswordById(int user_id);
+    static bool resetUserPasswordById(int user_id);//void to bool
 
-    static void lockUser(int user_id);
+    static bool lockUser(int user_id);
 
-    static void unlockUser(int user_id);
+    static bool unlockUser(int user_id);
 
     /*
      * userAction functions
      */
+    virtual ~PeopleServices();
 
-    virtual void addNewTutor(People people);
+//todo: need to replace to protected and fix tests
 
-    virtual void modifyTutorById(int user_id);
+public:
 
-    virtual void addNewStudent(People *people);
+    virtual bool addNewTutor(Tutor *people);// change the object to tutor according to the form in peopledao_test.cpp
 
-    virtual void modifyStudentById(int user_id);
+    virtual bool changeUserName(int user_id, string user_name);
 
-    virtual void addNewSubject(Subject subject);
+    virtual bool addNewStudent(Student *people);// change the object to tutor according to the form in peopledao_test.cpp
 
-    virtual void modifySubjectById(int subject_id);
+    virtual bool addNewSubject(Subject *subject);
+
+    virtual bool changeSubjectName(int subject_id, string subject_name);
 
     virtual void showStudents();
 
     virtual void showTutors();
 
     virtual void showSubjects();
+
+    virtual bool showSubjectsEnrolledById(int user_id);
 
 
 private:
@@ -72,11 +95,6 @@ private:
 
     static PeopleServices * currentUser;
 
-public:
-    static void setCurrentUser(PeopleServices *&currentUser);
-
-public:
-    static PeopleServices * getCurrentUser();
 
 };
 

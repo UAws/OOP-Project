@@ -1,10 +1,27 @@
-// Author : Akide Liu
-// Date : 13/9/20
-// License and copyright notice: GNU General Public License v3.0
-// https://www.gnu.org/licenses/gpl-3.0.en.html
-// Description :
+/*
 
-//
+Authors: Akide Liu ; Andrew Wang ; Chi Wang
+Date : 24/9/20
+
+OOP-Project
+Copyright (C) <2020>  Akide Liu ; Andrew Wang ; Chi Wang
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Description :
+
+*/
 
 #include <gtest/gtest.h>
 #include <iostream>
@@ -14,23 +31,11 @@
 #include <sqlpp11/sqlpp11.h>
 #include <sqlpp11/select.h>
 #include <sqlpp11/mysql/mysql.h>
+#include <database_connection.h>
 
 namespace mysql = sqlpp::mysql;
 
 using namespace std;
-
-mysql::connection getConnection() {
-    auto config = std::make_shared<mysql::connection_config>();
-    config->host = "172.16.0.78";
-    config->password = "LJi8kLPc2KaGjEJF";
-    config->user = "oop";
-    config->database = "oop";
-    config->debug = true;
-
-    mysql::connection db(config);
-
-    return db;
-}
 
 
 TEST(database,test01){
@@ -39,7 +44,7 @@ TEST(database,test01){
 
     try
     {
-        mysql::connection db = getConnection();
+        mysql::connection db = database_connection::getConnection();
         cout << "Connection created successfully" << endl;
     }
     catch (const sqlpp::exception& e)
@@ -52,7 +57,7 @@ TEST(database,test02){
     const auto people = oop::People{};
     try
     {
-        mysql::connection db = getConnection();
+        mysql::connection db = database_connection::getConnection();
 
         for (const auto &row : db(sqlpp::select(people.userId, people.name).from(people).where(people.userId < 3 and people.userId > 0 ))) {
             cout << "ID : " << row.userId << " name : " << row.name << endl;
@@ -69,7 +74,7 @@ TEST(database,test03) {
     const auto peopleSubject = oop::PeopleSubject{};
     try
     {
-        mysql::connection db = getConnection();
+        mysql::connection db = database_connection::getConnection();
 
         //select * from people where people.user_id IN (select user_id from peopleSubject);
 
@@ -95,7 +100,7 @@ TEST(database,test04){
     const auto peopleSubject = oop::PeopleSubject{};
     try
     {
-        mysql::connection db = getConnection();
+        mysql::connection db = database_connection::getConnection();
 
         // select * from subject where subject_id in (select subject_id from peopleSubject);
 
@@ -121,7 +126,7 @@ TEST(database,test05){
     const auto peopleSubject = oop::PeopleSubject{};
     try
     {
-        mysql::connection db = getConnection();
+        mysql::connection db = database_connection::getConnection();
 
         // select people.name from people
         // left join peopleSubject pS on people.user_id = pS.user_id
@@ -153,7 +158,7 @@ TEST(database,test06){
     const auto peopleSubject = oop::PeopleSubject{};
     try
     {
-        mysql::connection db = getConnection();
+        mysql::connection db = database_connection::getConnection();
 
         /*
             select subject.* from
@@ -186,7 +191,7 @@ TEST(database,test07){
     const auto peopleSubject = oop::PeopleSubject{};
     try
     {
-        mysql::connection db = getConnection();
+        mysql::connection db = database_connection::getConnection();
 
         /*
             select subject.name from

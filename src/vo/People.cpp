@@ -1,10 +1,27 @@
-// Author : Akide Liu
-// Date : 13/9/20
-// License and copyright notice: GNU General Public License v3.0 
-// https://www.gnu.org/licenses/gpl-3.0.en.html
-// Description : 
+/*
 
-//
+Authors: Akide Liu ; Andrew Wang ; Chi Wang
+Date : 24/9/20
+
+OOP-Project
+Copyright (C) <2020>  Akide Liu ; Andrew Wang ; Chi Wang
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Description :
+
+*/
 
 #include "include/VO_PUBLIC.h"
 #include "include/People.h"
@@ -56,8 +73,6 @@ void People::setIsActive(bool isActive) {
 }
 
 People::People(int userId, const string &name, const string &password, const string &title, bool isActive) : user_id(userId), name(name) , password(password),title(title) ,isActive(isActive){
-    //TODO: need to replace by database
-    Storage::setSUserId(Storage::getSUserId() + 1);
 }
 
 ostream &operator<<(ostream &os, const People &people) {

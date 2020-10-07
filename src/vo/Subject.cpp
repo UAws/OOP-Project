@@ -1,10 +1,27 @@
-// Author : Akide Liu 
-// Date : 13/9/20
-// License and copyright notice: GNU General Public License v3.0 
-// https://www.gnu.org/licenses/gpl-3.0.en.html
-// Description : 
+/*
 
-//
+Authors: Akide Liu ; Andrew Wang ; Chi Wang
+Date : 24/9/20
+
+OOP-Project
+Copyright (C) <2020>  Akide Liu ; Andrew Wang ; Chi Wang
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Description :
+
+*/
 
 #include "include/VO_PUBLIC.h"
 
@@ -24,18 +41,10 @@ void Subject::setSubjectName(const string &subjectName) {
     subject_name = subjectName;
 }
 
-vector<int> Subject::getUserIdEnrolled() const {
-    return userIdEnrolled;
-}
-
-void Subject::setUserIdEnrolled(const vector<int> &userIdEnrolled) {
-    Subject::userIdEnrolled = userIdEnrolled;
-}
-
 Subject::Subject(int subjectId, const string &subjectName) : subject_id(subjectId), subject_name(subjectName){
 
     //TODO: need to replace by database
-    Storage::setSSubjectId(Storage::getSSubjectId() + 1);
+    // Storage::setSSubjectId(Storage::getSSubjectId() + 1);
 
     /*
      * auto enroll teacher and tutor to all subject
@@ -43,33 +52,15 @@ Subject::Subject(int subjectId, const string &subjectName) : subject_id(subjectI
      */
 
     //TODO: need to replace by database
-    for (const auto& kv : Storage::storagePeople) {
-        if (kv.second->getUserLevel() == 2 || kv.second->getUserLevel() == 3) {
-            this->addUserIdEnrolledById(kv.first);
-        }
-    }
+    // for (const auto& kv : Storage::storagePeople) {
+    //     if (kv.second->getUserLevel() == 2 || kv.second->getUserLevel() == 3) {
+    //         this->addUserIdEnrolledById(kv.first);
+    //     }
+    // }
 
-}
-
-void Subject::addUserIdEnrolledById(int id) {
-
-    /*
-     * check does current subject contains id from parameter or not
-     */
-
-        int count = 0;
-        for (size_t i = 0; i < userIdEnrolled.size(); ++i) {
-            if (id != i){
-                count++;
-            }
-        }
-        if (count == userIdEnrolled.size()) {
-            this->userIdEnrolled.push_back(id);
-        }
 }
 
 ostream &operator<<(ostream &os, const Subject &subject) {
-    os << "subject_id: " << subject.subject_id << " subject_name: " << subject.subject_name << " userIdEnrolled: "
-       << subject.userIdEnrolled;
+    os << "subject_id: " << subject.subject_id << " subject_name: " << subject.subject_name;
     return os;
 }

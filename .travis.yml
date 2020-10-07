@@ -1,6 +1,22 @@
+dist: bionic
 language: cpp
-compiler: gcc
+compiler:
+  - gcc
+  - clang
+
+
+services:
+  - mysql
+
+before_install:
+  -  mysql -e 'create database oop;'
+  -  mysql oop < utils/db.sql
+  -  sed -i 's/172.16.0.78/127.0.0.1/g' utils/database_connection.cpp
+  -  sed -i 's/LJi8kLPc2KaGjEJF//g' utils/database_connection.cpp
+  -  sed -i 's/user = "oop"/user = "root"/g' utils/database_connection.cpp
+  -  sed -i 's/false/true/g' utils/database_connection.cpp
 
 script:
-  - cd script/
-  - ./build_dependencies.sh
+  - cd script/; ./build_dependencies.sh
+  - cd ../build_test/; ./GTestSelf >/dev/null 2>&1
+  - cd ../test/input_tests/initPassword; ./intpassword_test.sh

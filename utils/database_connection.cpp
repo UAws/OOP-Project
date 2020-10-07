@@ -23,31 +23,18 @@ Description :
 
 */
 
-#ifndef OOP_PROJECT_SUBJECTSERVICES_H
-#define OOP_PROJECT_SUBJECTSERVICES_H
+#include "database_connection.h"
 
+mysql::connection database_connection::getConnection() {
 
-class SubjectServices {
-public:
+        auto config = std::make_shared<mysql::connection_config>();
+        config->host = "172.16.0.78";
+        config->password = "LJi8kLPc2KaGjEJF";
+        config->user = "oop";
+        config->database = "oop";
+        config->debug = false;
 
-    static void listAllSubjects();
+        mysql::connection db(config);
 
-    static void displayOneSubject(int id);
-
-    static void displaySubjectByName(const string name);
-
-    static bool addNewSubject(string name);
-
-    static bool addStudentToSubject(int userId, int subjectId);
-
-
-
-private:
-
-
-
-
-};
-
-
-#endif //OOP_PROJECT_SUBJECTSERVICES_H
+        return db;
+}

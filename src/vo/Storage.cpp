@@ -1,47 +1,35 @@
-// Author : Akide Liu 
-// Date : 13/9/20
-// License and copyright notice: GNU General Public License v3.0 
-// https://www.gnu.org/licenses/gpl-3.0.en.html
-// Description : 
+/*
 
-//
+Authors: Akide Liu ; Andrew Wang ; Chi Wang
+Date : 24/9/20
+
+OOP-Project
+Copyright (C) <2020>  Akide Liu ; Andrew Wang ; Chi Wang
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Description :
+
+*/
 
 #include "include/VO_PUBLIC.h"
 
-//TODO: need to replace by database
-
-void Storage::setCurrentUserById(int i){
-
-    Storage::currentUser = Storage::storagePeople[i];
-
-}
 
 int Storage::s_user_id = 1;
 
  int Storage::s_subject_id = 1;
 
- vector<string> Storage::title_array {"","student","tutor","teacher"};
-
- map<int,People*> Storage::storagePeople {
-        {Storage::getSUserId(),new Student(Storage::getSUserId(),"student01")},
-        {Storage::getSUserId(),new Tutor(Storage::getSUserId(),"tutor01")},
-        {Storage::getSUserId(),new Teacher(Storage::getSUserId(),"teacher01")}
-};
-
-map<int, Subject> Storage::storageSubjects{
-        {Storage::getSSubjectId(), Subject(Storage::getSSubjectId(), "Subject01")},
-        {Storage::getSSubjectId(), Subject(Storage::getSSubjectId(), "Subject02")}
-};
-
-int Storage::useUser_Id() {
-    Storage::s_user_id += 1;
-    return Storage::s_user_id - 1;
-}
-
-int Storage::useSubject_Id() {
-    Storage::s_subject_id += 1;
-    return Storage::s_subject_id - 1;
-}
 
 int Storage::getSUserId() {
     return s_user_id;
@@ -59,18 +47,7 @@ void Storage::setSSubjectId(int sSubjectId) {
     s_subject_id = sSubjectId;
 }
 
-void Storage::clearHeap() {
-    for (const auto& kv : Storage::storagePeople) {
-        delete kv.second;
-    }
 
-}
-
-People * Storage::getCurrentUser() {
-    return currentUser;
-}
-
-People * Storage::currentUser = nullptr;
 
 
 

@@ -23,31 +23,34 @@ Description :
 
 */
 
-#ifndef OOP_PROJECT_SUBJECTSERVICES_H
-#define OOP_PROJECT_SUBJECTSERVICES_H
+#ifndef OOP_PROJECT_SUBJECTDAO_H
+#define OOP_PROJECT_SUBJECTDAO_H
 
+#include <vo/include/VO_PUBLIC.h>
 
-class SubjectServices {
+class SubjectDao {
 public:
+    // list
 
-    static void listAllSubjects();
+    static vector<Subject*> listAllSubjects();
 
-    static void displayOneSubject(int id);
+    // select
 
-    static void displaySubjectByName(const string name);
+    static Subject* selectOneSubject(int id);
 
-    static bool addNewSubject(string name);
+    static vector<Subject*> selectSubjectByName(string name);
 
-    static bool addStudentToSubject(int userId, int subjectId);
+    //insert
+
+    static bool addNewSubject(Subject *subject);
+
+    //update
+
+    static bool updatePeopleToSubject(int userId, int subjectId);
 
 
-
-private:
-
-
-
-
+    static bool updateSubjectName(int id, string name);
 };
 
 
-#endif //OOP_PROJECT_SUBJECTSERVICES_H
+#endif //OOP_PROJECT_SUBJECTDAO_H

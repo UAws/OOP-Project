@@ -23,31 +23,18 @@ Description :
 
 */
 
-#ifndef OOP_PROJECT_SUBJECTSERVICES_H
-#define OOP_PROJECT_SUBJECTSERVICES_H
+#ifndef OOP_PROJECT_DATABASE_CONNECTION_H
+#define OOP_PROJECT_DATABASE_CONNECTION_H
+#include <sqlpp11/mysql/mysql.h>
 
+namespace mysql = sqlpp::mysql;
 
-class SubjectServices {
+using namespace std;
+
+class database_connection {
 public:
-
-    static void listAllSubjects();
-
-    static void displayOneSubject(int id);
-
-    static void displaySubjectByName(const string name);
-
-    static bool addNewSubject(string name);
-
-    static bool addStudentToSubject(int userId, int subjectId);
-
-
-
-private:
-
-
-
-
+    static mysql::connection getConnection();
 };
 
 
-#endif //OOP_PROJECT_SUBJECTSERVICES_H
+#endif //OOP_PROJECT_DATABASE_CONNECTION_H

@@ -87,7 +87,7 @@ namespace oop
             const T& operator()() const { return isActive; }
           };
       };
-      using _traits = sqlpp::make_traits<sqlpp::tinyint>;
+      using _traits = sqlpp::make_traits<sqlpp::boolean>;
     };
     struct UserLevel
     {
