@@ -66,7 +66,7 @@ public:
 
 //todo: need to replace to protected and fix tests
 
-public:
+protected:
 
     virtual bool addNewTutor(Tutor *people);// change the object to tutor according to the form in peopledao_test.cpp
 
