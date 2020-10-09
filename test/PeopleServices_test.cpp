@@ -88,7 +88,7 @@ TEST(People_Services,addNewTutor){
 
     Tutor *check01 = new Tutor(0, "test_tutor");
 
-    PeopleServices * ps = new PeopleServices();
+    auto * ps = new TeacherServices();
 
     bool result01 =  ps->addNewTutor(check01);
 
@@ -122,7 +122,7 @@ TEST(People_Services,addNewStudent){
 
     Student *check01 = new Student(0, "test_student");
 
-    PeopleServices * ps = new PeopleServices();
+    auto * ps = new TeacherServices();
 
     bool result01 =  ps->addNewStudent(check01);
 
@@ -237,7 +237,7 @@ TEST(People_Services,addNewSubject) {
 
     Subject *check01 = new Subject(0, "test_subject");
 
-    PeopleServices * ps = new PeopleServices();
+    auto * ps = new TeacherServices();
 
     bool result01 =  ps->addNewSubject(check01);
 
@@ -261,7 +261,7 @@ TEST(People_Services,addNewSubject) {
 TEST(People_Services, showStudents) {
 
 
-    PeopleServices check;
+    TeacherServices check;
 
     testing::internal::CaptureStdout();
     check.showStudents();
@@ -288,7 +288,7 @@ TEST(People_Services, showStudents) {
 
 TEST(People_Services, showTutors) {
 
-    PeopleServices check;
+    TeacherServices check;
 
     testing::internal::CaptureStdout();
     check.showTutors();
@@ -314,7 +314,7 @@ TEST(People_Services, showTutors) {
 }
 TEST(People_Services, showSubjects) {
 
-    PeopleServices check;
+    TeacherServices check;
 
     testing::internal::CaptureStdout();
     check.showSubjects();
@@ -329,7 +329,7 @@ TEST(People_Services, showSubjects) {
 
 
 TEST(People_Services, showSubjectsEnrolledById) {
-    auto ps = PeopleServices();
+    auto ps = TeacherServices();
     for (int i = 1; i <= 6; ++i) {
         if (i <= 5) {
 
