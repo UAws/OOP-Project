@@ -3,7 +3,9 @@ language: cpp
 compiler:
   - gcc
   - clang
-
+cache:
+  directories:
+  - $HOME/.conan/data
 addons:
   apt:
     packages: lcov
