@@ -1,6 +1,16 @@
 # OOP-Project
 Student management system
 
+
+
+## Try it out by [docker](https://hub.docker.com/repository/docker/akide/oop-project):
+
+```
+docker run --rm -it akide/oop-project
+```
+
+
+
 ## Build status：
 
 | **master**      | [![Build Status](https://travis-ci.com/UAws/OOP-Project.svg?token=zP1c5kEjbj3paukTcp7U&branch=master)](https://travis-ci.com/UAws/OOP-Project) |
