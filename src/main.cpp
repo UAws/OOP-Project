@@ -154,7 +154,6 @@ int init() {
     string passWord;
 
     if (c == 1) {
-        renterIdFlag:
         cout << "Welcome! Please enter your User ID: " << endl;
         int ID = input_Lim(1, 1000);
 
@@ -232,7 +231,7 @@ int teacherMenu(int ID) {
                                  "unlock user by ID",
                                  "Logout"};
 
-    for (int i = 0; i < menu_names.size(); ++i) {
+    for (size_t i = 0; i < menu_names.size(); ++i) {
         vt.addRow(i+1,menu_names[i]);
     }
 
@@ -469,7 +468,7 @@ int studentMenu(int ID) {
                                  "Show all subjects currently enrolled",
                                  "Logout"};
 
-    for (int i = 0; i < menu_names.size(); ++i) {
+    for (size_t i = 0; i < menu_names.size(); ++i) {
         vt.addRow(i+1,menu_names[i]);
     }
 
