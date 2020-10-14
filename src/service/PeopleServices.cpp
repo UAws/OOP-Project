@@ -54,6 +54,7 @@ bool PeopleServices::login(int user_id , string password) {
      if (!People->isActive1()){
         cout << "Hi," << People->getName() << "your acount is locked , please contact your tutor or teacher for unlock" << endl;
         delete People;
+         exit(2);
         return false;
     }
 
@@ -78,7 +79,8 @@ bool PeopleServices::login(int user_id , string password) {
      * unknown conditions default return false.
      */
 
-    cerr << "password for " << People->getName() << " not correct " << endl;
+
+    cout << "password for " << People->getName() << " not correct  , you may try default '-1' " << endl;
 
     delete People;
 
@@ -119,7 +121,7 @@ bool PeopleServices::initPassword() {
     while (true) {
         cout << "Please reset your password for user " << People->getName() << ":" << std::endl;
         cin >> password;
-        cout << "Please re-enter your password : ";
+        cout << "Please re-enter your password : " << endl;
         cin >> secondPasswd;
 
         if (password == secondPasswd) {

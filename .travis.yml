@@ -26,6 +26,8 @@ script:
   - cd $WORKDIR/script/; ./build_dependencies.sh
   - cd $WORKDIR/build_test/; ./GTestSelf >/dev/null 2>&1
   - cd $WORKDIR/test/input_tests/initPassword; ./intpassword_test.sh
+#    main input test case 1
+  - cd $WORKDIR/test/input_tests/main_input_case-01; ./test.sh
 
 
 after_success:
