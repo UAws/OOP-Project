@@ -1,0 +1,346 @@
+|====== STUDENT DATABASE MANAGEMENT SYSTEM ======| 
+|                                                | 
+|                                                | 
+|                 1. Log   in                    | 
+|                 2. Show  Info                  | 
+|                 3. Exit  Program               | 
+|                                                | 
+|                                                | 
+                Select Your Choice :=>  ------------------------------------------------
+| People ID | People name |  Title  | IsActive |
+------------------------------------------------
+|         1 | student01   | student |        1 |
+|         2 | tutor01     | tutor   |        1 |
+|         3 | teacher01   | teacher |        1 |
+|         4 | student02   | student |        1 |
+|         5 | tutor02     | tutor   |        1 |
+------------------------------------------------
+press enter key to continue ...[H[2J|====== STUDENT DATABASE MANAGEMENT SYSTEM ======| 
+|                                                | 
+|                                                | 
+|                 1. Log   in                    | 
+|                 2. Show  Info                  | 
+|                 3. Exit  Program               | 
+|                                                | 
+|                                                | 
+                Select Your Choice :=>  Welcome! Please enter your User ID: 
+
+Hi, teacher01 , Please enter your password: 
+Please reset your password for user teacher01:
+Please re-enter your password : 
+----------------------------------------------
+| Options |              Options             |
+----------------------------------------------
+|       1 | Show all students                |
+|       2 | Show all tutors                  |
+|       3 | Show all subjects                |
+|       4 | Show all subjects enrolled by ID |
+|       5 | Change user's name               |
+|       6 | Add new student                  |
+|       7 | Add new tutor                    |
+|       8 | Add new subject                  |
+|       9 | unlock user by ID                |
+|      10 | Logout                           |
+----------------------------------------------
+Please enter the command of function
+----------------------------------------
+| Student ID | Student name | IsActive |
+----------------------------------------
+|          1 | student01    |        1 |
+|          4 | student02    |        1 |
+----------------------------------------
+press enter key to continue ...[H[2J----------------------------------------------
+| Options |              Options             |
+----------------------------------------------
+|       1 | Show all students                |
+|       2 | Show all tutors                  |
+|       3 | Show all subjects                |
+|       4 | Show all subjects enrolled by ID |
+|       5 | Change user's name               |
+|       6 | Add new student                  |
+|       7 | Add new tutor                    |
+|       8 | Add new subject                  |
+|       9 | unlock user by ID                |
+|      10 | Logout                           |
+----------------------------------------------
+Please enter the command of function
+------------------------------------
+| Tutor ID | Tutor name | IsActive |
+------------------------------------
+|        2 | tutor01    |        1 |
+|        5 | tutor02    |        1 |
+------------------------------------
+press enter key to continue ...[H[2J----------------------------------------------
+| Options |              Options             |
+----------------------------------------------
+|       1 | Show all students                |
+|       2 | Show all tutors                  |
+|       3 | Show all subjects                |
+|       4 | Show all subjects enrolled by ID |
+|       5 | Change user's name               |
+|       6 | Add new student                  |
+|       7 | Add new tutor                    |
+|       8 | Add new subject                  |
+|       9 | unlock user by ID                |
+|      10 | Logout                           |
+----------------------------------------------
+Please enter the command of function
+-------------------------
+| Tutor ID | Tutor name |
+-------------------------
+|        1 | subject01  |
+|        2 | subject02  |
+-------------------------
+press enter key to continue ...[H[2J----------------------------------------------
+| Options |              Options             |
+----------------------------------------------
+|       1 | Show all students                |
+|       2 | Show all tutors                  |
+|       3 | Show all subjects                |
+|       4 | Show all subjects enrolled by ID |
+|       5 | Change user's name               |
+|       6 | Add new student                  |
+|       7 | Add new tutor                    |
+|       8 | Add new subject                  |
+|       9 | unlock user by ID                |
+|      10 | Logout                           |
+----------------------------------------------
+Please enter the command of function
+------------------------------------------------
+| People ID | People name |  Title  | IsActive |
+------------------------------------------------
+|         1 | student01   | student |        1 |
+|         2 | tutor01     | tutor   |        1 |
+|         3 | teacher01   | teacher |        1 |
+|         4 | student02   | student |        1 |
+|         5 | tutor02     | tutor   |        1 |
+------------------------------------------------
+Please enter a ID for the account. 
+---------------------------------------------------------
+| Student ID | Student Name | Subject ID | Subject name |
+---------------------------------------------------------
+| 2          | tutor01      |          1 | subject01    |
+|            |              |          2 | subject02    |
+---------------------------------------------------------
+press enter key to continue ...[H[2J----------------------------------------------
+| Options |              Options             |
+----------------------------------------------
+|       1 | Show all students                |
+|       2 | Show all tutors                  |
+|       3 | Show all subjects                |
+|       4 | Show all subjects enrolled by ID |
+|       5 | Change user's name               |
+|       6 | Add new student                  |
+|       7 | Add new tutor                    |
+|       8 | Add new subject                  |
+|       9 | unlock user by ID                |
+|      10 | Logout                           |
+----------------------------------------------
+Please enter the command of function
+------------------------------------------------
+| People ID | People name |  Title  | IsActive |
+------------------------------------------------
+|         1 | student01   | student |        1 |
+|         2 | tutor01     | tutor   |        1 |
+|         3 | teacher01   | teacher |        1 |
+|         4 | student02   | student |        1 |
+|         5 | tutor02     | tutor   |        1 |
+------------------------------------------------
+Please enter a ID for the account. 
+---------------------------------------------------------
+| Student ID | Student Name | Subject ID | Subject name |
+---------------------------------------------------------
+| 1          | student01    |          1 | subject01    |
+---------------------------------------------------------
+press enter key to continue ...[H[2J----------------------------------------------
+| Options |              Options             |
+----------------------------------------------
+|       1 | Show all students                |
+|       2 | Show all tutors                  |
+|       3 | Show all subjects                |
+|       4 | Show all subjects enrolled by ID |
+|       5 | Change user's name               |
+|       6 | Add new student                  |
+|       7 | Add new tutor                    |
+|       8 | Add new subject                  |
+|       9 | unlock user by ID                |
+|      10 | Logout                           |
+----------------------------------------------
+Please enter the command of function
+------------------------------------------------
+| People ID | People name |  Title  | IsActive |
+------------------------------------------------
+|         1 | student01   | student |        1 |
+|         2 | tutor01     | tutor   |        1 |
+|         3 | teacher01   | teacher |        1 |
+|         4 | student02   | student |        1 |
+|         5 | tutor02     | tutor   |        1 |
+------------------------------------------------
+Please enter a ID for the account. 
+---------------------------------------------------------
+| Student ID | Student Name | Subject ID | Subject name |
+---------------------------------------------------------
+| 3          | teacher01    |          1 | subject01    |
+|            |              |          2 | subject02    |
+---------------------------------------------------------
+press enter key to continue ...[H[2J----------------------------------------------
+| Options |              Options             |
+----------------------------------------------
+|       1 | Show all students                |
+|       2 | Show all tutors                  |
+|       3 | Show all subjects                |
+|       4 | Show all subjects enrolled by ID |
+|       5 | Change user's name               |
+|       6 | Add new student                  |
+|       7 | Add new tutor                    |
+|       8 | Add new subject                  |
+|       9 | unlock user by ID                |
+|      10 | Logout                           |
+----------------------------------------------
+Please enter the command of function
+------------------------------------------------
+| People ID | People name |  Title  | IsActive |
+------------------------------------------------
+|         1 | student01   | student |        1 |
+|         2 | tutor01     | tutor   |        1 |
+|         3 | teacher01   | teacher |        1 |
+|         4 | student02   | student |        1 |
+|         5 | tutor02     | tutor   |        1 |
+------------------------------------------------
+Please enter a ID for the account. 
+Please enter a new name for your account. 
+user information updated : student01-changed
+press enter key to continue ...[H[2J----------------------------------------------
+| Options |              Options             |
+----------------------------------------------
+|       1 | Show all students                |
+|       2 | Show all tutors                  |
+|       3 | Show all subjects                |
+|       4 | Show all subjects enrolled by ID |
+|       5 | Change user's name               |
+|       6 | Add new student                  |
+|       7 | Add new tutor                    |
+|       8 | Add new subject                  |
+|       9 | unlock user by ID                |
+|      10 | Logout                           |
+----------------------------------------------
+Please enter the command of function
+input error! Please enter again:
+---------------------------------------------
+| Student ID |   Student name    | IsActive |
+---------------------------------------------
+|          1 | student01-changed |        1 |
+|          4 | student02         |        1 |
+---------------------------------------------
+press enter key to continue ...[H[2J----------------------------------------------
+| Options |              Options             |
+----------------------------------------------
+|       1 | Show all students                |
+|       2 | Show all tutors                  |
+|       3 | Show all subjects                |
+|       4 | Show all subjects enrolled by ID |
+|       5 | Change user's name               |
+|       6 | Add new student                  |
+|       7 | Add new tutor                    |
+|       8 | Add new subject                  |
+|       9 | unlock user by ID                |
+|      10 | Logout                           |
+----------------------------------------------
+Please enter the command of function
+Please enter the tutor name : 
+You have added a tutor user : tutor-test-01 successfully! 
+press enter key to continue ...[H[2J----------------------------------------------
+| Options |              Options             |
+----------------------------------------------
+|       1 | Show all students                |
+|       2 | Show all tutors                  |
+|       3 | Show all subjects                |
+|       4 | Show all subjects enrolled by ID |
+|       5 | Change user's name               |
+|       6 | Add new student                  |
+|       7 | Add new tutor                    |
+|       8 | Add new subject                  |
+|       9 | unlock user by ID                |
+|      10 | Logout                           |
+----------------------------------------------
+Please enter the command of function
+------------------------------------------------------
+| People ID |    People name    |  Title  | IsActive |
+------------------------------------------------------
+|         1 | student01-changed | student |        1 |
+|         2 | tutor01           | tutor   |        1 |
+|         3 | teacher01         | teacher |        1 |
+|         4 | student02         | student |        1 |
+|         5 | tutor02           | tutor   |        1 |
+|         6 | tutor-test-01     | tutor   |        1 |
+------------------------------------------------------
+Please enter a ID for the account. 
+---------------------------------------------------------
+| Student ID | Student Name | Subject ID | Subject name |
+---------------------------------------------------------
+| 5          | tutor02      |          1 | subject01    |
+|            |              |          2 | subject02    |
+---------------------------------------------------------
+press enter key to continue ...[H[2J----------------------------------------------
+| Options |              Options             |
+----------------------------------------------
+|       1 | Show all students                |
+|       2 | Show all tutors                  |
+|       3 | Show all subjects                |
+|       4 | Show all subjects enrolled by ID |
+|       5 | Change user's name               |
+|       6 | Add new student                  |
+|       7 | Add new tutor                    |
+|       8 | Add new subject                  |
+|       9 | unlock user by ID                |
+|      10 | Logout                           |
+----------------------------------------------
+Please enter the command of function
+Please enter the subject name : 
+You have added a subject : oop-02 successfully! 
+press enter key to continue ...[H[2J----------------------------------------------
+| Options |              Options             |
+----------------------------------------------
+|       1 | Show all students                |
+|       2 | Show all tutors                  |
+|       3 | Show all subjects                |
+|       4 | Show all subjects enrolled by ID |
+|       5 | Change user's name               |
+|       6 | Add new student                  |
+|       7 | Add new tutor                    |
+|       8 | Add new subject                  |
+|       9 | unlock user by ID                |
+|      10 | Logout                           |
+----------------------------------------------
+Please enter the command of function
+---------------------------------------------
+| Student ID |   Student name    | IsActive |
+---------------------------------------------
+|          1 | student01-changed |        1 |
+|          4 | student02         |        1 |
+---------------------------------------------
+press enter key to continue ...[H[2J----------------------------------------------
+| Options |              Options             |
+----------------------------------------------
+|       1 | Show all students                |
+|       2 | Show all tutors                  |
+|       3 | Show all subjects                |
+|       4 | Show all subjects enrolled by ID |
+|       5 | Change user's name               |
+|       6 | Add new student                  |
+|       7 | Add new tutor                    |
+|       8 | Add new subject                  |
+|       9 | unlock user by ID                |
+|      10 | Logout                           |
+----------------------------------------------
+Please enter the command of function
+teacher01Log out successfully !
+|====== STUDENT DATABASE MANAGEMENT SYSTEM ======| 
+|                                                | 
+|                                                | 
+|                 1. Log   in                    | 
+|                 2. Show  Info                  | 
+|                 3. Exit  Program               | 
+|                                                | 
+|                                                | 
+                Select Your Choice :=>  

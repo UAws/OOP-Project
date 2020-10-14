@@ -84,24 +84,41 @@ int main(int argc, char **argv) {
             goto initFlag;
         }
     }
+
+    if (ID == -2) {
+            goto initFlag;
+    }
+
+    return 0;
 }
 
+int errorCount = 0;
 
 
 int input_Lim(int start, int end) {
 
     int inputNum;
+
     cout<<"";
     while(true){
         // https://stackoverflow.com/a/43845915/14207562
 
         if (cin >> inputNum && inputNum >= start && inputNum <= end){
+            errorCount = 0;
             break;
         }
         else{
-            cout<<"input error! Please enter again:";
+            cout<<"input error! Please enter again:" << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            errorCount++;
+
+            if (errorCount >= 3) {
+                cout << "too many wrong input" << endl;
+                exit(1);
+            }
+
         }
     }
 
@@ -112,58 +129,83 @@ int init() {
     for (int i = 0; i < 9; i++) {
         switch (i) {
             case 0 :
-                cout << "       \t |====== STUDENT DATABASE MANAGEMENT SYSTEM ======| \n";
+                cout << "|====== STUDENT DATABASE MANAGEMENT SYSTEM ======| \n";
                 break;
             case 3 :
-                cout << "       \t |                 1. Log   in                    | \n";
+                cout << "|                 1. Log   in                    | \n";
                 break;
             case 4 :
-                cout << "       \t |                 2. Exit  Program               | \n";
+                cout << "|                 2. Show  Info                  | \n";
+                break;
+            case 5 :
+                cout << "|                 3. Exit  Program               | \n";
                 break;
             case 8 :
-                cout << "       \t                Select Your Choice :=>  ";
+                cout << "                Select Your Choice :=>  ";
                 break;
             default:
-                cout << "       \t |                                                | \n";
+                cout << "|                                                | \n";
                 break;
         }
     }
 
-    int c = input_Lim(1, 2);
+    int c = input_Lim(1, 3);
 
     string passWord;
 
     if (c == 1) {
         renterIdFlag:
         cout << "Welcome! Please enter your User ID: " << endl;
-        int ID = input_Lim(1,1000);
+        int ID = input_Lim(1, 1000);
 
         cout << endl;
         People *p = PeopleDao::selectOnePeople(ID);
 
+
         if (p == nullptr) {
             cerr << "People Not Found!" << endl;
-            goto renterIdFlag;
+            return -2;
         }
 
         cout << "Hi, " << p->getName() << " , Please enter your password: " << endl;
         // cin >> passWord;
 
-        delete p;
 
         bool loginFlag = false;
 
-        while(!loginFlag){
+        int count = 0;
+
+        while (!loginFlag) {
             getline(cin >> ws, passWord);
             loginFlag = PeopleServices::login(ID, passWord);
+            count++;
+            if (count >= 3) {
+                cout << "Hi," << p->getName() << "your acount is locked , please contact your tutor or teacher for unlock" << endl;
+
+                PeopleServices::lockUser(ID);
+
+                exit(2);
+            }
         }
+
+        delete p;
 
         return ID;
 
-    } else {
+    } else if (c == 2) {
+
+        PeopleServices::ListAllUsers();
+
+        std::cout << "press enter key to continue ...";
+        cin.ignore().get();
+        system("clear");
+
+        return -2;
+
+    } else if (c == 3) {
         return 0;
     }
-
+    return 0;
 }
 
 int teacherMenu(int ID) {
@@ -183,10 +225,11 @@ int teacherMenu(int ID) {
                                  "Show all tutors",
                                  "Show all subjects",
                                  "Show all subjects enrolled by ID",
-                                 "Add new student",
                                  "Change user's name",
+                                 "Add new student",
                                  "Add new tutor",
                                  "Add new subject",
+                                 "unlock user by ID",
                                  "Logout"};
 
     for (int i = 0; i < menu_names.size(); ++i) {
@@ -203,7 +246,7 @@ int teacherMenu(int ID) {
 
     cout << "Please enter the command of function" << endl;
 
-    int command_1 = input_Lim(1, 9);
+    int command_1 = input_Lim(1, 10);
 
     switch (command_1) {
         case 1 : {// show all students
@@ -296,7 +339,20 @@ int teacherMenu(int ID) {
 
             break;
         }
-        case 9 ://logout.
+        case 9 : {
+            cout << "Please enter a ID for the account. " << endl;
+
+            int id = input_Lim(1, 1000);
+
+            if(TeacherServices::unlockUser(id)){
+                cout << "user with ID : " << id  << "unlocked" << endl;
+            }else{
+                cout << "user with ID : " << id  << "unlock failed , please contact administrator" << endl;
+            }
+            break;
+
+        }
+        case 10 ://logout.
         {
             TeacherServices::logout(ID);
             return -1;
@@ -305,7 +361,7 @@ int teacherMenu(int ID) {
             break;
     }
 
-    std::cout << "press any key to continue ...";
+    std::cout << "press enter key to continue ...";
     cin.ignore().get();
     system("clear");
 
@@ -396,7 +452,7 @@ int tutorMenu(int ID) {
             break;
     }
 
-    std::cout << "press any key to continue ...";
+    std::cout << "press enter key to continue ...";
     cin.ignore().get();
     system("clear");
 
@@ -441,7 +497,7 @@ int studentMenu(int ID) {
             break;
     }
 
-    std::cout << "press any key to continue ...";
+    std::cout << "press enter key to continue ...";
     cin.ignore().get();
     system("clear");
 

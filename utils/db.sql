@@ -31,7 +31,7 @@ CREATE TABLE `people` (
   `userLevel` int(11) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `People_user_id_uindex` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=362 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -83,7 +83,7 @@ CREATE TABLE `subject` (
   `name` char(255) DEFAULT NULL,
   PRIMARY KEY (`subject_id`),
   UNIQUE KEY `subject_subject_id_uindex` (`subject_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=330 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
