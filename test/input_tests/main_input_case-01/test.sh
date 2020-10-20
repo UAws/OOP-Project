@@ -23,3 +23,6 @@ if [ $? != "0" ]; then
     cat output.txt
     exit 1
 fi
+
+
+# use ofstream to print out test 

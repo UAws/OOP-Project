@@ -103,30 +103,63 @@ int input_Lim(int start, int end) {
     while(true){
         // https://stackoverflow.com/a/43845915/14207562
 
-        if (cin >> inputNum && inputNum >= start && inputNum <= end){
-            errorCount = 0;
+        cin >> inputNum;
+        if (cin.good()) {
+            if (cin.peek() != '\n' || cin.peek() == std::char_traits<char>::eof()) {
+                // Bad, try again
+                cout << "Bad" << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                continue;
+            }
+            // Good
             break;
-        }
-        else{
-            cout<<"input error! Please enter again:" << endl;
+        } else {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-            errorCount++;
-
-            if (errorCount >= 3) {
-                cout << "too many wrong input" << endl;
-                exit(1);
-            }
-
         }
+
+        // if (cin >> inputNum && cin.peek() != '\n' || cin.peek() == std::char_traits<char>::eof()inputNum >= start && inputNum <= end){
+        //     errorCount = 0;
+        //     break;
+        // }
+        // else{
+        //     cout<<"input error! Please enter again:" << endl;
+        //     cin.clear();
+        //     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        //     errorCount++;
+
+        //     if (errorCount >= 3) {
+        //         cout << "too many wrong input" << endl;
+        //         exit(1);
+        //     }
+
+        // }
     }
+
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cout << "Input: " << inputNum << std::endl;
 
     return inputNum;
 }
 
+enum class InitMenuSelection {
+    Login = 1,
+    ShowInfo = 2,
+    Exit = 3,
+};
+
+enum class InitResult {
+    Good,
+    Bad,
+    Exit,
+};
+
 int init() {
-    for (int i = 0; i < 9; i++) {
+    const int menuLineCount = 9;
+    for (int i = 0; i < menuLineCount; i++) {
         switch (i) {
             case 0 :
                 cout << "|====== STUDENT DATABASE MANAGEMENT SYSTEM ======| \n";
@@ -149,13 +182,17 @@ int init() {
         }
     }
 
-    int c = input_Lim(1, 3);
+    // int c = input_Lim(1, 3);
+    const int menuSelectionCount = 3;
+    InitMenuSelection c = (InitMenuSelection)input_Lim(1,menuSelectionCount); // 1 to bring into range of 1-3
 
-    string passWord;
+    string passWord = "";
 
-    if (c == 1) {
+    if (c == InitMenuSelection::Login) {
         cout << "Welcome! Please enter your User ID: " << endl;
-        int ID = input_Lim(1, 1000);
+        const int minIDNumber = 1;
+        const int maxIDNumber = 1000;
+        int ID = input_Lim(minIDNumber, maxIDNumber);
 
         cout << endl;
         People *p = PeopleDao::selectOnePeople(ID);
@@ -169,16 +206,15 @@ int init() {
         cout << "Hi, " << p->getName() << " , Please enter your password: " << endl;
         // cin >> passWord;
 
-
-        bool loginFlag = false;
-
-        int count = 0;
-
-        while (!loginFlag) {
+        // Try to login until success or out of attempts
+        bool loginSuccess = false;
+        const int maxLoginAttempts = 3;
+        int loginAttemptCount = 0;
+        while (!loginSuccess) { 
             getline(cin >> ws, passWord);
-            loginFlag = PeopleServices::login(ID, passWord);
-            count++;
-            if (count >= 3) {
+            loginSuccess = PeopleServices::login(ID, passWord);
+            loginAttemptCount++;
+            if (loginAttemptCount >= maxLoginAttempts) {
                 cout << "Hi," << p->getName() << "your acount is locked , please contact your tutor or teacher for unlock" << endl;
 
                 PeopleServices::lockUser(ID);
@@ -191,7 +227,7 @@ int init() {
 
         return ID;
 
-    } else if (c == 2) {
+    } else if (c == InitMenuSelection::ShowInfo) {
 
         PeopleServices::ListAllUsers();
 
@@ -201,7 +237,7 @@ int init() {
 
         return -2;
 
-    } else if (c == 3) {
+    } else if (c == InitMenuSelection::Exit) {
         return 0;
     }
     return 0;
