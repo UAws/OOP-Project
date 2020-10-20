@@ -44,93 +44,55 @@ int studentMenu(int ID);
 
 int main(int argc, char **argv) {
 
-    initFlag:
+    // initFlag:
+    bool initFlag = true;
 
-    int ID = init();
+    while (initFlag) {
 
-// ----------------------------------------------------------------------------------------------------------------------------------
-// distinguish the user level and goto the corresponding menu
 
-    // goto teacherMenu
-    if (PeopleServices::checkUserLevelById(ID) == 3) {
+        int ID = init();
 
-        int goBackFlag = teacherMenu(ID);
+    // ----------------------------------------------------------------------------------------------------------------------------------
+    // distinguish the user level and goto the corresponding menu
 
-        while(goBackFlag == 0){
-            goBackFlag = teacherMenu(ID);
+        // goto teacherMenu
+        if (PeopleServices::checkUserLevelById(ID) == 3) {
+
+            int goBackFlag = teacherMenu(ID);
+
+            while(goBackFlag == 0){
+                goBackFlag = teacherMenu(ID);
+            }
+
+        // goto tutorMenu
+        } else if (PeopleServices::checkUserLevelById(ID) == 2) {
+
+            int goBackFlag = tutorMenu(ID);
+
+            while(goBackFlag == 0){
+                goBackFlag = tutorMenu(ID);
+            }
+
+
+        // goto studentMenu
+        } else if (PeopleServices::checkUserLevelById(ID) == 1) {
+
+            int goBackFlag = studentMenu(ID);
+
+            while(goBackFlag == 0){
+                goBackFlag = studentMenu(ID);
+            }
+
         }
-        if (goBackFlag == -1) {
-            goto initFlag;
+
+        if (ID == -1) {
+            break;
         }
 
-    // goto tutorMenu
-    } else if (PeopleServices::checkUserLevelById(ID) == 2) {
-
-        int goBackFlag = tutorMenu(ID);
-
-        while(goBackFlag == 0){
-            goBackFlag = tutorMenu(ID);
-        }
-
-        if (goBackFlag == -1) {
-            goto initFlag;
-        }
-
-    // goto studentMenu
-    } else if (PeopleServices::checkUserLevelById(ID) == 1) {
-
-        int goBackFlag = studentMenu(ID);
-
-        while(goBackFlag == 0){
-            goBackFlag = studentMenu(ID);
-        }
-
-        if (goBackFlag == -1) {
-            goto initFlag;
-        }
-    }
-
-    if (ID == -2) {
-            goto initFlag;
     }
 
     return 0;
 }
-
-
-// int input_Lim(int start, int end) {
-//     int  result = 0;
-//     int errorCount = 0;
-//     bool notDone = true;
-
-//     while(notDone) {
-
-//         string line;
-//         getline(std::cin, line);
-//         istringstream is(line);
-
-//         char dummy = '\0';
-
-//         // if we fail to extract an int
-//         // or we find something apart from whitespace after the int
-//         // or the value isn't in range
-//         if (!(is >> result) || (is >> std::ws && is.get(dummy)) || (result < start) || (result > end)){
-//             errorCount++;
-//             int chanceLeft = 5 - errorCount;
-//             cout << "input error! Please enter again. You have " << chanceLeft << " chance left" << endl;
-//         }
-//         else{
-//             notDone = false ;
-//         }
-//         if (errorCount >= 5) {
-//                 cout << "Too many wrong input" << endl;
-//                 exit(1);
-//             }
-
-//     }
-
-//     return result;
-// }
 
 // input limit, only accept whole number that lie between our defined start & end
 int input_Lim(int start, int end) {
@@ -139,7 +101,7 @@ int input_Lim(int start, int end) {
     int errorCount = 0;
 
 // error checking loop
-while(1) {
+while(true) {
     std::cin >> result; 
     // input valid
     if(!std::cin.fail() && (std::cin.peek() == EOF || std::cin.peek() == '\n')
@@ -203,44 +165,6 @@ int init() {
     }
 
 
-
-    // int c = input_Lim(1, 3);
-
-//     string passWord;
-
-//     if (c == 1) {
-//         renterIdFlag:
-//         cout << "Welcome! Please enter your User ID: " << endl;
-//         int ID = input_Lim(1,1000);
-
-//         cout << endl;
-//         People *p = PeopleDao::selectOnePeople(ID);
-
-//         if (p == nullptr) {
-//             cerr << "People Not Found!" << endl;
-//             goto renterIdFlag;
-//         }
-
-//         cout << "Hi, " << p->getName() << " , Please enter your password: " << endl;
-//         // cin >> passWord;
-
-//         delete p;
-
-//         bool loginFlag = false;
-
-//         while(!loginFlag){
-//             getline(cin >> ws, passWord);
-//             loginFlag = PeopleServices::login(ID, passWord);
-//         }
-
-//         return ID;
-
-//     } else {
-//         return 0;
-//     }
-
-// }
-
 // achieve basic functions: login, see users' info, exit
 const int menuSelectionCount = 3;
     InitMenuSelection c = (InitMenuSelection)input_Lim(1,menuSelectionCount); // 1 to bring into range of 1-3
@@ -299,7 +223,7 @@ const int menuSelectionCount = 3;
         return -2;
 
     } else if (c == InitMenuSelection::Exit) {
-        return 0;
+        return -1;
     }
     return 0;
 }
