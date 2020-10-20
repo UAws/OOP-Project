@@ -29,7 +29,8 @@ Description :
 #include <iostream>
 #include <vector>
 #include <map>
-#include "People.h"
+#include "VO_PUBLIC.h"
+#include "Message.h"
 
 //TODO: need to replace by database
 using namespace std;
@@ -45,6 +46,11 @@ public:
     static int getSSubjectId();
 
     static void setSSubjectId(int sSubjectId);
+
+    static int messageID;
+
+    static vector<Message *> messageArray;
+
 
 
 private:

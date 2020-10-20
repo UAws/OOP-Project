@@ -46,3 +46,14 @@ void TutorServices::showSubjects() {
 bool TutorServices::showSubjectsEnrolledById(int user_id) {
     return PeopleServices::showSubjectsEnrolledById(user_id);
 }
+
+void TutorServices::communicate(int messageId, string context) {
+
+    messageId -= 1;
+
+    Storage::messageArray[messageId]->setTutorId(Storage::getSUserId());
+    Storage::messageArray[messageId]->setTutorComment(context);
+
+    // cout << *Storage::messageArray[messageId] << endl;
+
+}

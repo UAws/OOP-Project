@@ -17,6 +17,7 @@ set(source_vo
         src/vo/Subject.cpp
         src/vo/Teacher.cpp
         src/vo/Tutor.cpp
+        src/vo/Message.cpp
         )
 set(source_dao
         src/dao/PeopleDao.cpp
@@ -28,6 +29,7 @@ set(source_service
         src/service/PeopleServices.cpp
         src/service/SubjectServices.cpp
         src/service/TeacherServices.cpp
+        src/service/PeopleCommunications.cpp
         )
 
 set(source_test

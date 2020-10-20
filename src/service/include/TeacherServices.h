@@ -28,7 +28,7 @@ Description :
 
 #include "PeopleServices.h"
 
-class TeacherServices : public PeopleServices {
+class TeacherServices : public PeopleServices, public PeopleCommunications {
 
 public:
     bool addNewTutor(Tutor *people) override;
@@ -48,6 +48,9 @@ public:
     void showSubjects() override;
 
     bool showSubjectsEnrolledById(int user_id) override;
+
+    void communicate(int messageId, string context) override;
+
 
 };
 

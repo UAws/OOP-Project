@@ -34,3 +34,11 @@ void StudentServices::showSubjects() {
 bool StudentServices::showSubjectsEnrolledById(int user_id) {
     return PeopleServices::showSubjectsEnrolledById(user_id);
 }
+
+void StudentServices::communicate(int id, string context) {
+
+    //id is subject id;
+    Storage::messageArray.push_back(new Message(Storage::messageID,Storage::getSUserId(),id));
+    Storage::messageID += 1;
+
+}

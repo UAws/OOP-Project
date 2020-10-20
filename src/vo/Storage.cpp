@@ -28,8 +28,11 @@ Description :
 
 int Storage::s_user_id = 1;
 
- int Storage::s_subject_id = 1;
+int Storage::s_subject_id = 1;
 
+int Storage::messageID = 1;
+
+vector<Message *> Storage::messageArray;
 
 int Storage::getSUserId() {
     return s_user_id;

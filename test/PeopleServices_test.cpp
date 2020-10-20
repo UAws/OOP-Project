@@ -347,3 +347,31 @@ TEST(People_Services, showSubjectsEnrolledById) {
 
 
 }
+
+TEST(People_Services,student_communication){
+    
+    Storage::setSUserId(1);
+    auto sc = StudentServices();
+    sc.communicate(2, "");
+
+    Storage::setSUserId(2);
+    auto tc = TutorServices();
+    tc.communicate(1, "it' s ok");
+
+    Storage::setSUserId(3);
+    auto Tc = TeacherServices();
+    Tc.communicate(1, "1");
+
+    mysql::connection db = database_connection::getConnection();
+
+    testing::internal::CaptureStdout();
+    Tc.showSubjectsEnrolledById(1);
+    string output = testing::internal::GetCapturedStdout();
+
+    EXPECT_TRUE(output.find("subject02") != string::npos);
+
+
+    db.execute("DELETE FROM oop.peopleSubject WHERE user_id = 1 AND subject_id = 2;");
+
+
+}
