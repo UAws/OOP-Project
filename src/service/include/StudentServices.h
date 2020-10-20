@@ -28,13 +28,16 @@ Description :
 
 
 #include "PeopleServices.h"
+#include "PeopleCommunications.h"
 
-class StudentServices : public PeopleServices {
+class StudentServices : public PeopleServices,public PeopleCommunications {
 
 public:
     void showSubjects() override;
 
     bool showSubjectsEnrolledById(int user_id) override;
+
+    void communicate(int id, string context) override;
 
 };
 
