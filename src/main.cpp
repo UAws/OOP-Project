@@ -24,6 +24,8 @@ Description :
 */
 #include <iostream>
 #include <string>
+#include <ctype.h>  // isdigit()
+#include <sstream>  // stringstream
 #include <service/include/SERVICE_PUBLIC.h>
 #include <vo/include/VO_PUBLIC.h>
 #include <dao/include/PeopleDao.h>
@@ -92,57 +94,68 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-int errorCount = 0;
 
+// int input_Lim(int start, int end) {
+//     int  result = 0;
+//     int errorCount = 0;
+//     bool notDone = true;
 
+//     while(notDone) {
+
+//         string line;
+//         getline(std::cin, line);
+//         istringstream is(line);
+
+//         char dummy = '\0';
+
+//         // if we fail to extract an int
+//         // or we find something apart from whitespace after the int
+//         // or the value isn't in range
+//         if (!(is >> result) || (is >> std::ws && is.get(dummy)) || (result < start) || (result > end)){
+//             errorCount++;
+//             int chanceLeft = 5 - errorCount;
+//             cout << "input error! Please enter again. You have " << chanceLeft << " chance left" << endl;
+//         }
+//         else{
+//             notDone = false ;
+//         }
+//         if (errorCount >= 5) {
+//                 cout << "Too many wrong input" << endl;
+//                 exit(1);
+//             }
+
+//     }
+
+//     return result;
+// }
 int input_Lim(int start, int end) {
 
-    int inputNum;
+    int result = 0;
+    int errorCount = 0;
 
-    cout<<"";
-    while(true){
-        // https://stackoverflow.com/a/43845915/14207562
-
-        cin >> inputNum;
-        if (cin.good()) {
-            if (cin.peek() != '\n' || cin.peek() == std::char_traits<char>::eof()) {
-                // Bad, try again
-                cout << "Bad" << endl;
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                continue;
-            }
-            // Good
-            break;
-        } else {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
-
-        // if (cin >> inputNum && cin.peek() != '\n' || cin.peek() == std::char_traits<char>::eof()inputNum >= start && inputNum <= end){
-        //     errorCount = 0;
-        //     break;
-        // }
-        // else{
-        //     cout<<"input error! Please enter again:" << endl;
-        //     cin.clear();
-        //     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-        //     errorCount++;
-
-        //     if (errorCount >= 3) {
-        //         cout << "too many wrong input" << endl;
-        //         exit(1);
-        //     }
-
-        // }
+// error checking loop
+while(1) {
+    std::cin >> result; 
+    // input valid
+    if(!std::cin.fail() && (std::cin.peek() == EOF || std::cin.peek() == '\n')
+        && result >= start && result <= end) {
+        break; // break from while loop
     }
+    // input invalid
+    else {
+        std::cin.clear();
+        std::cin.ignore(256, '\n');
+        errorCount++;
+        int chanceLeft = 5 - errorCount;
+        cout << "input error! Please enter again. You have " << chanceLeft << " chance left" << endl;
+    }
+    if (errorCount >= 5) {
+        cout << "Too many wrong input" << endl;
+        exit(1);
+     }
 
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cout << "Input: " << inputNum << std::endl;
-
-    return inputNum;
+}
+return result;
 }
 
 enum class InitMenuSelection {
@@ -156,6 +169,7 @@ enum class InitResult {
     Bad,
     Exit,
 };
+
 
 int init() {
     const int menuLineCount = 9;
@@ -182,16 +196,56 @@ int init() {
         }
     }
 
+
+
     // int c = input_Lim(1, 3);
-    const int menuSelectionCount = 3;
+
+//     string passWord;
+
+//     if (c == 1) {
+//         renterIdFlag:
+//         cout << "Welcome! Please enter your User ID: " << endl;
+//         int ID = input_Lim(1,1000);
+
+//         cout << endl;
+//         People *p = PeopleDao::selectOnePeople(ID);
+
+//         if (p == nullptr) {
+//             cerr << "People Not Found!" << endl;
+//             goto renterIdFlag;
+//         }
+
+//         cout << "Hi, " << p->getName() << " , Please enter your password: " << endl;
+//         // cin >> passWord;
+
+//         delete p;
+
+//         bool loginFlag = false;
+
+//         while(!loginFlag){
+//             getline(cin >> ws, passWord);
+//             loginFlag = PeopleServices::login(ID, passWord);
+//         }
+
+//         return ID;
+
+//     } else {
+//         return 0;
+//     }
+
+// }
+
+const int menuSelectionCount = 3;
     InitMenuSelection c = (InitMenuSelection)input_Lim(1,menuSelectionCount); // 1 to bring into range of 1-3
 
     string passWord = "";
 
     if (c == InitMenuSelection::Login) {
         cout << "Welcome! Please enter your User ID: " << endl;
+
         const int minIDNumber = 1;
         const int maxIDNumber = 1000;
+
         int ID = input_Lim(minIDNumber, maxIDNumber);
 
         cout << endl;
@@ -243,6 +297,7 @@ int init() {
     return 0;
 }
 
+
 int teacherMenu(int ID) {
     string new_name;
 
@@ -260,14 +315,13 @@ int teacherMenu(int ID) {
                                  "Show all tutors",
                                  "Show all subjects",
                                  "Show all subjects enrolled by ID",
-                                 "Change user's name",
                                  "Add new student",
+                                 "Change user's name",
                                  "Add new tutor",
                                  "Add new subject",
-                                 "unlock user by ID",
                                  "Logout"};
 
-    for (size_t i = 0; i < menu_names.size(); ++i) {
+    for (int i = 0; i < menu_names.size(); ++i) {
         vt.addRow(i+1,menu_names[i]);
     }
 
@@ -281,7 +335,10 @@ int teacherMenu(int ID) {
 
     cout << "Please enter the command of function" << endl;
 
-    int command_1 = input_Lim(1, 10);
+    const int command_start_index = 1;
+    const int command_end_index = 10;
+
+    int command_1 = input_Lim(command_start_index, command_end_index);
 
     switch (command_1) {
         case 1 : {// show all students
@@ -301,7 +358,10 @@ int teacherMenu(int ID) {
             PeopleServices::ListAllUsers();
             cout << "Please enter a ID for the account. " << endl;
 
-            int id = input_Lim(1, 1000);
+            const int minIDNumber = 1;
+            const int maxIDNumber = 1000;
+
+            int id = input_Lim(minIDNumber, maxIDNumber);
 
             TS.showSubjectsEnrolledById(id);
             break;
@@ -312,7 +372,10 @@ int teacherMenu(int ID) {
 
             cout << "Please enter a ID for the account. " << endl;
 
-            int id = input_Lim(1, 1000);
+            const int minIDNumber = 1;
+            const int maxIDNumber = 1000;
+
+            int id = input_Lim(minIDNumber, maxIDNumber);
 
             cout << "Please enter a new name for your account. " << endl;
 
@@ -377,7 +440,10 @@ int teacherMenu(int ID) {
         case 9 : {
             cout << "Please enter a ID for the account. " << endl;
 
-            int id = input_Lim(1, 1000);
+            const int minIDNumber = 1;
+            const int maxIDNumber = 1000;
+
+            int id = input_Lim(minIDNumber, maxIDNumber);
 
             if(TeacherServices::unlockUser(id)){
                 cout << "user with ID : " << id  << "unlocked" << endl;
@@ -396,7 +462,7 @@ int teacherMenu(int ID) {
             break;
     }
 
-    std::cout << "press enter key to continue ...";
+    std::cout << "press any key to continue ...";
     cin.ignore().get();
     system("clear");
 
@@ -424,7 +490,10 @@ int tutorMenu(int ID) {
 
     cout << "Please enter the command of function" << endl;
 
-    int command_2 = input_Lim(1, 6);
+    const int command_start_index = 1;
+    const int command_end_index = 6;
+
+    int command_2 = input_Lim(command_start_index, command_end_index);
 
     switch (command_2) {
         case 1 :// show all students
@@ -443,7 +512,11 @@ int tutorMenu(int ID) {
 
             cout << "Please enter a ID for the account. " << endl;
 
-            int id = input_Lim(1, 1000);
+            const int minIDNumber = 1;
+            const int maxIDNumber = 1000;
+
+            int id = input_Lim(minIDNumber, maxIDNumber);
+
 
             TUS.showSubjectsEnrolledById(id);
             break;
@@ -451,10 +524,14 @@ int tutorMenu(int ID) {
         case 4 ://Change user's name.
         {
             PeopleServices::ListAllUsers();
+    
 
             cout << "Please enter a ID for the account. " << endl;
 
-            int id = input_Lim(1, 1000);
+            const int minIDNumber = 1;
+            const int maxIDNumber = 1000;
+
+            int id = input_Lim(minIDNumber, maxIDNumber);
 
             cout << "Please enter a new name for your account. " << endl;
 
@@ -487,7 +564,7 @@ int tutorMenu(int ID) {
             break;
     }
 
-    std::cout << "press enter key to continue ...";
+    std::cout << "press any key to continue ...";
     cin.ignore().get();
     system("clear");
 
@@ -504,7 +581,7 @@ int studentMenu(int ID) {
                                  "Show all subjects currently enrolled",
                                  "Logout"};
 
-    for (size_t i = 0; i < menu_names.size(); ++i) {
+    for (int i = 0; i < menu_names.size(); ++i) {
         vt.addRow(i+1,menu_names[i]);
     }
 
@@ -512,7 +589,10 @@ int studentMenu(int ID) {
 
     cout << "Please enter the command of function" << endl;
 
-    int command_1 = input_Lim(1, 9);
+    const int command_start_index = 1;
+    const int command_end_index = 9;
+
+    int command_1 = input_Lim(command_start_index, command_end_index);
 
     switch (command_1) {
         case 1:
@@ -532,7 +612,7 @@ int studentMenu(int ID) {
             break;
     }
 
-    std::cout << "press enter key to continue ...";
+    std::cout << "press any key to continue ...";
     cin.ignore().get();
     system("clear");
 
