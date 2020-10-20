@@ -22,7 +22,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Description :
 
 */
-
+#include <dao/include/SubjectDao.h>
+#include <dao/include/PeopleDao.h>
 #include <service/include/SERVICE_PUBLIC.h>
 #include <vo/include/VO_PUBLIC.h>
 
@@ -61,4 +62,48 @@ void TeacherServices::showSubjects() {
 
 bool TeacherServices::showSubjectsEnrolledById(int user_id) {
     return PeopleServices::showSubjectsEnrolledById(user_id);
+}
+
+// set the message id
+
+void TeacherServices::communicate(int messageId, string context) {
+
+    messageId -= 1;
+
+
+    auto currentMessage = Storage::messageArray[messageId];
+
+    auto check = PeopleDao::selectSubjectPeopleEnrolledByUserId(currentMessage->getStudentId());
+
+    bool checkFlag = true;
+    for (auto &i : check.second) {
+
+        if (i->getSubjectId() == currentMessage->getRequestSubjectId()) {
+
+            cout << *Storage::messageArray[messageId] << " student already in this subject" << endl;
+
+            checkFlag = false;
+
+            break;
+        }
+    }
+
+
+    if (checkFlag) {
+        if (context == "1") {
+
+            if (SubjectDao::updatePeopleToSubject(currentMessage->getStudentId(),
+                                                  currentMessage->getRequestSubjectId())) {
+
+                cout << *Storage::messageArray[messageId] << "request approved" << endl;
+
+            }
+
+        } else {
+
+            cout << *Storage::messageArray[messageId] << "denied" << endl;
+
+        }
+    }
+
 }

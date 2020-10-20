@@ -31,6 +31,7 @@ Description :
 #include "SubjectServices.h"
 #include "TeacherServices.h"
 #include "TutorServices.h"
+#include "PeopleCommunications.h"
 #include <prettyprint.hpp>
 
 //https://github.com/friedmud/variadic_table

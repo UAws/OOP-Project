@@ -32,6 +32,7 @@ Description :
 #include "Subject.h"
 #include "Teacher.h"
 #include "Tutor.h"
+#include "Message.h"
 #include <prettyprint.hpp>
 
 //https://github.com/friedmud/variadic_table
