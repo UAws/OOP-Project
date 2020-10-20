@@ -84,5 +84,5 @@ Successfully logged: information of the teacher would be shown (information that
 
 
 
-###[Additional Info](https://www.notion.so/OOP-Major-Practical-Design-Student-management-system-C-c84a6cce47864e0a802a3164224915c6#3ae5643700534310b530b856b16c22f1)
+### [Additional Info](https://www.notion.so/OOP-Major-Practical-Design-Student-management-system-C-c84a6cce47864e0a802a3164224915c6#3ae5643700534310b530b856b16c22f1)
 
