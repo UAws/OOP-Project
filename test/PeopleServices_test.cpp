@@ -349,7 +349,12 @@ TEST(People_Services, showSubjectsEnrolledById) {
 }
 
 TEST(People_Services,student_communication){
-    
+
+    // - [x]  student request to join subject
+    // - [x]  tutor can see the request and give the advice to teacher
+    // - [x]  teacher can check tutor's advice and to examine and approve students' request
+
+
     Storage::setSUserId(1);
     auto sc = StudentServices();
     sc.communicate(2, "");
@@ -372,6 +377,8 @@ TEST(People_Services,student_communication){
 
 
     db.execute("DELETE FROM oop.peopleSubject WHERE user_id = 1 AND subject_id = 2;");
+
+    PeopleServices::showCommunication();
 
 
 }

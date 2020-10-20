@@ -59,6 +59,8 @@ public:
 
     static bool unlockUser(int user_id);
 
+    static void showCommunication();
+
     /*
      * userAction functions
      */
