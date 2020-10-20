@@ -98,39 +98,6 @@ int main(int argc, char **argv) {
 }
 
 
-// int input_Lim(int start, int end) {
-//     int  result = 0;
-//     int errorCount = 0;
-//     bool notDone = true;
-
-//     while(notDone) {
-
-//         string line;
-//         getline(std::cin, line);
-//         istringstream is(line);
-
-//         char dummy = '\0';
-
-//         // if we fail to extract an int
-//         // or we find something apart from whitespace after the int
-//         // or the value isn't in range
-//         if (!(is >> result) || (is >> std::ws && is.get(dummy)) || (result < start) || (result > end)){
-//             errorCount++;
-//             int chanceLeft = 5 - errorCount;
-//             cout << "input error! Please enter again. You have " << chanceLeft << " chance left" << endl;
-//         }
-//         else{
-//             notDone = false ;
-//         }
-//         if (errorCount >= 5) {
-//                 cout << "Too many wrong input" << endl;
-//                 exit(1);
-//             }
-
-//     }
-
-//     return result;
-// }
 
 // input limit, only accept whole number that lie between our defined start & end
 int input_Lim(int start, int end) {
@@ -170,6 +137,40 @@ enum class InitMenuSelection {
     Exit = 3,
 };
 
+enum class TeacherMenuSelection {
+    ShowAllStudents = 1,
+    ShowAllTutors = 2,
+    ShowAllSubjects = 3,
+    ShowAllSubjuctsByID = 4,
+    ChangeUserName = 5,
+    AddNewStudent = 6,
+    AddNewTutor = 7,
+    AddNewSubject = 8,
+    UnlockUserByID = 9,
+    ReviewJoinRequest = 10,
+    Logout = 11,
+};
+
+enum class TutorMenuSelection {
+    ShowAllStudents = 1,
+    ShowAllSubjects = 2,
+    ShowAllSubjuctsByID = 3,
+    ChangeUserName = 4,
+    AddNewStudent = 5,
+    ReviewJoinRequest = 6,
+    Logout = 7,
+
+};
+
+
+enum class StudentMenuSelection {
+    ShowAllSubjects = 1,
+    ShowEnroledSubject = 2,
+    NewSubjectRequest = 3,
+    Logout = 4,
+
+};
+
 enum class InitResult {
     Good,
     Bad,
@@ -204,50 +205,14 @@ int init() {
 
 
 
-    // int c = input_Lim(1, 3);
-
-//     string passWord;
-
-//     if (c == 1) {
-//         renterIdFlag:
-//         cout << "Welcome! Please enter your User ID: " << endl;
-//         int ID = input_Lim(1,1000);
-
-//         cout << endl;
-//         People *p = PeopleDao::selectOnePeople(ID);
-
-//         if (p == nullptr) {
-//             cerr << "People Not Found!" << endl;
-//             goto renterIdFlag;
-//         }
-
-//         cout << "Hi, " << p->getName() << " , Please enter your password: " << endl;
-//         // cin >> passWord;
-
-//         delete p;
-
-//         bool loginFlag = false;
-
-//         while(!loginFlag){
-//             getline(cin >> ws, passWord);
-//             loginFlag = PeopleServices::login(ID, passWord);
-//         }
-
-//         return ID;
-
-//     } else {
-//         return 0;
-//     }
-
-// }
 
 // achieve basic functions: login, see users' info, exit
-const int menuSelectionCount = 3;
-    InitMenuSelection c = (InitMenuSelection)input_Lim(1,menuSelectionCount); // 1 to bring into range of 1-3
+    const int menuSelectionCount = 3;
+    InitMenuSelection choice = (InitMenuSelection)input_Lim(1,menuSelectionCount); // 1 to bring into range of 1-3
 
     string passWord = "";
 
-    if (c == InitMenuSelection::Login) {
+    if (choice == InitMenuSelection::Login) {
         cout << "Welcome! Please enter your User ID: " << endl;
 
         const int minIDNumber = 1;
@@ -288,7 +253,7 @@ const int menuSelectionCount = 3;
 
         return ID;
 
-    } else if (c == InitMenuSelection::ShowInfo) {
+    } else if (choice == InitMenuSelection::ShowInfo) {
 
         PeopleServices::ListAllUsers();
 
@@ -298,7 +263,7 @@ const int menuSelectionCount = 3;
 
         return -2;
 
-    } else if (c == InitMenuSelection::Exit) {
+    } else if (choice == InitMenuSelection::Exit) {
         return 0;
     }
     return 0;
@@ -344,48 +309,40 @@ int teacherMenu(int ID) {
     //assumed just only numbers
 
     cout << "Please enter the command of function" << endl;
+    const int menuSelectionCount = 11;
+    TeacherMenuSelection choice = (TeacherMenuSelection)input_Lim(1,menuSelectionCount);
 
-    const int command_start_index = 1;
-    const int command_end_index = 11;
 
-    int command_1 = input_Lim(command_start_index, command_end_index);
-
-    switch (command_1) {
-        case 1 : {// show all students
+    switch (choice) {
+        case TeacherMenuSelection::ShowAllStudents: {// show all students
             TS.showStudents();
             break;
         }
-        case 2 :// show all tutors
+        case TeacherMenuSelection::ShowAllTutors :// show all tutors
             TS.showTutors();
             break;
 
-        case 3 :// Show all subjects
+        case TeacherMenuSelection::ShowAllSubjects :// Show all subjects
             TS.showSubjects();
             break;
 
-        case 4 ://Show all subjects enrolled by ID
+        case TeacherMenuSelection::ShowAllSubjuctsByID ://Show all subjects enrolled by ID
         {
             PeopleServices::ListAllUsers();
             cout << "Please enter a ID for the account. " << endl;
 
-            const int minIDNumber = 1;
-            const int maxIDNumber = 1000;
-
-            int id = input_Lim(minIDNumber, maxIDNumber);
+            int id = input_Lim(1, 1000);
 
             TS.showSubjectsEnrolledById(id);
             break;
         }
-        case 5 ://Change user's name.
+        case TeacherMenuSelection::ChangeUserName ://Change user's name.
         {
             PeopleServices::ListAllUsers();
 
             cout << "Please enter a ID for the account. " << endl;
 
-            const int minIDNumber = 1;
-            const int maxIDNumber = 1000;
-
-            int id = input_Lim(minIDNumber, maxIDNumber);
+            int id = input_Lim(1, 1000);
 
             cout << "Please enter a new name for your account. " << endl;
 
@@ -395,7 +352,7 @@ int teacherMenu(int ID) {
 
             break;
         }
-        case 6 ://Add new student.
+        case TeacherMenuSelection::AddNewStudent ://Add new student.
         {
 
             cout << "Please enter the student name : " << endl;
@@ -410,7 +367,7 @@ int teacherMenu(int ID) {
 
             break;
         }
-        case 7 ://Add new tutor
+        case TeacherMenuSelection::AddNewTutor ://Add new tutor
         {
             cout << "Please enter the tutor name : " << endl;
 
@@ -428,7 +385,7 @@ int teacherMenu(int ID) {
 
             break;
         }
-        case 8 ://Add new subject.
+        case TeacherMenuSelection::AddNewSubject ://Add new subject.
         {
 
             cout << "Please enter the subject name : " << endl;
@@ -447,14 +404,10 @@ int teacherMenu(int ID) {
 
             break;
         }
-        case 9 : // unlock one's account
-            {
+        case TeacherMenuSelection::UnlockUserByID : {
             cout << "Please enter a ID for the account. " << endl;
 
-            const int minIDNumber = 1;
-            const int maxIDNumber = 1000;
-
-            int id = input_Lim(minIDNumber, maxIDNumber);
+            int id = input_Lim(1, 1000);
 
             if(TeacherServices::unlockUser(id)){
                 cout << "user with ID : " << id  << "unlocked" << endl;
@@ -464,8 +417,9 @@ int teacherMenu(int ID) {
             break;
 
         }
-        case 10 :// Review joining request
-        case 11 ://logout.
+
+        case TeacherMenuSelection::ReviewJoinRequest: {}
+        case TeacherMenuSelection::Logout ://logout.
         {
             TeacherServices::logout(ID);
             return -1;
@@ -482,7 +436,6 @@ int teacherMenu(int ID) {
 
 }
 
-// show tutorMenu and implment tutor's function
 int tutorMenu(int ID) {
     string new_name;
 
@@ -504,48 +457,38 @@ int tutorMenu(int ID) {
 
     cout << "Please enter the command of function" << endl;
 
-    const int command_start_index = 1;
-    const int command_end_index = 7;
+    const int menuSelectionCount = 7;
+    TutorMenuSelection choice = (TutorMenuSelection)input_Lim(1,menuSelectionCount);
 
-    int command_2 = input_Lim(command_start_index, command_end_index);
-
-    switch (command_2) {
-        case 1 :// show all students
+    switch (choice) {
+        case TutorMenuSelection::ShowAllStudents :// show all students
 
             TUS.showStudents();
             break;
 
-        case 2 :// Show all subjects
+        case TutorMenuSelection::ShowAllSubjects :// Show all subjects
 
             TUS.showSubjects();
             break;
 
-        case 3 ://Show all subjects enrolled by ID
+        case TutorMenuSelection::ShowAllSubjuctsByID ://Show all subjects enrolled by ID
         {
             PeopleServices::ListAllUsers();
 
             cout << "Please enter a ID for the account. " << endl;
 
-            const int minIDNumber = 1;
-            const int maxIDNumber = 1000;
-
-            int id = input_Lim(minIDNumber, maxIDNumber);
-
+            int id = input_Lim(1, 1000);
 
             TUS.showSubjectsEnrolledById(id);
             break;
         }
-        case 4 ://Change user's name.
+        case TutorMenuSelection::ChangeUserName ://Change user's name.
         {
             PeopleServices::ListAllUsers();
-    
 
             cout << "Please enter a ID for the account. " << endl;
 
-            const int minIDNumber = 1;
-            const int maxIDNumber = 1000;
-
-            int id = input_Lim(minIDNumber, maxIDNumber);
+            int id = input_Lim(1, 1000);
 
             cout << "Please enter a new name for your account. " << endl;
 
@@ -555,7 +498,7 @@ int tutorMenu(int ID) {
 
             break;
         }
-        case 5 ://Add new student.
+        case TutorMenuSelection::AddNewStudent ://Add new student.
 
         {
             cout << "Please enter the student name : " << endl;
@@ -569,8 +512,8 @@ int tutorMenu(int ID) {
 
             break;
         }
-        case 6:// review joining request
-        case 7: {
+        case TutorMenuSelection::ReviewJoinRequest: {}
+        case TutorMenuSelection::Logout: {
             TutorServices::logout(ID);
             return -1;
         }
@@ -587,7 +530,6 @@ int tutorMenu(int ID) {
     return 0;
 }
 
-// show studentMenu and implment student's function
 int studentMenu(int ID) {
 
     StudentServices SS;
@@ -606,24 +548,22 @@ int studentMenu(int ID) {
 
     cout << "Please enter the command of function" << endl;
 
-    const int command_start_index = 1;
-    const int command_end_index = 4;
+    const int menuSelectionCount = 4;
+    StudentMenuSelection choice = (StudentMenuSelection)input_Lim(1,menuSelectionCount);
 
-    int command_1 = input_Lim(command_start_index, command_end_index);
-
-    switch (command_1) {
-        case 1:
+    switch (choice) {
+        case StudentMenuSelection::ShowAllSubjects:
             SS.showSubjects();
             break;
 
-        case 2:
+        case StudentMenuSelection::ShowEnroledSubject:
 
             SS.showSubjectsEnrolledById(ID);
             break;
 
-        case 3: // request join a new subject 
-            
-        case 4:
+        case StudentMenuSelection::NewSubjectRequest:
+
+        case StudentMenuSelection::Logout:
             StudentServices::logout(ID);
             return -1;
 
