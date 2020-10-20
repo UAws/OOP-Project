@@ -327,6 +327,7 @@ int teacherMenu(int ID) {
                                  "Add new tutor",
                                  "Add new subject",
                                  "unlock user by ID",
+                                 "Review joining request"
                                  "Logout"};
 
     for (size_t i = 0; i < menu_names.size(); ++i) {
@@ -345,7 +346,7 @@ int teacherMenu(int ID) {
     cout << "Please enter the command of function" << endl;
 
     const int command_start_index = 1;
-    const int command_end_index = 10;
+    const int command_end_index = 11;
 
     int command_1 = input_Lim(command_start_index, command_end_index);
 
@@ -463,7 +464,8 @@ int teacherMenu(int ID) {
             break;
 
         }
-        case 10 ://logout.
+        case 10 :// Review joining request
+        case 11 ://logout.
         {
             TeacherServices::logout(ID);
             return -1;
@@ -495,14 +497,15 @@ int tutorMenu(int ID) {
         vt.addRow(3,"Show all subjects enrolled by ID");
         vt.addRow(4,"Change user's name");
         vt.addRow(5,"Add new student");
-        vt.addRow(6,"Logout");
+        vt.addRow(6,"Review joining request");
+        vt.addRow(7,"Logout");
 
     vt.print(cout);
 
     cout << "Please enter the command of function" << endl;
 
     const int command_start_index = 1;
-    const int command_end_index = 6;
+    const int command_end_index = 7;
 
     int command_2 = input_Lim(command_start_index, command_end_index);
 
@@ -566,7 +569,8 @@ int tutorMenu(int ID) {
 
             break;
         }
-        case 6: {
+        case 6:// review joining request
+        case 7: {
             TutorServices::logout(ID);
             return -1;
         }
@@ -591,6 +595,7 @@ int studentMenu(int ID) {
 
     vector<string> menu_names = {"Show all subjects",
                                  "Show all subjects currently enrolled",
+                                 "Request to join a new subject"
                                  "Logout"};
 
     for (size_t i = 0; i < menu_names.size(); ++i) {
@@ -602,7 +607,7 @@ int studentMenu(int ID) {
     cout << "Please enter the command of function" << endl;
 
     const int command_start_index = 1;
-    const int command_end_index = 9;
+    const int command_end_index = 4;
 
     int command_1 = input_Lim(command_start_index, command_end_index);
 
@@ -616,7 +621,9 @@ int studentMenu(int ID) {
             SS.showSubjectsEnrolledById(ID);
             break;
 
-        case 3:
+        case 3: // request join a new subject 
+            
+        case 4:
             StudentServices::logout(ID);
             return -1;
 
