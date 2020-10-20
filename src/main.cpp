@@ -49,6 +49,9 @@ int main(int argc, char **argv) {
     int ID = init();
 
 // ----------------------------------------------------------------------------------------------------------------------------------
+// distinguish the user level and goto the corresponding menu
+
+    // goto teacherMenu
     if (PeopleServices::checkUserLevelById(ID) == 3) {
 
         int goBackFlag = teacherMenu(ID);
@@ -60,7 +63,7 @@ int main(int argc, char **argv) {
             goto initFlag;
         }
 
-
+    // goto tutorMenu
     } else if (PeopleServices::checkUserLevelById(ID) == 2) {
 
         int goBackFlag = tutorMenu(ID);
@@ -73,7 +76,7 @@ int main(int argc, char **argv) {
             goto initFlag;
         }
 
-
+    // goto studentMenu
     } else if (PeopleServices::checkUserLevelById(ID) == 1) {
 
         int goBackFlag = studentMenu(ID);
@@ -128,6 +131,8 @@ int main(int argc, char **argv) {
 
 //     return result;
 // }
+
+// input limit, only accept whole number that lie between our defined start & end
 int input_Lim(int start, int end) {
 
     int result = 0;
@@ -158,6 +163,7 @@ while(1) {
 return result;
 }
 
+// enum classes: for comparing with input and leading user to corresponding function
 enum class InitMenuSelection {
     Login = 1,
     ShowInfo = 2,
@@ -170,7 +176,7 @@ enum class InitResult {
     Exit,
 };
 
-
+// initial user interface, displays basic funtionalities
 int init() {
     const int menuLineCount = 9;
     for (int i = 0; i < menuLineCount; i++) {
@@ -235,6 +241,7 @@ int init() {
 
 // }
 
+// achieve basic functions: login, see users' info, exit
 const int menuSelectionCount = 3;
     InitMenuSelection c = (InitMenuSelection)input_Lim(1,menuSelectionCount); // 1 to bring into range of 1-3
 
@@ -297,7 +304,7 @@ const int menuSelectionCount = 3;
     return 0;
 }
 
-
+// show teacherMenu and implment teacher's function
 int teacherMenu(int ID) {
     string new_name;
 
@@ -315,15 +322,17 @@ int teacherMenu(int ID) {
                                  "Show all tutors",
                                  "Show all subjects",
                                  "Show all subjects enrolled by ID",
-                                 "Add new student",
                                  "Change user's name",
+                                 "Add new student",
                                  "Add new tutor",
                                  "Add new subject",
+                                 "unlock user by ID",
                                  "Logout"};
 
-    for (int i = 0; i < menu_names.size(); ++i) {
+    for (size_t i = 0; i < menu_names.size(); ++i) {
         vt.addRow(i+1,menu_names[i]);
     }
+
 
 
     vt.print(cout);
@@ -437,7 +446,8 @@ int teacherMenu(int ID) {
 
             break;
         }
-        case 9 : {
+        case 9 : // unlock one's account
+            {
             cout << "Please enter a ID for the account. " << endl;
 
             const int minIDNumber = 1;
@@ -462,7 +472,7 @@ int teacherMenu(int ID) {
             break;
     }
 
-    std::cout << "press any key to continue ...";
+    std::cout << "press enter key to continue ...";
     cin.ignore().get();
     system("clear");
 
@@ -470,6 +480,7 @@ int teacherMenu(int ID) {
 
 }
 
+// show tutorMenu and implment tutor's function
 int tutorMenu(int ID) {
     string new_name;
 
@@ -564,7 +575,7 @@ int tutorMenu(int ID) {
             break;
     }
 
-    std::cout << "press any key to continue ...";
+    std::cout << "press enter key to continue ...";
     cin.ignore().get();
     system("clear");
 
@@ -572,6 +583,7 @@ int tutorMenu(int ID) {
     return 0;
 }
 
+// show studentMenu and implment student's function
 int studentMenu(int ID) {
 
     StudentServices SS;
@@ -581,7 +593,7 @@ int studentMenu(int ID) {
                                  "Show all subjects currently enrolled",
                                  "Logout"};
 
-    for (int i = 0; i < menu_names.size(); ++i) {
+    for (size_t i = 0; i < menu_names.size(); ++i) {
         vt.addRow(i+1,menu_names[i]);
     }
 
@@ -612,7 +624,7 @@ int studentMenu(int ID) {
             break;
     }
 
-    std::cout << "press any key to continue ...";
+    std::cout << "press enter key to continue ...";
     cin.ignore().get();
     system("clear");
 
