@@ -102,6 +102,7 @@ target_link_libraries(GTestSelf
         CONAN_PKG::sqlpp11
         )
 
+
 target_link_libraries(GTestSelfInput
         CONAN_PKG::gtest
         CONAN_PKG::openssl
@@ -141,6 +142,21 @@ if(UNIX AND NOT APPLE)
             )
     target_link_libraries(MainSelf
             ${CMAKE_CURRENT_SOURCE_DIR}/utils/sqlpp11-connector-mysql/installed/x64-linux/lib/libsqlpp-mysql.a
+            )
+    set_target_properties(GTestSelf
+            PROPERTIES
+            COMPILE_FLAGS "-ftest-coverage -fprofile-arcs"
+            LINK_FLAGS    "-lgcov --coverage"
+            )
+    set_target_properties(GTestSelfInput
+            PROPERTIES
+            COMPILE_FLAGS "-ftest-coverage -fprofile-arcs"
+            LINK_FLAGS    "-lgcov --coverage"
+            )
+    set_target_properties(MainSelf
+            PROPERTIES
+            COMPILE_FLAGS "-ftest-coverage -fprofile-arcs"
+            LINK_FLAGS    "-lgcov --coverage"
             )
 endif(UNIX AND NOT APPLE)
 
