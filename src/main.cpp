@@ -24,11 +24,11 @@ Description :
 */
 #include <iostream>
 #include <string>
-#include <ctype.h>  // isdigit()
-#include <sstream>  // stringstream
+#include <cctype>  // isdigit()
 #include <service/include/SERVICE_PUBLIC.h>
 #include <vo/include/VO_PUBLIC.h>
 #include <dao/include/PeopleDao.h>
+#include <dao/include/SubjectDao.h>
 
 using namespace std;
 
@@ -94,6 +94,7 @@ int main(int argc, char **argv) {
     return 0;
 }
 
+
 // input limit, only accept whole number that lie between our defined start & end
 int input_Lim(int start, int end) {
 
@@ -132,6 +133,40 @@ enum class InitMenuSelection {
     Exit = 3,
 };
 
+enum class TeacherMenuSelection {
+    ShowAllStudents = 1,
+    ShowAllTutors = 2,
+    ShowAllSubjects = 3,
+    ShowAllSubjuctsByID = 4,
+    ChangeUserName = 5,
+    AddNewStudent = 6,
+    AddNewTutor = 7,
+    AddNewSubject = 8,
+    UnlockUserByID = 9,
+    ReviewJoinRequest = 10,
+    Logout = 11,
+};
+
+enum class TutorMenuSelection {
+    ShowAllStudents = 1,
+    ShowAllSubjects = 2,
+    ShowAllSubjuctsByID = 3,
+    ChangeUserName = 4,
+    AddNewStudent = 5,
+    ReviewJoinRequest = 6,
+    Logout = 7,
+
+};
+
+
+enum class StudentMenuSelection {
+    ShowAllSubjects = 1,
+    ShowEnroledSubject = 2,
+    NewSubjectRequest = 3,
+    Logout = 4,
+
+};
+
 enum class InitResult {
     Good,
     Bad,
@@ -165,13 +200,14 @@ int init() {
     }
 
 
+  
 // achieve basic functions: login, see users' info, exit
-const int menuSelectionCount = 3;
-    InitMenuSelection c = (InitMenuSelection)input_Lim(1,menuSelectionCount); // 1 to bring into range of 1-3
+    const int menuSelectionCount = 3;
+    InitMenuSelection choice = (InitMenuSelection)input_Lim(1,menuSelectionCount); // 1 to bring into range of 1-3
 
     string passWord = "";
 
-    if (c == InitMenuSelection::Login) {
+    if (choice == InitMenuSelection::Login) {
         cout << "Welcome! Please enter your User ID: " << endl;
 
         const int minIDNumber = 1;
@@ -212,7 +248,7 @@ const int menuSelectionCount = 3;
 
         return ID;
 
-    } else if (c == InitMenuSelection::ShowInfo) {
+    } else if (choice == InitMenuSelection::ShowInfo) {
 
         PeopleServices::ListAllUsers();
 
@@ -222,7 +258,7 @@ const int menuSelectionCount = 3;
 
         return -2;
 
-    } else if (c == InitMenuSelection::Exit) {
+    } else if (choice == InitMenuSelection::Exit) {
         return -1;
     }
     return 0;
@@ -251,6 +287,7 @@ int teacherMenu(int ID) {
                                  "Add new tutor",
                                  "Add new subject",
                                  "unlock user by ID",
+                                 "Review joining request",
                                  "Logout"};
 
     for (size_t i = 0; i < menu_names.size(); ++i) {
@@ -267,48 +304,40 @@ int teacherMenu(int ID) {
     //assumed just only numbers
 
     cout << "Please enter the command of function" << endl;
+    const int menuSelectionCount = 11;
+    TeacherMenuSelection choice = (TeacherMenuSelection)input_Lim(1,menuSelectionCount);
 
-    const int command_start_index = 1;
-    const int command_end_index = 10;
 
-    int command_1 = input_Lim(command_start_index, command_end_index);
-
-    switch (command_1) {
-        case 1 : {// show all students
+    switch (choice) {
+        case TeacherMenuSelection::ShowAllStudents: {// show all students
             TS.showStudents();
             break;
         }
-        case 2 :// show all tutors
+        case TeacherMenuSelection::ShowAllTutors :// show all tutors
             TS.showTutors();
             break;
 
-        case 3 :// Show all subjects
+        case TeacherMenuSelection::ShowAllSubjects :// Show all subjects
             TS.showSubjects();
             break;
 
-        case 4 ://Show all subjects enrolled by ID
+        case TeacherMenuSelection::ShowAllSubjuctsByID ://Show all subjects enrolled by ID
         {
             PeopleServices::ListAllUsers();
             cout << "Please enter a ID for the account. " << endl;
 
-            const int minIDNumber = 1;
-            const int maxIDNumber = 1000;
-
-            int id = input_Lim(minIDNumber, maxIDNumber);
+            int id = input_Lim(1, 1000);
 
             TS.showSubjectsEnrolledById(id);
             break;
         }
-        case 5 ://Change user's name.
+        case TeacherMenuSelection::ChangeUserName ://Change user's name.
         {
             PeopleServices::ListAllUsers();
 
             cout << "Please enter a ID for the account. " << endl;
 
-            const int minIDNumber = 1;
-            const int maxIDNumber = 1000;
-
-            int id = input_Lim(minIDNumber, maxIDNumber);
+            int id = input_Lim(1, 1000);
 
             cout << "Please enter a new name for your account. " << endl;
 
@@ -318,7 +347,7 @@ int teacherMenu(int ID) {
 
             break;
         }
-        case 6 ://Add new student.
+        case TeacherMenuSelection::AddNewStudent ://Add new student.
         {
 
             cout << "Please enter the student name : " << endl;
@@ -333,7 +362,7 @@ int teacherMenu(int ID) {
 
             break;
         }
-        case 7 ://Add new tutor
+        case TeacherMenuSelection::AddNewTutor ://Add new tutor
         {
             cout << "Please enter the tutor name : " << endl;
 
@@ -351,7 +380,7 @@ int teacherMenu(int ID) {
 
             break;
         }
-        case 8 ://Add new subject.
+        case TeacherMenuSelection::AddNewSubject ://Add new subject.
         {
 
             cout << "Please enter the subject name : " << endl;
@@ -370,14 +399,10 @@ int teacherMenu(int ID) {
 
             break;
         }
-        case 9 : // unlock one's account
-            {
+        case TeacherMenuSelection::UnlockUserByID : {
             cout << "Please enter a ID for the account. " << endl;
 
-            const int minIDNumber = 1;
-            const int maxIDNumber = 1000;
-
-            int id = input_Lim(minIDNumber, maxIDNumber);
+            int id = input_Lim(1, 1000);
 
             if(TeacherServices::unlockUser(id)){
                 cout << "user with ID : " << id  << "unlocked" << endl;
@@ -387,7 +412,28 @@ int teacherMenu(int ID) {
             break;
 
         }
-        case 10 ://logout.
+
+        case TeacherMenuSelection::ReviewJoinRequest: {
+
+            PeopleServices::showCommunication();
+            cout << "Please enter the message ID. " << endl;
+
+            const int maxMessageID = Storage::messageArray.size();
+            int messageID = input_Lim(1, maxMessageID);
+
+            cout << "Do you want to approve this request , enter 1 to approve , anything else to deny " << endl;
+
+
+            string approve ;
+
+            getline(cin >> ws, approve);
+
+            TS.communicate(messageID, approve);
+
+            break;
+
+        }
+        case TeacherMenuSelection::Logout ://logout.
         {
             TeacherServices::logout(ID);
             return -1;
@@ -404,7 +450,6 @@ int teacherMenu(int ID) {
 
 }
 
-// show tutorMenu and implment tutor's function
 int tutorMenu(int ID) {
     string new_name;
 
@@ -419,54 +464,45 @@ int tutorMenu(int ID) {
         vt.addRow(3,"Show all subjects enrolled by ID");
         vt.addRow(4,"Change user's name");
         vt.addRow(5,"Add new student");
-        vt.addRow(6,"Logout");
+        vt.addRow(6,"Review joining request");
+        vt.addRow(7,"Logout");
 
     vt.print(cout);
 
     cout << "Please enter the command of function" << endl;
 
-    const int command_start_index = 1;
-    const int command_end_index = 6;
+    const int menuSelectionCount = 7;
+    TutorMenuSelection choice = (TutorMenuSelection)input_Lim(1,menuSelectionCount);
 
-    int command_2 = input_Lim(command_start_index, command_end_index);
-
-    switch (command_2) {
-        case 1 :// show all students
+    switch (choice) {
+        case TutorMenuSelection::ShowAllStudents :// show all students
 
             TUS.showStudents();
             break;
 
-        case 2 :// Show all subjects
+        case TutorMenuSelection::ShowAllSubjects :// Show all subjects
 
             TUS.showSubjects();
             break;
 
-        case 3 ://Show all subjects enrolled by ID
+        case TutorMenuSelection::ShowAllSubjuctsByID ://Show all subjects enrolled by ID
         {
             PeopleServices::ListAllUsers();
 
             cout << "Please enter a ID for the account. " << endl;
 
-            const int minIDNumber = 1;
-            const int maxIDNumber = 1000;
-
-            int id = input_Lim(minIDNumber, maxIDNumber);
-
+            int id = input_Lim(1, 1000);
 
             TUS.showSubjectsEnrolledById(id);
             break;
         }
-        case 4 ://Change user's name.
+        case TutorMenuSelection::ChangeUserName ://Change user's name.
         {
             PeopleServices::ListAllUsers();
-    
 
             cout << "Please enter a ID for the account. " << endl;
 
-            const int minIDNumber = 1;
-            const int maxIDNumber = 1000;
-
-            int id = input_Lim(minIDNumber, maxIDNumber);
+            int id = input_Lim(1, 1000);
 
             cout << "Please enter a new name for your account. " << endl;
 
@@ -476,7 +512,7 @@ int tutorMenu(int ID) {
 
             break;
         }
-        case 5 ://Add new student.
+        case TutorMenuSelection::AddNewStudent ://Add new student.
 
         {
             cout << "Please enter the student name : " << endl;
@@ -490,7 +526,26 @@ int tutorMenu(int ID) {
 
             break;
         }
-        case 6: {
+        case TutorMenuSelection::ReviewJoinRequest: {
+
+            PeopleServices::showCommunication();
+            cout << "Please enter the message ID. " << endl;
+
+            const int maxMessageID = Storage::messageArray.size();
+            int messageID = input_Lim(1, maxMessageID);
+
+            cout << "Please enter the comments : " << endl;
+
+
+            string comments ;
+
+            getline(cin >> ws, comments);
+
+            TUS.communicate(messageID, comments);
+
+            break;
+        }
+        case TutorMenuSelection::Logout: {
             TutorServices::logout(ID);
             return -1;
         }
@@ -507,7 +562,6 @@ int tutorMenu(int ID) {
     return 0;
 }
 
-// show studentMenu and implment student's function
 int studentMenu(int ID) {
 
     StudentServices SS;
@@ -515,6 +569,7 @@ int studentMenu(int ID) {
 
     vector<string> menu_names = {"Show all subjects",
                                  "Show all subjects currently enrolled",
+                                 "Request to join a new subject",
                                  "Logout"};
 
     for (size_t i = 0; i < menu_names.size(); ++i) {
@@ -525,22 +580,36 @@ int studentMenu(int ID) {
 
     cout << "Please enter the command of function" << endl;
 
-    const int command_start_index = 1;
-    const int command_end_index = 9;
+    const int menuSelectionCount = 4;
+    StudentMenuSelection choice = (StudentMenuSelection)input_Lim(1,menuSelectionCount);
 
-    int command_1 = input_Lim(command_start_index, command_end_index);
-
-    switch (command_1) {
-        case 1:
+    switch (choice) {
+        case StudentMenuSelection::ShowAllSubjects:
             SS.showSubjects();
             break;
 
-        case 2:
+        case StudentMenuSelection::ShowEnroledSubject:
 
             SS.showSubjectsEnrolledById(ID);
             break;
 
-        case 3:
+        case StudentMenuSelection::NewSubjectRequest:
+        {
+            SS.showSubjects();
+
+            cout << "Please enter the subject ID request to join. " << endl;
+
+            const int maxSubjectID = SubjectDao::listAllSubjects().size();
+
+            int subjectID = input_Lim(1, maxSubjectID);
+
+            SS.communicate(subjectID, "");
+
+            break;
+        }
+
+        case StudentMenuSelection::Logout:
+
             StudentServices::logout(ID);
             return -1;
 
