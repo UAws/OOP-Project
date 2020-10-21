@@ -1,2 +1,3 @@
 ignore:
   - "utils/**/*"  # ignore folders and all its contents
+  - "utils/*"
