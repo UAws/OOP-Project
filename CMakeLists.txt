@@ -120,6 +120,12 @@ target_link_libraries(GTestSelf
         coverage_config
         )
 
+set_target_properties(GTestSelf
+        PROPERTIES
+        COMPILE_FLAGS "-ftest-coverage -fprofile-arcs"
+        LINK_FLAGS    "-lgcov --coverage"
+        )
+
 
 target_link_libraries(GTestSelfInput
         CONAN_PKG::gtest
