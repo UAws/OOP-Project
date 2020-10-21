@@ -32,7 +32,7 @@ Description :
 
 using namespace std;
 
-int input_Lim(int start, int end);
+int input_Limit(int start, int end);
 
 int init();
 
@@ -44,10 +44,7 @@ int studentMenu(int ID);
 
 int main(int argc, char **argv) {
 
-    // initFlag:
-    bool initFlag = true;
-
-    while (initFlag) {
+    while (true) {
 
 
         int ID = init();
@@ -96,7 +93,7 @@ int main(int argc, char **argv) {
 
 
 // input limit, only accept whole number that lie between our defined start & end
-int input_Lim(int start, int end) {
+int input_Limit(int start, int end) {
 
     int result = 0;
     int errorCount = 0;
@@ -203,7 +200,7 @@ int init() {
   
 // achieve basic functions: login, see users' info, exit
     const int menuSelectionCount = 3;
-    InitMenuSelection choice = (InitMenuSelection)input_Lim(1,menuSelectionCount); // 1 to bring into range of 1-3
+    InitMenuSelection choice = (InitMenuSelection) input_Limit(1, menuSelectionCount); // 1 to bring into range of 1-3
 
     string passWord = "";
 
@@ -213,7 +210,7 @@ int init() {
         const int minIDNumber = 1;
         const int maxIDNumber = 1000;
 
-        int ID = input_Lim(minIDNumber, maxIDNumber);
+        int ID = input_Limit(minIDNumber, maxIDNumber);
 
         cout << endl;
         People *p = PeopleDao::selectOnePeople(ID);
@@ -305,7 +302,7 @@ int teacherMenu(int ID) {
 
     cout << "Please enter the command of function" << endl;
     const int menuSelectionCount = 11;
-    TeacherMenuSelection choice = (TeacherMenuSelection)input_Lim(1,menuSelectionCount);
+    TeacherMenuSelection choice = (TeacherMenuSelection) input_Limit(1, menuSelectionCount);
 
 
     switch (choice) {
@@ -326,7 +323,7 @@ int teacherMenu(int ID) {
             PeopleServices::ListAllUsers();
             cout << "Please enter a ID for the account. " << endl;
 
-            int id = input_Lim(1, 1000);
+            int id = input_Limit(1, 1000);
 
             TS.showSubjectsEnrolledById(id);
             break;
@@ -337,7 +334,7 @@ int teacherMenu(int ID) {
 
             cout << "Please enter a ID for the account. " << endl;
 
-            int id = input_Lim(1, 1000);
+            int id = input_Limit(1, 1000);
 
             cout << "Please enter a new name for your account. " << endl;
 
@@ -402,7 +399,7 @@ int teacherMenu(int ID) {
         case TeacherMenuSelection::UnlockUserByID : {
             cout << "Please enter a ID for the account. " << endl;
 
-            int id = input_Lim(1, 1000);
+            int id = input_Limit(1, 1000);
 
             if(TeacherServices::unlockUser(id)){
                 cout << "user with ID : " << id  << "unlocked" << endl;
@@ -419,7 +416,7 @@ int teacherMenu(int ID) {
             cout << "Please enter the message ID. " << endl;
 
             const int maxMessageID = Storage::messageArray.size();
-            int messageID = input_Lim(1, maxMessageID);
+            int messageID = input_Limit(1, maxMessageID);
 
             cout << "Do you want to approve this request , enter 1 to approve , anything else to deny " << endl;
 
@@ -472,7 +469,7 @@ int tutorMenu(int ID) {
     cout << "Please enter the command of function" << endl;
 
     const int menuSelectionCount = 7;
-    TutorMenuSelection choice = (TutorMenuSelection)input_Lim(1,menuSelectionCount);
+    TutorMenuSelection choice = (TutorMenuSelection) input_Limit(1, menuSelectionCount);
 
     switch (choice) {
         case TutorMenuSelection::ShowAllStudents :// show all students
@@ -491,7 +488,7 @@ int tutorMenu(int ID) {
 
             cout << "Please enter a ID for the account. " << endl;
 
-            int id = input_Lim(1, 1000);
+            int id = input_Limit(1, 1000);
 
             TUS.showSubjectsEnrolledById(id);
             break;
@@ -502,7 +499,7 @@ int tutorMenu(int ID) {
 
             cout << "Please enter a ID for the account. " << endl;
 
-            int id = input_Lim(1, 1000);
+            int id = input_Limit(1, 1000);
 
             cout << "Please enter a new name for your account. " << endl;
 
@@ -532,7 +529,7 @@ int tutorMenu(int ID) {
             cout << "Please enter the message ID. " << endl;
 
             const int maxMessageID = Storage::messageArray.size();
-            int messageID = input_Lim(1, maxMessageID);
+            int messageID = input_Limit(1, maxMessageID);
 
             cout << "Please enter the comments : " << endl;
 
@@ -581,7 +578,7 @@ int studentMenu(int ID) {
     cout << "Please enter the command of function" << endl;
 
     const int menuSelectionCount = 4;
-    StudentMenuSelection choice = (StudentMenuSelection)input_Lim(1,menuSelectionCount);
+    StudentMenuSelection choice = (StudentMenuSelection) input_Limit(1, menuSelectionCount);
 
     switch (choice) {
         case StudentMenuSelection::ShowAllSubjects:
@@ -601,7 +598,7 @@ int studentMenu(int ID) {
 
             const int maxSubjectID = SubjectDao::listAllSubjects().size();
 
-            int subjectID = input_Lim(1, maxSubjectID);
+            int subjectID = input_Limit(1, maxSubjectID);
 
             SS.communicate(subjectID, "");
 
