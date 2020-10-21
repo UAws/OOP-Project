@@ -44,59 +44,55 @@ int studentMenu(int ID);
 
 int main(int argc, char **argv) {
 
-    initFlag:
+    // initFlag:
+    bool initFlag = true;
 
-    int ID = init();
+    while (initFlag) {
 
-// ----------------------------------------------------------------------------------------------------------------------------------
-// distinguish the user level and goto the corresponding menu
 
-    // goto teacherMenu
-    if (PeopleServices::checkUserLevelById(ID) == 3) {
+        int ID = init();
 
-        int goBackFlag = teacherMenu(ID);
+    // ----------------------------------------------------------------------------------------------------------------------------------
+    // distinguish the user level and goto the corresponding menu
 
-        while(goBackFlag == 0){
-            goBackFlag = teacherMenu(ID);
+        // goto teacherMenu
+        if (PeopleServices::checkUserLevelById(ID) == 3) {
+
+            int goBackFlag = teacherMenu(ID);
+
+            while(goBackFlag == 0){
+                goBackFlag = teacherMenu(ID);
+            }
+
+        // goto tutorMenu
+        } else if (PeopleServices::checkUserLevelById(ID) == 2) {
+
+            int goBackFlag = tutorMenu(ID);
+
+            while(goBackFlag == 0){
+                goBackFlag = tutorMenu(ID);
+            }
+
+
+        // goto studentMenu
+        } else if (PeopleServices::checkUserLevelById(ID) == 1) {
+
+            int goBackFlag = studentMenu(ID);
+
+            while(goBackFlag == 0){
+                goBackFlag = studentMenu(ID);
+            }
+
         }
-        if (goBackFlag == -1) {
-            goto initFlag;
+
+        if (ID == -1) {
+            break;
         }
 
-    // goto tutorMenu
-    } else if (PeopleServices::checkUserLevelById(ID) == 2) {
-
-        int goBackFlag = tutorMenu(ID);
-
-        while(goBackFlag == 0){
-            goBackFlag = tutorMenu(ID);
-        }
-
-        if (goBackFlag == -1) {
-            goto initFlag;
-        }
-
-    // goto studentMenu
-    } else if (PeopleServices::checkUserLevelById(ID) == 1) {
-
-        int goBackFlag = studentMenu(ID);
-
-        while(goBackFlag == 0){
-            goBackFlag = studentMenu(ID);
-        }
-
-        if (goBackFlag == -1) {
-            goto initFlag;
-        }
-    }
-
-    if (ID == -2) {
-            goto initFlag;
     }
 
     return 0;
 }
-
 
 
 // input limit, only accept whole number that lie between our defined start & end
@@ -106,7 +102,7 @@ int input_Lim(int start, int end) {
     int errorCount = 0;
 
 // error checking loop
-while(1) {
+while(true) {
     std::cin >> result; 
     // input valid
     if(!std::cin.fail() && (std::cin.peek() == EOF || std::cin.peek() == '\n')
@@ -204,8 +200,7 @@ int init() {
     }
 
 
-
-
+  
 // achieve basic functions: login, see users' info, exit
     const int menuSelectionCount = 3;
     InitMenuSelection choice = (InitMenuSelection)input_Lim(1,menuSelectionCount); // 1 to bring into range of 1-3

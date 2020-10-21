@@ -329,3 +329,20 @@ bool PeopleServices::showSubjectsEnrolledById(int user_id){
 
 }
 
+void PeopleServices::showCommunication() {
+
+    VariadicTable<int, int, int, int, string> vc(
+            {"messageID", "studentID", "SubjectID", "tutorID", "tutorComment"});
+
+    for (auto & i : Storage::messageArray) {
+        vc.addRow(i->getMessageId(),
+                  i->getStudentId(),
+                  i->getRequestSubjectId(),
+                  i->getTutorId(),
+                  i->getTutorComment());
+    }
+
+    vc.print(cout);
+
+}
+

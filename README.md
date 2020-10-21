@@ -3,7 +3,7 @@ Student management system
 
 
 
-## Try it out by [docker](https://hub.docker.com/repository/docker/akide/oop-project):
+## Try it out by [docker](https://hub.docker.com/r/akide/oop-project):
 
 ```
 docker run --rm -it akide/oop-project
