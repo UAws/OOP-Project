@@ -254,7 +254,7 @@ void PeopleServices::showTutors() {
 void PeopleServices::showSubjects() {
     vector<Subject *> Subject = SubjectDao::listAllSubjects();
 
-    VariadicTable<int, string> vt({"Tutor ID", "Tutor name"});
+    VariadicTable<int, string> vt({"Subject ID", "Subject name"});
     for (auto & i : Subject) {
 
         vt.addRow(i->getSubjectId(), i->getSubjectName());
