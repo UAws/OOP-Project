@@ -63,9 +63,9 @@ Please reset your password for user teacher01:
 |       9 | unlock user by ID                |
 |      10 | Review joining request           |
 |      11 | Logout                           |
-| Tutor ID | Tutor name |
-|        1 | subject01  |
-|        2 | subject02  |
+| Subject ID | Subject name |
+|          1 | subject01    |
+|          2 | subject02    |
 | Options |              Options             |
 |       1 | Show all students                |
 |       2 | Show all tutors                  |
