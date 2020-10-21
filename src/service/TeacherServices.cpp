@@ -94,14 +94,16 @@ void TeacherServices::communicate(int messageId, string context) {
 
             if (SubjectDao::updatePeopleToSubject(currentMessage->getStudentId(),
                                                   currentMessage->getRequestSubjectId())) {
-
-                cout << *Storage::messageArray[messageId] << "request approved" << endl;
+                Storage::messageArray[messageId]->setApprove("approved");
+                cout << *Storage::messageArray[messageId] << " request approved!" << endl;
 
             }
 
         } else {
 
-            cout << *Storage::messageArray[messageId] << "denied" << endl;
+            Storage::messageArray[messageId]->setApprove("denied");
+
+            cout << *Storage::messageArray[messageId] << " denied!" << endl;
 
         }
     }

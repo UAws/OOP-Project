@@ -13,6 +13,8 @@
 #include <vector>
 #include <algorithm>
 
+using namespace std;
+
 class Message {
 
 
@@ -41,11 +43,32 @@ public:
 
     friend std::ostream &operator<<(std::ostream &os, const Message &message);
 
+    const string &getStudentName() const;
+
+    void setStudentName(const string &studentName);
+
+    const string &getTutorName() const;
+
+    void setTutorName(const string &tutorName);
+
+    const string &getApprove() const;
+
+    void setApprove(const string &approve);
+
+    const string &getSubjectName() const;
+
+    void setSubjectName(const string &subjectName);
+
+
 private:
     int messageID;
     int studentID;
     int requestSubjectID;
     int tutorID = 0;
+    string subjectName;
+    string studentName;
+    string tutorName;
+    string approve;
     std::string tutorComment;
 
 };
