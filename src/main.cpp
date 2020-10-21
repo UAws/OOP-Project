@@ -24,11 +24,11 @@ Description :
 */
 #include <iostream>
 #include <string>
-#include <ctype.h>  // isdigit()
-#include <sstream>  // stringstream
+#include <cctype>  // isdigit()
 #include <service/include/SERVICE_PUBLIC.h>
 #include <vo/include/VO_PUBLIC.h>
 #include <dao/include/PeopleDao.h>
+#include <dao/include/SubjectDao.h>
 
 using namespace std;
 
@@ -259,7 +259,7 @@ int init() {
         return -2;
 
     } else if (choice == InitMenuSelection::Exit) {
-        return 0;
+        return -1;
     }
     return 0;
 }
@@ -287,7 +287,7 @@ int teacherMenu(int ID) {
                                  "Add new tutor",
                                  "Add new subject",
                                  "unlock user by ID",
-                                 "Review joining request"
+                                 "Review joining request",
                                  "Logout"};
 
     for (size_t i = 0; i < menu_names.size(); ++i) {
@@ -413,7 +413,26 @@ int teacherMenu(int ID) {
 
         }
 
-        case TeacherMenuSelection::ReviewJoinRequest: {}
+        case TeacherMenuSelection::ReviewJoinRequest: {
+
+            PeopleServices::showCommunication();
+            cout << "Please enter the message ID. " << endl;
+
+            const int maxMessageID = Storage::messageArray.size();
+            int messageID = input_Lim(1, maxMessageID);
+
+            cout << "Do you want to approve this request , enter 1 to approve , anything else to deny " << endl;
+
+
+            string approve ;
+
+            getline(cin >> ws, approve);
+
+            TS.communicate(messageID, approve);
+
+            break;
+
+        }
         case TeacherMenuSelection::Logout ://logout.
         {
             TeacherServices::logout(ID);
@@ -507,7 +526,25 @@ int tutorMenu(int ID) {
 
             break;
         }
-        case TutorMenuSelection::ReviewJoinRequest: {}
+        case TutorMenuSelection::ReviewJoinRequest: {
+
+            PeopleServices::showCommunication();
+            cout << "Please enter the message ID. " << endl;
+
+            const int maxMessageID = Storage::messageArray.size();
+            int messageID = input_Lim(1, maxMessageID);
+
+            cout << "Please enter the comments : " << endl;
+
+
+            string comments ;
+
+            getline(cin >> ws, comments);
+
+            TUS.communicate(messageID, comments);
+
+            break;
+        }
         case TutorMenuSelection::Logout: {
             TutorServices::logout(ID);
             return -1;
@@ -532,7 +569,7 @@ int studentMenu(int ID) {
 
     vector<string> menu_names = {"Show all subjects",
                                  "Show all subjects currently enrolled",
-                                 "Request to join a new subject"
+                                 "Request to join a new subject",
                                  "Logout"};
 
     for (size_t i = 0; i < menu_names.size(); ++i) {
@@ -557,8 +594,22 @@ int studentMenu(int ID) {
             break;
 
         case StudentMenuSelection::NewSubjectRequest:
+        {
+            SS.showSubjects();
+
+            cout << "Please enter the subject ID request to join. " << endl;
+
+            const int maxSubjectID = SubjectDao::listAllSubjects().size();
+
+            int subjectID = input_Lim(1, maxSubjectID);
+
+            SS.communicate(subjectID, "");
+
+            break;
+        }
 
         case StudentMenuSelection::Logout:
+
             StudentServices::logout(ID);
             return -1;
 
