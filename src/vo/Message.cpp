@@ -56,3 +56,35 @@ std::ostream &operator<<(std::ostream &os, const Message &message) {
        << message.requestSubjectID << " tutorID: " << message.tutorID << " tutorComment: " << message.tutorComment;
     return os;
 }
+
+const string &Message::getStudentName() const {
+    return studentName;
+}
+
+void Message::setStudentName(const string &studentName) {
+    Message::studentName = studentName;
+}
+
+const string &Message::getTutorName() const {
+    return tutorName;
+}
+
+void Message::setTutorName(const string &tutorName) {
+    Message::tutorName = tutorName;
+}
+
+const string &Message::getApprove() const {
+    return approve;
+}
+
+void Message::setApprove(const string &approve) {
+    Message::approve = approve;
+}
+
+const string &Message::getSubjectName() const {
+    return subjectName;
+}
+
+void Message::setSubjectName(const string &subjectName) {
+    Message::subjectName = subjectName;
+}

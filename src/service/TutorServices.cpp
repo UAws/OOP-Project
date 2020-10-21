@@ -25,6 +25,7 @@ Description :
 
 #include <service/include/SERVICE_PUBLIC.h>
 #include <vo/include/VO_PUBLIC.h>
+#include <dao/include/PeopleDao.h>
 
 
 bool TutorServices::changeUserName(int user_id, string user_name) {
@@ -51,8 +52,14 @@ void TutorServices::communicate(int messageId, string context) {
 
     messageId -= 1;
 
+    auto tmpPeople = PeopleDao::selectOnePeople(Storage::getSUserId());
+
+
     Storage::messageArray[messageId]->setTutorId(Storage::getSUserId());
     Storage::messageArray[messageId]->setTutorComment(context);
+    Storage::messageArray[messageId]->setTutorName(tmpPeople->getName());
+
+    delete tmpPeople;
 
     // cout << *Storage::messageArray[messageId] << endl;
 

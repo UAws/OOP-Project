@@ -25,6 +25,8 @@ Description :
 
 #include <service/include/SERVICE_PUBLIC.h>
 #include <vo/include/VO_PUBLIC.h>
+#include <dao/include/PeopleDao.h>
+#include <dao/include/SubjectDao.h>
 
 
 void StudentServices::showSubjects() {
@@ -38,7 +40,24 @@ bool StudentServices::showSubjectsEnrolledById(int user_id) {
 void StudentServices::communicate(int id, string context) {
 
     //id is subject id;
-    Storage::messageArray.push_back(new Message(Storage::messageID,Storage::getSUserId(),id));
+    const int subject_id = id;
+
+    auto tmpMessage = new Message(Storage::messageID, Storage::getSUserId(), subject_id);
+
+    auto tmpPeople = PeopleDao::selectOnePeople(Storage::getSUserId());
+
+    auto tmpSubject = SubjectDao::selectOneSubject(id);
+
+    tmpMessage->setStudentName(tmpPeople->getName());
+
+    tmpMessage->setSubjectName(tmpSubject->getSubjectName());
+
+    Storage::messageArray.push_back(tmpMessage);
+
     Storage::messageID += 1;
+
+    delete tmpPeople;
+
+    delete tmpSubject;
 
 }
