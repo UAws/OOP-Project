@@ -1,0 +1,190 @@
+|====== STUDENT DATABASE MANAGEMENT SYSTEM ======| 
+|                                                | 
+|                                                | 
+|                 1. Log   in                    | 
+|                 2. Show  Info                  | 
+|                 3. Exit  Program               | 
+|                                                | 
+|                                                | 
+| People ID | People name |  Title  | IsActive |
+|         1 | student01   | student |        1 |
+|         2 | tutor01     | tutor   |        1 |
+|         3 | teacher01   | teacher |        1 |
+|         4 | student02   | student |        1 |
+|         5 | tutor02     | tutor   |        1 |
+|                                                | 
+|                                                | 
+|                 1. Log   in                    | 
+|                 2. Show  Info                  | 
+|                 3. Exit  Program               | 
+|                                                | 
+|                                                | 
+
+Please reset your password for user student01:
+| Options |                Options               |
+|       1 | Show all subjects                    |
+|       2 | Show all subjects currently enrolled |
+|       3 | Request to join a new subject        |
+|       4 | Logout                               |
+| Tutor ID | Tutor name |
+|        1 | subject01  |
+|        2 | subject02  |
+| Options |                Options               |
+|       1 | Show all subjects                    |
+|       2 | Show all subjects currently enrolled |
+|       3 | Request to join a new subject        |
+|       4 | Logout                               |
+| Student ID | Student Name | Subject ID | Subject name |
+| 1          | student01    |          1 | subject01    |
+| Options |                Options               |
+|       1 | Show all subjects                    |
+|       2 | Show all subjects currently enrolled |
+|       3 | Request to join a new subject        |
+|       4 | Logout                               |
+| Tutor ID | Tutor name |
+|        1 | subject01  |
+|        2 | subject02  |
+| Options |                Options               |
+|       1 | Show all subjects                    |
+|       2 | Show all subjects currently enrolled |
+|       3 | Request to join a new subject        |
+|       4 | Logout                               |
+student01Log out successfully !
+|====== STUDENT DATABASE MANAGEMENT SYSTEM ======|
+|                                                |
+|                                                |
+|                 1. Log   in                    |
+|                 2. Show  Info                  |
+|                 3. Exit  Program               |
+|                                                |
+|                                                |
+
+Please reset your password for user tutor01:
+| Options |              Options             |
+|       1 | Show all students                |
+|       2 | Show all subjects                |
+|       3 | Show all subjects enrolled by ID |
+|       4 | Change user's name               |
+|       5 | Add new student                  |
+|       6 | Review joining request           |
+|       7 | Logout                           |
+| Student ID | Student name | IsActive |
+|          1 | student01    |        1 |
+|          4 | student02    |        1 |
+| Options |              Options             |
+|       1 | Show all students                |
+|       2 | Show all subjects                |
+|       3 | Show all subjects enrolled by ID |
+|       4 | Change user's name               |
+|       5 | Add new student                  |
+|       6 | Review joining request           |
+|       7 | Logout                           |
+| Tutor ID | Tutor name |
+|        1 | subject01  |
+|        2 | subject02  |
+| Options |              Options             |
+|       1 | Show all students                |
+|       2 | Show all subjects                |
+|       3 | Show all subjects enrolled by ID |
+|       4 | Change user's name               |
+|       5 | Add new student                  |
+|       6 | Review joining request           |
+|       7 | Logout                           |
+| People ID | People name |  Title  | IsActive |
+|         1 | student01   | student |        1 |
+|         2 | tutor01     | tutor   |        1 |
+|         3 | teacher01   | teacher |        1 |
+|         4 | student02   | student |        1 |
+|         5 | tutor02     | tutor   |        1 |
+| Student ID | Student Name | Subject ID | Subject name |
+| 1          | student01    |          1 | subject01    |
+| Options |              Options             |
+|       1 | Show all students                |
+|       2 | Show all subjects                |
+|       3 | Show all subjects enrolled by ID |
+|       4 | Change user's name               |
+|       5 | Add new student                  |
+|       6 | Review joining request           |
+|       7 | Logout                           |
+| People ID | People name |  Title  | IsActive |
+|         1 | student01   | student |        1 |
+|         2 | tutor01     | tutor   |        1 |
+|         3 | teacher01   | teacher |        1 |
+|         4 | student02   | student |        1 |
+|         5 | tutor02     | tutor   |        1 |
+| Options |              Options             |
+|       1 | Show all students                |
+|       2 | Show all subjects                |
+|       3 | Show all subjects enrolled by ID |
+|       4 | Change user's name               |
+|       5 | Add new student                  |
+|       6 | Review joining request           |
+|       7 | Logout                           |
+| messageID | studentID | studentName | subjectName | tutorName | tutorComment | approve? |
+|         1 |         1 | student01   | subject02   |           |              |          |
+| Options |              Options             |
+|       1 | Show all students                |
+|       2 | Show all subjects                |
+|       3 | Show all subjects enrolled by ID |
+|       4 | Change user's name               |
+|       5 | Add new student                  |
+|       6 | Review joining request           |
+|       7 | Logout                           |
+tutor01Log out successfully !
+|====== STUDENT DATABASE MANAGEMENT SYSTEM ======|
+|                                                |
+|                                                |
+|                 1. Log   in                    |
+|                 2. Show  Info                  |
+|                 3. Exit  Program               |
+|                                                |
+|                                                |
+
+Please reset your password for user teacher01:
+| Options |              Options             |
+|       1 | Show all students                |
+|       2 | Show all tutors                  |
+|       3 | Show all subjects                |
+|       4 | Show all subjects enrolled by ID |
+|       5 | Change user's name               |
+|       6 | Add new student                  |
+|       7 | Add new tutor                    |
+|       8 | Add new subject                  |
+|       9 | unlock user by ID                |
+|      10 | Review joining request           |
+|      11 | Logout                           |
+| messageID | studentID | studentName | subjectName | tutorName | tutorComment | approve? |
+|         1 |         1 | student01   | subject02   | tutor01   | it's ok      |          |
+messageID: 1 studentID: 1 requestSubjectID: 2 tutorID: 2 tutorComment: it's ok request approved!
+| Options |              Options             |
+|       1 | Show all students                |
+|       2 | Show all tutors                  |
+|       3 | Show all subjects                |
+|       4 | Show all subjects enrolled by ID |
+|       5 | Change user's name               |
+|       6 | Add new student                  |
+|       7 | Add new tutor                    |
+|       8 | Add new subject                  |
+|       9 | unlock user by ID                |
+|      10 | Review joining request           |
+|      11 | Logout                           |
+teacher01Log out successfully !
+|====== STUDENT DATABASE MANAGEMENT SYSTEM ======|
+|                                                |
+|                                                |
+|                 1. Log   in                    |
+|                 2. Show  Info                  |
+|                 3. Exit  Program               |
+|                                                |
+|                                                |
+
+|====== STUDENT DATABASE MANAGEMENT SYSTEM ======|
+|                                                |
+|                                                |
+|                 1. Log   in                    |
+|                 2. Show  Info                  |
+|                 3. Exit  Program               |
+|                                                |
+|                                                |
+
+Hi,student01your acount is locked , please contact your tutor or teacher for unlock
