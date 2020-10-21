@@ -416,16 +416,22 @@ int teacherMenu(int ID) {
             cout << "Please enter the message ID. " << endl;
 
             const int maxMessageID = Storage::messageArray.size();
-            int messageID = input_Limit(1, maxMessageID);
 
-            cout << "Do you want to approve this request , enter 1 to approve , anything else to deny " << endl;
+            if (maxMessageID >= 0){
+
+                int messageID = input_Limit(1, maxMessageID);
+
+                cout << "Do you want to approve this request , enter 1 to approve , anything else to deny " << endl;
 
 
-            string approve ;
+                string approve ;
 
-            getline(cin >> ws, approve);
+                getline(cin >> ws, approve);
 
-            TS.communicate(messageID, approve);
+                TS.communicate(messageID, approve);
+                
+            }
+
 
             break;
 
@@ -529,16 +535,21 @@ int tutorMenu(int ID) {
             cout << "Please enter the message ID. " << endl;
 
             const int maxMessageID = Storage::messageArray.size();
-            int messageID = input_Limit(1, maxMessageID);
 
-            cout << "Please enter the comments : " << endl;
+            if (maxMessageID >= 0){
+
+                int messageID = input_Limit(1, maxMessageID);
+
+                cout << "Please enter the comments : " << endl;
 
 
-            string comments ;
+                string comments ;
 
-            getline(cin >> ws, comments);
+                getline(cin >> ws, comments);
 
-            TUS.communicate(messageID, comments);
+                TUS.communicate(messageID, comments);
+
+            }
 
             break;
         }
@@ -598,9 +609,11 @@ int studentMenu(int ID) {
 
             const int maxSubjectID = SubjectDao::listAllSubjects().size();
 
-            int subjectID = input_Limit(1, maxSubjectID);
+            if (maxSubjectID != 0){
+                int subjectID = input_Limit(1, maxSubjectID);
 
-            SS.communicate(subjectID, "");
+                SS.communicate(subjectID, "");
+            }
 
             break;
         }
