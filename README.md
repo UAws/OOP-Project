@@ -17,7 +17,7 @@ docker run --rm -it akide/oop-project
 | --------------- | ------------------------------------------------------------ |
 | **development** | [![Build Status](https://travis-ci.com/UAws/OOP-Project.svg?token=zP1c5kEjbj3paukTcp7U&branch=development)](https://travis-ci.com/UAws/OOP-Project) |
 
-## Code coverage: [![codecov](https://codecov.io/gh/UAws/OOP-Project/branch/master/graph/badge.svg?token=ON3OHRSFKF)](undefined)
+## Code coverage: [![codecov](https://codecov.io/gh/UAws/OOP-Project/branch/master/graph/badge.svg?token=ON3OHRSFKF)](https://codecov.io/gh/UAws/OOP-Project)
 
 ## System design
 
