@@ -64,8 +64,8 @@ Please reset your password for user teacher01:
 |      10 | Review joining request           |
 |      11 | Logout                           |
 | Subject ID | Subject name |
-|        1   | subject01    |
-|        2   | subject02    |
+|          1 | subject01    |
+|          2 | subject02    |
 | Options |              Options             |
 |       1 | Show all students                |
 |       2 | Show all tutors                  |
