@@ -28,6 +28,7 @@ script:
   - cd $WORKDIR/test/input_tests/initPassword; ./intpassword_test.sh
 #    main input test case 1
   - cd $WORKDIR/test/input_tests/main_input_case-01; ./test.sh
+  - cd $WORKDIR/test/input_tests/main_input_case-02; ./test.sh
 
 
 after_success:
