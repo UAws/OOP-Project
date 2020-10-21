@@ -2,7 +2,7 @@ CURRENT_DIR=$(pwd)
 
 cd ../../../
 
-#mysql oop < utils/db.sql
+mysql oop < utils/db.sql
 
 EXEFile=$(find "$(pwd -P)"  -name 'MainSelf' | head -1)
 
