@@ -21,7 +21,7 @@ docker run --rm -it akide/oop-project
 
 ## System design
 
-![University students management platform](https://cdn.jsdelivr.net/gh/AkideLiu/image@master/uPic/image-20200918evn1cD.png)
+![University students management platform](https://minio.llycloud.com/image/uPic/image-20200918evn1cD.png)
 
 ### Introduction
 
